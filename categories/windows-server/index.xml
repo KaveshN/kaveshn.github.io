@@ -1,28 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kavesh Naidoos Blog</title>
-    <link>https://kaveshn.github.io/</link>
-    <description>Recent content on Kavesh Naidoos Blog</description>
+    <title>Windows Server on Kavesh Naidoos Blog</title>
+    <link>https://kaveshn.github.io/categories/windows-server/</link>
+    <description>Recent content in Windows Server on Kavesh Naidoos Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Jan 2023 21:20:07 +0200</lastBuildDate><atom:link href="https://kaveshn.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Azure Active Directory: A Cloud-based Identity and Access Management Solution</title>
-      <link>https://kaveshn.github.io/post/azad/</link>
-      <pubDate>Mon, 30 Jan 2023 21:20:07 +0200</pubDate>
-      
-      <guid>https://kaveshn.github.io/post/azad/</guid>
-      <description>
-        
-          
-            Introduction Azure Active Directory (AAD) is a cloud-based identity and access management solution developed by Microsoft. It is built on top of the same technology as on-premises Active Directory (AD) and provides many of the same features, but with the added benefits of being hosted in the cloud. In this post, we will take a closer look at what AAD is, how it works, and some of its key features.
-          
-          
-        
-      </description>
-    </item>
-    
+    <lastBuildDate>Mon, 30 Jan 2023 20:42:15 +0200</lastBuildDate><atom:link href="https://kaveshn.github.io/categories/windows-server/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Understanding Active Directory: What It Is and How It Works</title>
       <link>https://kaveshn.github.io/post/post/</link>
