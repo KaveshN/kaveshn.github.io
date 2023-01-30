@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Kavesh Naidoos Blog</title>
+    <link>https://kaveshn.github.io/tags/</link>
+    <description>Recent content in Tags on Kavesh Naidoos Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 30 Jan 2023 20:42:15 +0200</lastBuildDate><atom:link href="https://kaveshn.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>
