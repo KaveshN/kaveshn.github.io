@@ -1,0 +1,9 @@
+# Python venv
+.venv/
+__pycache__/
+
+# MkDocs build output (published to gh-pages, not committed to main)
+/site/
+
+# local preview screenshots
+/shots/

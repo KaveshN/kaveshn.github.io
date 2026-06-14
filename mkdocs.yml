@@ -1,0 +1,84 @@
+site_name: Kavesh Naidoo
+site_url: https://kaveshn.github.io/
+site_author: Kavesh Naidoo
+site_description: >-
+  Notes on identity, infrastructure, and AI — Entra ID, PowerShell, and the
+  systems in between.
+
+theme:
+  name: material
+  icon:
+    logo: material/console-line
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+    - toc.follow
+
+plugins:
+  - search
+  - blog:
+      blog_dir: blog
+      post_url_format: "{slug}"
+      post_excerpt: optional
+      archive_date_format: MMMM yyyy
+      categories_allowed:
+        - Identity
+        - PowerShell
+        - Infrastructure
+        - AI
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Blog:
+      - blog/index.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/KaveshN
+      name: GitHub
+
+copyright: Copyright &copy; Kavesh Naidoo
