@@ -1,0 +1,29 @@
+name: Deploy site
+
+# Rebuild and publish the MkDocs site whenever source on main changes.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # allow manual runs from the Actions tab
+
+permissions:
+  contents: write # gh-deploy force-pushes the built site to gh-pages
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # gh-deploy needs full history for the gh-pages branch
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build and deploy to gh-pages
+        run: mkdocs gh-deploy --force
