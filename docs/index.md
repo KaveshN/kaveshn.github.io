@@ -18,6 +18,69 @@ build, so expect equal parts architecture and hands-on.
 
 <div class="grid cards" markdown>
 
+-   :material-shield-key:{ .lg .middle } &nbsp; __[Which of your admins still don't have MFA?](blog/posts/find-admins-without-mfa-graph.md)__
+
+    ---
+
+    Find privileged accounts with no second factor — the modern Microsoft Graph
+    replacement for the dead MSOnline approach.
+
+    `PowerShell` · `Identity`
+
+-   :material-certificate-outline:{ .lg .middle } &nbsp; __[Never get surprised by an expired app secret again](blog/posts/report-expiring-app-secrets-graph.md)__
+
+    ---
+
+    Scan every Entra app registration for expiring secrets and certificates —
+    including the SAML signing certs everyone forgets.
+
+    `PowerShell` · `Identity`
+
+-   :material-key-change:{ .lg .middle } &nbsp; __[Rotating the krbtgt password without breaking Kerberos](blog/posts/rotate-krbtgt-password-safely.md)__
+
+    ---
+
+    The account that signs every Kerberos ticket in your domain — how to rotate
+    it safely, and the double-reset that breaks everything.
+
+    `PowerShell` · `Identity`
+
+-   :material-laptop-account:{ .lg .middle } &nbsp; __[Finding the machines that slipped through LAPS](blog/posts/find-missing-laps-powershell.md)__
+
+    ---
+
+    Report on every Windows machine without a LAPS-managed local admin password
+    — covering both Windows LAPS and the legacy attribute.
+
+    `PowerShell` · `Identity`
+
+-   :material-lock-alert:{ .lg .middle } &nbsp; __[Catching account lockouts before the helpdesk ticket](blog/posts/alert-locked-out-accounts-powershell.md)__
+
+    ---
+
+    Find locked-out AD accounts with Search-ADAccount, then trace the source
+    machine via event 4740.
+
+    `PowerShell` · `Identity`
+
+-   :material-account-supervisor:{ .lg .middle } &nbsp; __[Get an email the moment someone joins Domain Admins](blog/posts/monitor-privileged-groups-powershell.md)__
+
+    ---
+
+    Near-real-time privileged group monitoring with a PowerShell state-file diff
+    — no SIEM required.
+
+    `PowerShell` · `Identity`
+
+-   :material-server-network:{ .lg .middle } &nbsp; __[A domain controller health report you'll actually read](blog/posts/dc-health-report-powershell.md)__
+
+    ---
+
+    A colour-coded HTML health report across the whole forest — ping, DNS,
+    uptime, disk, services, and DCDiag.
+
+    `PowerShell` · `Infrastructure`
+
 -   :material-account-key:{ .lg .middle } &nbsp; __[Assigning Entra ID access packages with PowerShell](blog/posts/assign-entra-access-packages-powershell.md)__
 
     ---
