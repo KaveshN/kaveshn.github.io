@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A practical Microsoft Graph PowerShell recipe for auditing Entra ID users — guests, stale accounts, and disabled identities — exported to CSV.">
+        <meta name="description" content="The krbtgt account signs every Kerberos ticket in your domain. Here's how to rotate its password safely — and the double-reset mistake that breaks Kerberos domain-wide.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/audit-entra-users-powershell/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/rotate-krbtgt-password-safely/">
       
       
-        <link rel="prev" href="../connect-microsoft-graph-powershell/">
+        <link rel="prev" href="../find-missing-laps-powershell/">
       
       
-        <link rel="next" href="../dc-health-report-powershell/">
+        <link rel="next" href="../report-expiring-app-secrets-graph/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Auditing Entra ID users with PowerShell - Kavesh Naidoo</title>
+        <title>Rotating the krbtgt password without breaking Kerberos - Kavesh Naidoo</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#auditing-entra-id-users-with-powershell" class="md-skip">
+        <a href="#rotating-the-krbtgt-password-without-breaking-kerberos" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Auditing Entra ID users with PowerShell
+              Rotating the krbtgt password without breaking Kerberos
             
           </span>
         </div>
@@ -704,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#connect-with-read-scopes" class="md-nav__link">
+  <a href="#why-theres-a-right-way-and-a-very-wrong-way" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Connect with read scopes
+        Why there's a right way and a very wrong way
       
     </span>
   </a>
@@ -715,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#list-users-and-only-the-properties-you-need" class="md-nav__link">
+  <a href="#step-1-know-your-ticket-lifetime" class="md-nav__link">
     <span class="md-ellipsis">
       
-        List users — and only the properties you need
+        Step 1 — know your ticket lifetime
       
     </span>
   </a>
@@ -726,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#find-the-guests" class="md-nav__link">
+  <a href="#step-2-reset-once-on-the-pdc-emulator" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Find the guests
+        Step 2 — reset once, on the PDC emulator
       
     </span>
   </a>
@@ -737,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#flag-stale-accounts-90-days-dormant" class="md-nav__link">
+  <a href="#step-3-force-replication-and-verify-convergence" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Flag stale accounts (90+ days dormant)
+        Step 3 — force replication and verify convergence
       
     </span>
   </a>
@@ -748,10 +748,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#export-for-the-security-review" class="md-nav__link">
+  <a href="#dont-write-this-from-scratch" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Export for the security review
+        Don't write this from scratch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-actually-do-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to actually do this
       
     </span>
   </a>
@@ -814,7 +825,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-06-02 00:00:00+00:00" class="md-ellipsis">June 2, 2026</time>
+                        <time datetime="2026-06-13 00:00:00+00:00" class="md-ellipsis">June 13, 2026</time>
                       </div>
                     </li>
                     
@@ -837,7 +848,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              2 min read
+                              4 min read
                             
                           </span>
                         </div>
@@ -861,86 +872,123 @@
 
 
 
-<h1 id="auditing-entra-id-users-with-powershell">Auditing Entra ID users with PowerShell<a class="headerlink" href="#auditing-entra-id-users-with-powershell" title="Permanent link">&para;</a></h1>
-<p>"Who has access?" is the question every security review opens with. With the
-Microsoft Graph PowerShell SDK you can answer it in a few lines: list every
-user, flag the guests and the dormant accounts, and hand security a CSV.</p>
-<p>This builds directly on <a href="../connect-microsoft-graph-powershell/">connecting to Graph</a> —
-make sure you can run <code>Get-MgContext</code> first.</p>
+<h1 id="rotating-the-krbtgt-password-without-breaking-kerberos">Rotating the krbtgt password without breaking Kerberos<a class="headerlink" href="#rotating-the-krbtgt-password-without-breaking-kerberos" title="Permanent link">&para;</a></h1>
+<p>There's one account in every Active Directory domain whose password signs <em>every
+Kerberos ticket ever issued</em>: <code>krbtgt</code>. It's disabled, nobody logs in as it, and
+most people never touch it — which is exactly why attackers love it. Steal the
+krbtgt hash and you can forge <strong>Golden Tickets</strong>: valid-looking TGTs for any user,
+any group, with a lifetime you choose. The only cure is to change the password.</p>
+<p>But krbtgt is also the one password you can get <em>catastrophically</em> wrong. Rotate
+it carelessly and you break authentication for the entire domain. Let's do it
+properly.</p>
 <!-- more -->
 
-<h2 id="connect-with-read-scopes">Connect with read scopes<a class="headerlink" href="#connect-with-read-scopes" title="Permanent link">&para;</a></h2>
-<p>Auditing is read-only. Request exactly that — plus <code>AuditLog.Read.All</code>, which is
-what unlocks the all-important last-sign-in data:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Connect-MgGraph</span> <span class="n">-Scopes</span> <span class="s2">&quot;User.Read.All&quot;</span><span class="p">,</span> <span class="s2">&quot;AuditLog.Read.All&quot;</span>
-</span></code></pre></div>
-<h2 id="list-users-and-only-the-properties-you-need">List users — and only the properties you need<a class="headerlink" href="#list-users-and-only-the-properties-you-need" title="Permanent link">&para;</a></h2>
-<p><code>Get-MgUser</code> returns a slim default set. Ask explicitly for the fields you'll
-report on, or they come back empty:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$users</span> <span class="p">=</span> <span class="nb">Get-MgUser</span> <span class="n">-All</span> <span class="n">-Property</span> <span class="p">`</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="n">DisplayName</span><span class="p">,</span> <span class="n">UserPrincipalName</span><span class="p">,</span> <span class="n">AccountEnabled</span><span class="p">,</span> <span class="n">UserType</span><span class="p">,</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="n">CreatedDateTime</span><span class="p">,</span> <span class="n">SignInActivity</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">$users</span> <span class="p">|</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  <span class="nb">Select-Object</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">UserPrincipalName</span><span class="p">,</span> <span class="n">UserType</span><span class="p">,</span> <span class="n">AccountEnabled</span> <span class="p">|</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  <span class="nb">Format-Table</span> <span class="n">-AutoSize</span>
-</span></code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title"><code>SignInActivity</code> needs the property AND the scope</p>
-<p><code>signInActivity</code> is only populated when you (1) request it via <code>-Property</code>
-<strong>and</strong> (2) connected with <code>AuditLog.Read.All</code>. Omit either and the field is
-silently null — which looks exactly like "never signed in". Don't confuse
-the two.</p>
+<h2 id="why-theres-a-right-way-and-a-very-wrong-way">Why there's a right way and a very wrong way<a class="headerlink" href="#why-theres-a-right-way-and-a-very-wrong-way" title="Permanent link">&para;</a></h2>
+<p>Active Directory keeps the <strong>current and previous</strong> krbtgt password (N and N-1)
+so that tickets signed just before a change still validate. That's the safety
+net. It's also the trap:</p>
+<div class="admonition danger">
+<p class="admonition-title">The double-reset that breaks every domain</p>
+<p>If you reset krbtgt <strong>twice in quick succession</strong> — before all existing
+tickets have expired — you invalidate the N-1 key that those in-flight tickets
+were signed with. Every ticket issued under the old key is instantly
+untrustable, and you get domain-wide authentication failures until things
+expire and re-issue. <strong>Reset once, then wait at least one maximum TGT lifetime
+(default 10 hours, plus clock skew) before resetting again.</strong></p>
 </div>
-<h2 id="find-the-guests">Find the guests<a class="headerlink" href="#find-the-guests" title="Permanent link">&para;</a></h2>
-<p>External identities are the usual soft spot. Advanced queries (<code>-ConsistencyLevel
-eventual</code> plus a count) let you filter server-side:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$guests</span> <span class="p">=</span> <span class="nb">Get-MgUser</span> <span class="n">-All</span> <span class="p">`</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  <span class="n">-Filter</span> <span class="s2">&quot;userType eq &#39;Guest&#39;&quot;</span> <span class="p">`</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  <span class="n">-ConsistencyLevel</span> <span class="n">eventual</span> <span class="p">`</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  <span class="n">-CountVariable</span> <span class="n">guestCount</span> <span class="p">`</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  <span class="n">-Property</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">UserPrincipalName</span><span class="p">,</span> <span class="n">CreatedDateTime</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">Write-Host</span> <span class="s2">&quot;$guestCount guest accounts found&quot;</span>
+<p>So the procedure is: reset once → force replication → verify convergence →
+<strong>wait</strong> → only then consider a second reset.</p>
+<h2 id="step-1-know-your-ticket-lifetime">Step 1 — know your ticket lifetime<a class="headerlink" href="#step-1-know-your-ticket-lifetime" title="Permanent link">&para;</a></h2>
+<p>The safe waiting window comes from your Kerberos policy. Read it before you touch
+anything:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Import-Module</span> <span class="n">ActiveDirectory</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">$domain</span> <span class="p">=</span> <span class="nb">Get-ADDomain</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">$krbtgt</span> <span class="p">=</span> <span class="nb">Get-ADUser</span> <span class="n">krbtgt</span> <span class="n">-Properties</span> <span class="n">PasswordLastSet</span> <span class="n">-Server</span> <span class="nv">$domain</span><span class="p">.</span><span class="n">PDCEmulator</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c"># Default domain policy: max TGT lifetime (hrs) and max clock skew (mins)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="no">[xml]</span><span class="nv">$gpo</span> <span class="p">=</span> <span class="nb">Get-GPOReport</span> <span class="n">-Guid</span> <span class="s1">&#39;{31B2F340-016D-11D2-945F-00C04FB984F9}&#39;</span> <span class="n">-ReportType</span> <span class="n">Xml</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nv">$security</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$gpo</span><span class="p">.</span><span class="n">gpo</span><span class="p">.</span><span class="n">Computer</span><span class="p">.</span><span class="n">ExtensionData</span> <span class="p">|</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s1">&#39;Security&#39;</span> <span class="p">}).</span><span class="n">Extension</span><span class="p">.</span><span class="n">ChildNodes</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nv">$maxTgtHours</span>  <span class="p">=</span> <span class="p">(</span><span class="nv">$security</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">Name</span> <span class="o">-eq</span> <span class="s1">&#39;MaxTicketAge&#39;</span><span class="p">).</span><span class="n">SettingNumber</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nv">$maxSkewMins</span>  <span class="p">=</span> <span class="p">(</span><span class="nv">$security</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">Name</span> <span class="o">-eq</span> <span class="s1">&#39;MaxClockSkew&#39;</span><span class="p">).</span><span class="n">SettingNumber</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$maxTgtHours</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$maxTgtHours</span> <span class="p">=</span> <span class="n">10</span> <span class="p">}</span>   <span class="c"># AD defaults</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$maxSkewMins</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$maxSkewMins</span> <span class="p">=</span> <span class="n">5</span> <span class="p">}</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nv">$safeAfter</span> <span class="p">=</span> <span class="nv">$krbtgt</span><span class="p">.</span><span class="n">PasswordLastSet</span><span class="p">.</span><span class="n">AddHours</span><span class="p">(</span><span class="nv">$maxTgtHours</span><span class="p">).</span><span class="n">AddMinutes</span><span class="p">(</span><span class="nv">$maxSkewMins</span> <span class="p">*</span> <span class="n">2</span><span class="p">)</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="nb">Write-Host</span> <span class="s2">&quot;krbtgt last set: </span><span class="p">$(</span><span class="nv">$krbtgt</span><span class="p">.</span><span class="n">PasswordLastSet</span><span class="p">)</span><span class="s2">&quot;</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Earliest SAFE time for the NEXT reset: $safeAfter&quot;</span>
 </span></code></pre></div>
-<h2 id="flag-stale-accounts-90-days-dormant">Flag stale accounts (90+ days dormant)<a class="headerlink" href="#flag-stale-accounts-90-days-dormant" title="Permanent link">&para;</a></h2>
-<p>Combine "enabled" with "hasn't signed in lately". <code>SignInActivity</code> can be null
-for accounts that have genuinely never signed in — treat that as stale too:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$cutoff</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">).</span><span class="n">AddDays</span><span class="p">(-</span><span class="n">90</span><span class="p">)</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">$stale</span> <span class="p">=</span> <span class="nv">$users</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="nv">$_</span><span class="p">.</span><span class="n">AccountEnabled</span> <span class="o">-and</span> <span class="p">(</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="o">-not</span> <span class="nv">$_</span><span class="p">.</span><span class="n">SignInActivity</span><span class="p">.</span><span class="n">LastSignInDateTime</span> <span class="o">-or</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="nv">$_</span><span class="p">.</span><span class="n">SignInActivity</span><span class="p">.</span><span class="n">LastSignInDateTime</span> <span class="o">-lt</span> <span class="nv">$cutoff</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="p">)</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="nv">$stale</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> enabled accounts dormant for 90+ days&quot;</span>
+<p>If <code>$safeAfter</code> is in the future, <strong>stop</strong> — a previous reset is still inside its
+window. Doubling the clock skew accounts for drift in both directions.</p>
+<h2 id="step-2-reset-once-on-the-pdc-emulator">Step 2 — reset once, on the PDC emulator<a class="headerlink" href="#step-2-reset-once-on-the-pdc-emulator" title="Permanent link">&para;</a></h2>
+<p><code>Set-ADAccountPassword -Reset</code> against krbtgt forces AD to generate a brand-new
+random key (you don't supply a real password — krbtgt's is never used to log in,
+so the actual string is throwaway):</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># Generate throwaway complexity-satisfying bytes; AD replaces the key anyway</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$bytes</span> <span class="p">=</span> <span class="no">[byte[]]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">32</span><span class="p">)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="no">[System.Security.Cryptography.RandomNumberGenerator]</span><span class="p">::</span><span class="n">Fill</span><span class="p">(</span><span class="nv">$bytes</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">$dummy</span> <span class="p">=</span> <span class="no">[Convert]</span><span class="p">::</span><span class="n">ToBase64String</span><span class="p">(</span><span class="nv">$bytes</span><span class="p">)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nb">Set-ADAccountPassword</span> <span class="n">-Identity</span> <span class="nv">$krbtgt</span><span class="p">.</span><span class="n">DistinguishedName</span> <span class="p">`</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">-Server</span> <span class="nv">$domain</span><span class="p">.</span><span class="n">PDCEmulator</span> <span class="n">-Reset</span> <span class="p">`</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">-NewPassword</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="nv">$dummy</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">)</span>
 </span></code></pre></div>
-<h2 id="export-for-the-security-review">Export for the security review<a class="headerlink" href="#export-for-the-security-review" title="Permanent link">&para;</a></h2>
-<p>A timestamped CSV is what auditors actually want to receive:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">$report</span> <span class="p">=</span> <span class="nv">$users</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="p">`</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  <span class="n">DisplayName</span><span class="p">,</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  <span class="n">UserPrincipalName</span><span class="p">,</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  <span class="n">UserType</span><span class="p">,</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  <span class="n">AccountEnabled</span><span class="p">,</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  <span class="n">CreatedDateTime</span><span class="p">,</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  <span class="p">@{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s2">&quot;LastSignIn&quot;</span><span class="p">;</span> <span class="n">Expression</span> <span class="p">=</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">SignInActivity</span><span class="p">.</span><span class="n">LastSignInDateTime</span> <span class="p">}</span> <span class="p">}</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nv">$path</span> <span class="p">=</span> <span class="s2">&quot;EntraUserAudit_{0:yyyy-MM-dd}.csv&quot;</span> <span class="o">-f</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">)</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nv">$report</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">LastSignIn</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="nv">$path</span> <span class="n">-NoTypeInformation</span> <span class="n">-Encoding</span> <span class="n">UTF8</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Wrote </span><span class="p">$(</span><span class="nv">$report</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> rows to $path&quot;</span>
+<div class="admonition note">
+<p class="admonition-title">Always target the PDC emulator</p>
+<p>Reset on the PDC emulator so there's a single authoritative origin to
+replicate <em>out</em> from. Resetting on some random DC means you have to wait for it
+to reach the PDC first, complicating the convergence check.</p>
+</div>
+<h2 id="step-3-force-replication-and-verify-convergence">Step 3 — force replication and verify convergence<a class="headerlink" href="#step-3-force-replication-and-verify-convergence" title="Permanent link">&para;</a></h2>
+<p>Don't trust normal replication latency for something this important. Push the
+single object to every writable DC, then confirm <code>PasswordLastSet</code> matches
+everywhere:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$rwdcs</span> <span class="p">=</span> <span class="nb">Get-ADDomainController</span> <span class="n">-Filter</span> <span class="p">{</span> <span class="n">IsReadOnly</span> <span class="o">-eq</span> <span class="nv">$false</span> <span class="p">}</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">$pdc</span>   <span class="p">=</span> <span class="nv">$domain</span><span class="p">.</span><span class="n">PDCEmulator</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">$krbDN</span> <span class="p">=</span> <span class="nv">$krbtgt</span><span class="p">.</span><span class="n">DistinguishedName</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">foreach</span> <span class="p">(</span><span class="nv">$dc</span> <span class="k">in</span> <span class="nv">$rwdcs</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">HostName</span> <span class="o">-ne</span> <span class="nv">$pdc</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">repadmin</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">replsingleobj</span> <span class="nv">$dc</span><span class="p">.</span><span class="n">HostName</span> <span class="nv">$pdc</span> <span class="nv">$krbDN</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="nv">$pdcSet</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-ADUser</span> <span class="n">krbtgt</span> <span class="n">-Properties</span> <span class="n">PasswordLastSet</span> <span class="n">-Server</span> <span class="nv">$pdc</span><span class="p">).</span><span class="n">PasswordLastSet</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">foreach</span> <span class="p">(</span><span class="nv">$dc</span> <span class="k">in</span> <span class="nv">$rwdcs</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="nv">$dcSet</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-ADUser</span> <span class="n">krbtgt</span> <span class="n">-Properties</span> <span class="n">PasswordLastSet</span> <span class="n">-Server</span> <span class="nv">$dc</span><span class="p">.</span><span class="n">HostName</span><span class="p">).</span><span class="n">PasswordLastSet</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="nv">$state</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$dcSet</span> <span class="o">-eq</span> <span class="nv">$pdcSet</span><span class="p">)</span> <span class="p">{</span> <span class="s1">&#39;IN SYNC&#39;</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="s1">&#39;OUT OF SYNC&#39;</span> <span class="p">}</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="nb">Write-Host</span> <span class="p">(</span><span class="s2">&quot;{0,-30} {1}&quot;</span> <span class="o">-f</span> <span class="nv">$dc</span><span class="p">.</span><span class="n">HostName</span><span class="p">,</span> <span class="nv">$state</span><span class="p">)</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">}</span>
 </span></code></pre></div>
+<p>When every DC reports <strong>IN SYNC</strong>, the rotation is complete and safe.</p>
+<h2 id="dont-write-this-from-scratch">Don't write this from scratch<a class="headerlink" href="#dont-write-this-from-scratch" title="Permanent link">&para;</a></h2>
+<p>Everything above is the <em>mechanism</em> so you understand what's happening. For
+production, use Microsoft's battle-tested script — Jared Poeppelman's
+<strong>New-KrbtgtKeys.ps1</strong> (the v2.x rewrite on GitHub). It wraps all of this in
+three modes:</p>
+<ul>
+<li><strong>Informational</strong> — checks prerequisites and tells you the safe reset window.
+  Run it any time; it changes nothing.</li>
+<li><strong>Simulation</strong> — triggers the replication path <em>without</em> resetting, so you can
+  measure how long convergence actually takes in your environment.</li>
+<li><strong>Reset</strong> — does the real thing, with guardrails and the N-1 warning built in.</li>
+</ul>
 <div class="admonition tip">
-<p class="admonition-title">Calculated properties flatten nested objects</p>
-<p><code>signInActivity</code> is an object, so it won't land cleanly in a CSV column. The
-<code>@{ Name = ...; Expression = ... }</code> hashtable (a <em>calculated property</em>) pulls
-the nested value out into a flat column — the standard PowerShell idiom for
-this.</p>
+<p class="admonition-title">Run Informational → Simulation → Reset, in that order</p>
+<p>The first two modes are completely safe and tell you whether Reset will go
+cleanly. There is no reason to ever run Reset cold.</p>
 </div>
-<p>Next in the series: going from read-only auditing to actually granting access —
-assigning Entra ID <strong>access packages</strong> with PowerShell.</p>
+<h2 id="when-to-actually-do-this">When to actually do this<a class="headerlink" href="#when-to-actually-do-this" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Routinely</strong>, twice with the safe gap between, if you suspect compromise or as
+  part of incident recovery (this is a standard step in evicting an attacker).</li>
+<li><strong>Periodically</strong> (e.g. annually) as hygiene, especially if krbtgt hasn't changed
+  since the domain was built — a password from 2014 is a 2014-era key sitting in
+  every backup you've ever taken.</li>
+</ul>
+<p>After a confirmed compromise, you reset it <em>twice</em> (with the wait between) to flush
+both the N and N-1 keys — that's the only way to fully invalidate forged tickets.</p>
 
 
 
@@ -983,7 +1031,7 @@ assigning Entra ID <strong>access packages</strong> with PowerShell.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../connect-microsoft-graph-powershell/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Connecting to Microsoft Graph with PowerShell">
+          <a href="../find-missing-laps-powershell/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Finding the machines that slipped through LAPS">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -993,20 +1041,20 @@ assigning Entra ID <strong>access packages</strong> with PowerShell.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Connecting to Microsoft Graph with PowerShell
+                Finding the machines that slipped through LAPS
               </div>
             </div>
           </a>
         
         
           
-          <a href="../dc-health-report-powershell/" class="md-footer__link md-footer__link--next" aria-label="Next: A domain controller health report you&#39;ll actually read">
+          <a href="../report-expiring-app-secrets-graph/" class="md-footer__link md-footer__link--next" aria-label="Next: Never get surprised by an expired app secret again">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                A domain controller health report you'll actually read
+                Never get surprised by an expired app secret again
               </div>
             </div>
             <div class="md-footer__button md-icon">

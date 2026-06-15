@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A practical Microsoft Graph PowerShell recipe for auditing Entra ID users — guests, stale accounts, and disabled identities — exported to CSV.">
+        <meta name="description" content="Report on every Windows machine that doesn't have a LAPS-managed local admin password — covering both Windows LAPS and the legacy Microsoft LAPS attribute.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/audit-entra-users-powershell/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/find-missing-laps-powershell/">
       
       
-        <link rel="prev" href="../connect-microsoft-graph-powershell/">
+        <link rel="prev" href="../alert-locked-out-accounts-powershell/">
       
       
-        <link rel="next" href="../dc-health-report-powershell/">
+        <link rel="next" href="../rotate-krbtgt-password-safely/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Auditing Entra ID users with PowerShell - Kavesh Naidoo</title>
+        <title>Finding the machines that slipped through LAPS - Kavesh Naidoo</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#auditing-entra-id-users-with-powershell" class="md-skip">
+        <a href="#finding-the-machines-that-slipped-through-laps" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Auditing Entra ID users with PowerShell
+              Finding the machines that slipped through LAPS
             
           </span>
         </div>
@@ -704,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#connect-with-read-scopes" class="md-nav__link">
+  <a href="#two-attributes-depending-on-which-laps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Connect with read scopes
+        Two attributes, depending on which LAPS
       
     </span>
   </a>
@@ -715,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#list-users-and-only-the-properties-you-need" class="md-nav__link">
+  <a href="#exclude-the-things-that-are-meant-to-be-excluded" class="md-nav__link">
     <span class="md-ellipsis">
       
-        List users — and only the properties you need
+        Exclude the things that are meant to be excluded
       
     </span>
   </a>
@@ -726,32 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#find-the-guests" class="md-nav__link">
+  <a href="#report-only-whats-broken" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Find the guests
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#flag-stale-accounts-90-days-dormant" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Flag stale accounts (90+ days dormant)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#export-for-the-security-review" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Export for the security review
+        Report only what's broken
       
     </span>
   </a>
@@ -814,7 +792,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-06-02 00:00:00+00:00" class="md-ellipsis">June 2, 2026</time>
+                        <time datetime="2026-06-12 00:00:00+00:00" class="md-ellipsis">June 12, 2026</time>
                       </div>
                     </li>
                     
@@ -837,7 +815,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              2 min read
+                              3 min read
                             
                           </span>
                         </div>
@@ -861,86 +839,114 @@
 
 
 
-<h1 id="auditing-entra-id-users-with-powershell">Auditing Entra ID users with PowerShell<a class="headerlink" href="#auditing-entra-id-users-with-powershell" title="Permanent link">&para;</a></h1>
-<p>"Who has access?" is the question every security review opens with. With the
-Microsoft Graph PowerShell SDK you can answer it in a few lines: list every
-user, flag the guests and the dormant accounts, and hand security a CSV.</p>
-<p>This builds directly on <a href="../connect-microsoft-graph-powershell/">connecting to Graph</a> —
-make sure you can run <code>Get-MgContext</code> first.</p>
+<h1 id="finding-the-machines-that-slipped-through-laps">Finding the machines that slipped through LAPS<a class="headerlink" href="#finding-the-machines-that-slipped-through-laps" title="Permanent link">&para;</a></h1>
+<p>LAPS — the Local Administrator Password Solution — is one of the highest
+return-on-effort security controls you can deploy: every machine gets a unique,
+rotated, randomly-generated local administrator password, stored in the
+directory. The catch is coverage. A control that protects 90% of your estate
+leaves the other 10% as the soft targets an attacker pivots through. So the
+question that matters isn't "is LAPS deployed?" — it's "<em>which machines aren't
+covered yet?</em>"</p>
+<p>This script answers exactly that.</p>
 <!-- more -->
 
-<h2 id="connect-with-read-scopes">Connect with read scopes<a class="headerlink" href="#connect-with-read-scopes" title="Permanent link">&para;</a></h2>
-<p>Auditing is read-only. Request exactly that — plus <code>AuditLog.Read.All</code>, which is
-what unlocks the all-important last-sign-in data:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Connect-MgGraph</span> <span class="n">-Scopes</span> <span class="s2">&quot;User.Read.All&quot;</span><span class="p">,</span> <span class="s2">&quot;AuditLog.Read.All&quot;</span>
-</span></code></pre></div>
-<h2 id="list-users-and-only-the-properties-you-need">List users — and only the properties you need<a class="headerlink" href="#list-users-and-only-the-properties-you-need" title="Permanent link">&para;</a></h2>
-<p><code>Get-MgUser</code> returns a slim default set. Ask explicitly for the fields you'll
-report on, or they come back empty:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$users</span> <span class="p">=</span> <span class="nb">Get-MgUser</span> <span class="n">-All</span> <span class="n">-Property</span> <span class="p">`</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="n">DisplayName</span><span class="p">,</span> <span class="n">UserPrincipalName</span><span class="p">,</span> <span class="n">AccountEnabled</span><span class="p">,</span> <span class="n">UserType</span><span class="p">,</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="n">CreatedDateTime</span><span class="p">,</span> <span class="n">SignInActivity</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">$users</span> <span class="p">|</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  <span class="nb">Select-Object</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">UserPrincipalName</span><span class="p">,</span> <span class="n">UserType</span><span class="p">,</span> <span class="n">AccountEnabled</span> <span class="p">|</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  <span class="nb">Format-Table</span> <span class="n">-AutoSize</span>
+<h2 id="two-attributes-depending-on-which-laps">Two attributes, depending on which LAPS<a class="headerlink" href="#two-attributes-depending-on-which-laps" title="Permanent link">&para;</a></h2>
+<p>There are two generations of LAPS, and they store the expiry timestamp in
+different attributes:</p>
+<table>
+<thead>
+<tr>
+<th>LAPS generation</th>
+<th>Password-expiry attribute</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows LAPS</strong> (built into Windows, 2023+)</td>
+<td><code>msLAPS-PasswordExpirationTime</code></td>
+</tr>
+<tr>
+<td><strong>Legacy Microsoft LAPS</strong> (the old MSI)</td>
+<td><code>ms-Mcs-AdmPwdExpirationTime</code></td>
+</tr>
+</tbody>
+</table>
+<p>If the relevant attribute is <strong>empty</strong>, that machine has never had a LAPS
+password set — it's non-compliant. A migrating estate will have a mix of both,
+so check for either:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Import-Module</span> <span class="n">ActiveDirectory</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">$searchBase</span> <span class="p">=</span> <span class="s1">&#39;OU=Servers,DC=corp,DC=example,DC=com&#39;</span>   <span class="c"># scope it — see the gotcha</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">$props</span>      <span class="p">=</span> <span class="s1">&#39;msLAPS-PasswordExpirationTime&#39;</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>              <span class="s1">&#39;ms-Mcs-AdmPwdExpirationTime&#39;</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>              <span class="s1">&#39;OperatingSystem&#39;</span><span class="p">,</span> <span class="s1">&#39;LastLogonTimeStamp&#39;</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nv">$missing</span> <span class="p">=</span> <span class="nb">Get-ADComputer</span> <span class="n">-SearchBase</span> <span class="nv">$searchBase</span> <span class="n">-Filter</span> <span class="s1">&#39;Enabled -eq $true&#39;</span> <span class="n">-Properties</span> <span class="nv">$props</span> <span class="p">|</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="nb">Where-Object</span> <span class="p">{</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="o">-not</span> <span class="nv">$_</span><span class="p">.</span><span class="s1">&#39;msLAPS-PasswordExpirationTime&#39;</span> <span class="o">-and</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="o">-not</span> <span class="nv">$_</span><span class="p">.</span><span class="s1">&#39;ms-Mcs-AdmPwdExpirationTime&#39;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="p">}</span> <span class="p">|</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="nb">Select-Object</span> <span class="n">Name</span><span class="p">,</span> <span class="n">OperatingSystem</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="p">@{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s1">&#39;LastLogon&#39;</span><span class="p">;</span> <span class="n">Expression</span> <span class="p">=</span> <span class="p">{</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>            <span class="no">[DateTime]</span><span class="p">::</span><span class="n">FromFileTime</span><span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">LastLogonTimeStamp</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="p">}}</span> <span class="p">|</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="nb">Sort-Object</span> <span class="n">Name</span>
 </span></code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title"><code>SignInActivity</code> needs the property AND the scope</p>
-<p><code>signInActivity</code> is only populated when you (1) request it via <code>-Property</code>
-<strong>and</strong> (2) connected with <code>AuditLog.Read.All</code>. Omit either and the field is
-silently null — which looks exactly like "never signed in". Don't confuse
-the two.</p>
+<p class="admonition-title">Scope the search — don't <code>-Filter *</code> the whole domain</p>
+<p>The classic version of this script runs <code>Get-ADComputer -Filter * -Properties *</code>
+against the entire domain. <code>-Properties *</code> pulls <strong>every</strong> attribute for
+<strong>every</strong> computer object — slow, memory-hungry, and mostly wasted. Always:
+name the exact properties you need, filter server-side where you can
+(<code>-Filter 'Enabled -eq $true'</code>), and scope with <code>-SearchBase</code>.</p>
 </div>
-<h2 id="find-the-guests">Find the guests<a class="headerlink" href="#find-the-guests" title="Permanent link">&para;</a></h2>
-<p>External identities are the usual soft spot. Advanced queries (<code>-ConsistencyLevel
-eventual</code> plus a count) let you filter server-side:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$guests</span> <span class="p">=</span> <span class="nb">Get-MgUser</span> <span class="n">-All</span> <span class="p">`</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  <span class="n">-Filter</span> <span class="s2">&quot;userType eq &#39;Guest&#39;&quot;</span> <span class="p">`</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  <span class="n">-ConsistencyLevel</span> <span class="n">eventual</span> <span class="p">`</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  <span class="n">-CountVariable</span> <span class="n">guestCount</span> <span class="p">`</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  <span class="n">-Property</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">UserPrincipalName</span><span class="p">,</span> <span class="n">CreatedDateTime</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">Write-Host</span> <span class="s2">&quot;$guestCount guest accounts found&quot;</span>
-</span></code></pre></div>
-<h2 id="flag-stale-accounts-90-days-dormant">Flag stale accounts (90+ days dormant)<a class="headerlink" href="#flag-stale-accounts-90-days-dormant" title="Permanent link">&para;</a></h2>
-<p>Combine "enabled" with "hasn't signed in lately". <code>SignInActivity</code> can be null
-for accounts that have genuinely never signed in — treat that as stale too:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$cutoff</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">).</span><span class="n">AddDays</span><span class="p">(-</span><span class="n">90</span><span class="p">)</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">$stale</span> <span class="p">=</span> <span class="nv">$users</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="nv">$_</span><span class="p">.</span><span class="n">AccountEnabled</span> <span class="o">-and</span> <span class="p">(</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="o">-not</span> <span class="nv">$_</span><span class="p">.</span><span class="n">SignInActivity</span><span class="p">.</span><span class="n">LastSignInDateTime</span> <span class="o">-or</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="nv">$_</span><span class="p">.</span><span class="n">SignInActivity</span><span class="p">.</span><span class="n">LastSignInDateTime</span> <span class="o">-lt</span> <span class="nv">$cutoff</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="p">)</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="nv">$stale</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> enabled accounts dormant for 90+ days&quot;</span>
-</span></code></pre></div>
-<h2 id="export-for-the-security-review">Export for the security review<a class="headerlink" href="#export-for-the-security-review" title="Permanent link">&para;</a></h2>
-<p>A timestamped CSV is what auditors actually want to receive:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">$report</span> <span class="p">=</span> <span class="nv">$users</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="p">`</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  <span class="n">DisplayName</span><span class="p">,</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  <span class="n">UserPrincipalName</span><span class="p">,</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  <span class="n">UserType</span><span class="p">,</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  <span class="n">AccountEnabled</span><span class="p">,</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  <span class="n">CreatedDateTime</span><span class="p">,</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  <span class="p">@{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s2">&quot;LastSignIn&quot;</span><span class="p">;</span> <span class="n">Expression</span> <span class="p">=</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">SignInActivity</span><span class="p">.</span><span class="n">LastSignInDateTime</span> <span class="p">}</span> <span class="p">}</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nv">$path</span> <span class="p">=</span> <span class="s2">&quot;EntraUserAudit_{0:yyyy-MM-dd}.csv&quot;</span> <span class="o">-f</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">)</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nv">$report</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">LastSignIn</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="nv">$path</span> <span class="n">-NoTypeInformation</span> <span class="n">-Encoding</span> <span class="n">UTF8</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Wrote </span><span class="p">$(</span><span class="nv">$report</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> rows to $path&quot;</span>
+<h2 id="exclude-the-things-that-are-meant-to-be-excluded">Exclude the things that are <em>meant</em> to be excluded<a class="headerlink" href="#exclude-the-things-that-are-meant-to-be-excluded" title="Permanent link">&para;</a></h2>
+<p>Domain controllers don't get LAPS (their local admin account is governed
+differently), and you'll usually have a handful of legitimately-exempt boxes.
+Keep the exclusion list in a file, not in the script:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$exclusions</span> <span class="p">=</span> <span class="p">@()</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s1">&#39;C:\ProgramData\LAPS\exclusions.txt&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="nv">$exclusions</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="s1">&#39;C:\ProgramData\LAPS\exclusions.txt&#39;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nv">$missing</span> <span class="p">=</span> <span class="nv">$missing</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="n">-notin</span> <span class="nv">$exclusions</span> <span class="o">-and</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="nv">$_</span><span class="p">.</span><span class="n">DistinguishedName</span> <span class="o">-notlike</span> <span class="s1">&#39;*OU=Domain Controllers*&#39;</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
 </span></code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Calculated properties flatten nested objects</p>
-<p><code>signInActivity</code> is an object, so it won't land cleanly in a CSV column. The
-<code>@{ Name = ...; Expression = ... }</code> hashtable (a <em>calculated property</em>) pulls
-the nested value out into a flat column — the standard PowerShell idiom for
-this.</p>
+<p class="admonition-title"><code>-notin</code> needs a real array on the right</p>
+<p><code>$_.Name -notin $exclusions</code> only works if <code>$exclusions</code> is an array.
+<code>Get-Content</code> returns an array of lines, so you're fine — but if the file has a
+single line, some PowerShell versions hand you a string instead. Wrapping with
+<code>@(Get-Content …)</code> forces an array every time and saves you a baffling
+debugging session.</p>
 </div>
-<p>Next in the series: going from read-only auditing to actually granting access —
-assigning Entra ID <strong>access packages</strong> with PowerShell.</p>
+<h2 id="report-only-whats-broken">Report only what's broken<a class="headerlink" href="#report-only-whats-broken" title="Permanent link">&para;</a></h2>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$missing</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="nb">Write-Host</span> <span class="s2">&quot;Every in-scope machine has a LAPS password. Nothing to report.&quot;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">return</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nv">$style</span> <span class="p">=</span> <span class="s1">&#39;&lt;style&gt;body{font-family:Segoe UI,Arial;font-size:10pt}&#39;</span> <span class="p">+</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>         <span class="s1">&#39;table{border-collapse:collapse}th,td{border:1px solid #ccc;padding:6px}&#39;</span> <span class="p">+</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>         <span class="s1">&#39;th{background:#2d2d6b;color:#fff}&lt;/style&gt;&#39;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="nv">$html</span> <span class="p">=</span> <span class="nv">$missing</span> <span class="p">|</span> <span class="nb">ConvertTo-Html</span> <span class="n">-Head</span> <span class="nv">$style</span> <span class="p">`</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">-PreContent</span> <span class="s2">&quot;&lt;h2&gt;Machines missing a LAPS password — </span><span class="p">$(</span><span class="nv">$missing</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2">&lt;/h2&gt;&quot;</span> <span class="p">|</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="nb">Out-String</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nb">Send-MailMessage</span> <span class="n">-To</span> <span class="s1">&#39;secops@example.com&#39;</span> <span class="n">-From</span> <span class="s1">&#39;laps-report@example.com&#39;</span> <span class="p">`</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="n">-SmtpServer</span> <span class="s1">&#39;smtp.example.com&#39;</span> <span class="n">-BodyAsHtml</span> <span class="n">-Body</span> <span class="nv">$html</span> <span class="p">`</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="n">-Subject</span> <span class="s2">&quot;LAPS coverage gaps: </span><span class="p">$(</span><span class="nv">$missing</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> machine(s)&quot;</span>
+</span></code></pre></div>
+<p>Sort the output by <code>LastLogon</code>. A non-compliant machine that signed in this
+morning is a live remediation target; one that hasn't checked in for six months
+is probably a stale computer object you should be <em>deleting</em>, not patching — which
+is its own useful finding.</p>
+<p>This is the kind of weekly report that quietly drives a number from 85% coverage
+to 100% — and gives you a clean artefact for the next ISO 27001 or Cyber
+Essentials audit.</p>
 
 
 
@@ -983,7 +989,7 @@ assigning Entra ID <strong>access packages</strong> with PowerShell.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../connect-microsoft-graph-powershell/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Connecting to Microsoft Graph with PowerShell">
+          <a href="../alert-locked-out-accounts-powershell/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Catching account lockouts before the helpdesk ticket">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -993,20 +999,20 @@ assigning Entra ID <strong>access packages</strong> with PowerShell.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Connecting to Microsoft Graph with PowerShell
+                Catching account lockouts before the helpdesk ticket
               </div>
             </div>
           </a>
         
         
           
-          <a href="../dc-health-report-powershell/" class="md-footer__link md-footer__link--next" aria-label="Next: A domain controller health report you&#39;ll actually read">
+          <a href="../rotate-krbtgt-password-safely/" class="md-footer__link md-footer__link--next" aria-label="Next: Rotating the krbtgt password without breaking Kerberos">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                A domain controller health report you'll actually read
+                Rotating the krbtgt password without breaking Kerberos
               </div>
             </div>
             <div class="md-footer__button md-icon">

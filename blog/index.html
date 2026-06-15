@@ -721,6 +721,286 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2026-06-15 00:00:00+00:00">June 15, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/powershell/" class="md-meta__link">PowerShell</a>, 
+              <a href="category/identity/" class="md-meta__link">Identity</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="which-of-your-admins-still-dont-have-mfa"><a class="toclink" href="find-admins-without-mfa-graph/">Which of your admins still don't have MFA?</a></h2>
+<p>Of all the gaps a security review can surface, a <strong>privileged account with no
+second factor</strong> is the one that should keep you up at night. A Global Admin
+protected by a password alone is a single phish away from total tenant compromise.
+You want a report that does exactly one thing: list the accounts that hold a
+privileged role <em>and</em> have no MFA registered.</p>
+<p>If you've done this before with <code>Get-MsolUser</code> and <code>StrongAuthenticationMethods</code>,
+that approach is dead — let's do it the way that still works.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="find-admins-without-mfa-graph/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-06-14 00:00:00+00:00">June 14, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/powershell/" class="md-meta__link">PowerShell</a>, 
+              <a href="category/identity/" class="md-meta__link">Identity</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="never-get-surprised-by-an-expired-app-secret-again"><a class="toclink" href="report-expiring-app-secrets-graph/">Never get surprised by an expired app secret again</a></h2>
+<p>App registration secrets and certificates expire. When one does, whatever it was
+authenticating — a SAML app, a scheduled job, an API integration — stops working,
+usually at the worst possible time, and usually with an error message that points
+nowhere near the real cause. The fix is boring and effective: scan the whole
+tenant on a schedule and email a report of everything expiring in the next N days,
+while there's still time to rotate.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="report-expiring-app-secrets-graph/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-06-13 00:00:00+00:00">June 13, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/powershell/" class="md-meta__link">PowerShell</a>, 
+              <a href="category/identity/" class="md-meta__link">Identity</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="rotating-the-krbtgt-password-without-breaking-kerberos"><a class="toclink" href="rotate-krbtgt-password-safely/">Rotating the krbtgt password without breaking Kerberos</a></h2>
+<p>There's one account in every Active Directory domain whose password signs <em>every
+Kerberos ticket ever issued</em>: <code>krbtgt</code>. It's disabled, nobody logs in as it, and
+most people never touch it — which is exactly why attackers love it. Steal the
+krbtgt hash and you can forge <strong>Golden Tickets</strong>: valid-looking TGTs for any user,
+any group, with a lifetime you choose. The only cure is to change the password.</p>
+<p>But krbtgt is also the one password you can get <em>catastrophically</em> wrong. Rotate
+it carelessly and you break authentication for the entire domain. Let's do it
+properly.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="rotate-krbtgt-password-safely/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-06-12 00:00:00+00:00">June 12, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/powershell/" class="md-meta__link">PowerShell</a>, 
+              <a href="category/identity/" class="md-meta__link">Identity</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="finding-the-machines-that-slipped-through-laps"><a class="toclink" href="find-missing-laps-powershell/">Finding the machines that slipped through LAPS</a></h2>
+<p>LAPS — the Local Administrator Password Solution — is one of the highest
+return-on-effort security controls you can deploy: every machine gets a unique,
+rotated, randomly-generated local administrator password, stored in the
+directory. The catch is coverage. A control that protects 90% of your estate
+leaves the other 10% as the soft targets an attacker pivots through. So the
+question that matters isn't "is LAPS deployed?" — it's "<em>which machines aren't
+covered yet?</em>"</p>
+<p>This script answers exactly that.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="find-missing-laps-powershell/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-06-11 00:00:00+00:00">June 11, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/powershell/" class="md-meta__link">PowerShell</a>, 
+              <a href="category/identity/" class="md-meta__link">Identity</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="catching-account-lockouts-before-the-helpdesk-ticket"><a class="toclink" href="alert-locked-out-accounts-powershell/">Catching account lockouts before the helpdesk ticket</a></h2>
+<p>Locked accounts are noise until they're a pattern. One user fat-fingered their
+password — fine. Twenty accounts locking out in ten minutes is either a bad
+service-account credential after a password change, or someone spraying
+passwords against your directory. Either way you want to see it on a dashboard,
+not discover it from a pile of helpdesk tickets.</p>
+<p>The data is one cmdlet away. The craft is in reporting it <em>well</em>.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="alert-locked-out-accounts-powershell/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2026-06-10 00:00:00+00:00">June 10, 2026</time></li>
         
           <li class="md-meta__item">
@@ -754,6 +1034,116 @@ policy, submit the request, confirm it landed.</p>
     
       <nav class="md-post__action">
         <a href="assign-entra-access-packages-powershell/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-06-10 00:00:00+00:00">June 10, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/powershell/" class="md-meta__link">PowerShell</a>, 
+              <a href="category/identity/" class="md-meta__link">Identity</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="get-an-email-the-moment-someone-joins-domain-admins"><a class="toclink" href="monitor-privileged-groups-powershell/">Get an email the moment someone joins Domain Admins</a></h2>
+<p>A change to <strong>Domain Admins</strong> or <strong>Enterprise Admins</strong> is one of the highest-signal
+events in your whole estate. Legitimately, it happens a few times a year. If it
+happens and you <em>didn't</em> schedule it, you want to know in minutes, not at the next
+quarterly access review.</p>
+<p>You don't need a SIEM for the first 80% of this. A scheduled PowerShell script
+that remembers last run's membership and emails you the delta is a genuinely
+useful control — the <strong>state-file diff</strong> pattern.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="monitor-privileged-groups-powershell/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-06-09 00:00:00+00:00">June 9, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/powershell/" class="md-meta__link">PowerShell</a>, 
+              <a href="category/infrastructure/" class="md-meta__link">Infrastructure</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="a-domain-controller-health-report-youll-actually-read"><a class="toclink" href="dc-health-report-powershell/">A domain controller health report you'll actually read</a></h2>
+<p>Every morning someone should be able to glance at one page and know whether the
+directory is healthy. <code>dcdiag</code> and <code>repadmin</code> give you the raw truth, but their
+output is a wall of text — nobody reads it daily. The fix is a scheduled script
+that polls every DC in the forest, scores each check, and emails a colour-coded
+HTML table: green is fine, yellow needs a look, red is on fire.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="dc-health-report-powershell/">
           Continue reading
         </a>
       </nav>
@@ -871,108 +1261,6 @@ app-only), and the scope gotcha that trips everyone up the first time.</p>
   </div>
 </article>
       
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-05-06 00:00:00+00:00">May 6, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/identity/" class="md-meta__link">Identity</a>, 
-              <a href="category/infrastructure/" class="md-meta__link">Infrastructure</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              12 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="skills-directory-getting-started-guide"><a class="toclink" href="entra-nextjs-getting-started/">Skills Directory — Getting Started Guide</a></h2>
-<p>A complete, self-contained walkthrough for getting from zero to a working Entra-authenticated Next.js app on your laptop. Covers Day 0 (prerequisites), Day 1 (project on localhost), and Day 2 (Microsoft sign-in working end-to-end).</p>
-<p>This is the on-ramp to Sprint 1 of the project roadmap. By the end, you'll have a real, working foundation that everything else builds on.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="entra-nextjs-getting-started/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-04-27 00:00:00+00:00">April 27, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/ai/" class="md-meta__link">AI</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              3 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="the-great-unbundling"><a class="toclink" href="the-great-unbundling/">The Great Unbundling</a></h2>
-<h3 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes"><a class="toclink" href="the-great-unbundling/#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes</a></h3>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="the-great-unbundling/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
       
         
           
@@ -980,7 +1268,7 @@ app-only), and the scope gotcha that trips everyone up the first time.</p>
 
 
 <nav class="md-pagination">
-  
+  <span class="md-pagination__current">1</span> <a class="md-pagination__link" href="page/2/">2</a>
 </nav>
         
       
