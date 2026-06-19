@@ -1265,7 +1265,7 @@ that begin with one phished credential and end with a domain admin token.</p>
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
-          <time datetime="2026-06-15 00:00:00+00:00">June 15, 2026</time></li>
+          <time datetime="2026-06-19 00:00:00+00:00">June 19, 2026</time></li>
         
           <li class="md-meta__item">
             in
@@ -1277,7 +1277,7 @@ that begin with one phished credential and end with a domain admin token.</p>
           
           <li class="md-meta__item">
             
-              3 min read
+              4 min read
             
           </li>
         
@@ -1287,18 +1287,19 @@ that begin with one phished credential and end with a domain admin token.</p>
     </div>
   </header>
   <div class="md-post__content md-typeset">
-    <h2 id="which-of-your-admins-still-dont-have-mfa"><a class="toclink" href="../../find-admins-without-mfa-graph/">Which of your admins still don't have MFA?</a></h2>
-<p>Of all the gaps a security review can surface, a <strong>privileged account with no
-second factor</strong> is the one that should keep you up at night. A Global Admin
-protected by a password alone is a single phish away from total tenant compromise.
-You want a report that does exactly one thing: list the accounts that hold a
-privileged role <em>and</em> have no MFA registered.</p>
-<p>If you've done this before with <code>Get-MsolUser</code> and <code>StrongAuthenticationMethods</code>,
-that approach is dead — let's do it the way that still works.</p>
+    <h2 id="fixing-room-mailboxes-that-silently-reject-external-meeting-invites"><a class="toclink" href="../../room-mailbox-external-booking-powershell/">Fixing room mailboxes that silently reject external meeting invites</a></h2>
+<p>Someone outside your organisation tries to book a meeting room. They send the
+invite, get no error, and assume it worked. Then the meeting happens and the
+room is already taken by someone else who booked it through the internal system.
+The external guest never got a rejection — the room just quietly discarded their
+invite.</p>
+<p>The culprit is almost always <code>ProcessExternalMeetingMessages</code> set to <code>$false</code>
+on the room mailbox. It's the default in many tenants and it trips people up
+constantly.</p>
 
     
       <nav class="md-post__action">
-        <a href="../../find-admins-without-mfa-graph/">
+        <a href="../../room-mailbox-external-booking-powershell/">
           Continue reading
         </a>
       </nav>

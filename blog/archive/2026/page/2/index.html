@@ -730,6 +730,63 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2026-06-19 00:00:00+00:00">June 19, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../../../category/powershell/" class="md-meta__link">PowerShell</a>, 
+              <a href="../../../../category/identity/" class="md-meta__link">Identity</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="fixing-room-mailboxes-that-silently-reject-external-meeting-invites"><a class="toclink" href="../../../../room-mailbox-external-booking-powershell/">Fixing room mailboxes that silently reject external meeting invites</a></h2>
+<p>Someone outside your organisation tries to book a meeting room. They send the
+invite, get no error, and assume it worked. Then the meeting happens and the
+room is already taken by someone else who booked it through the internal system.
+The external guest never got a rejection — the room just quietly discarded their
+invite.</p>
+<p>The culprit is almost always <code>ProcessExternalMeetingMessages</code> set to <code>$false</code>
+on the room mailbox. It's the default in many tenants and it trips people up
+constantly.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../../../room-mailbox-external-booking-powershell/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2026-06-15 00:00:00+00:00">June 15, 2026</time></li>
         
           <li class="md-meta__item">
@@ -1207,61 +1264,6 @@ make sure you can run <code>Get-MgContext</code> first.</p>
     
       <nav class="md-post__action">
         <a href="../../../../audit-entra-users-powershell/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-05-20 00:00:00+00:00">May 20, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="../../../../category/powershell/" class="md-meta__link">PowerShell</a>, 
-              <a href="../../../../category/identity/" class="md-meta__link">Identity</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="connecting-to-microsoft-graph-with-powershell"><a class="toclink" href="../../../../connect-microsoft-graph-powershell/">Connecting to Microsoft Graph with PowerShell</a></h2>
-<p>Almost every Entra ID automation I write starts the same way: connect to
-Microsoft Graph, request the least privilege I need, do the work, disconnect.
-Get this foundation right and everything else — users, groups, access packages —
-is just cmdlets on top.</p>
-<p>This post covers installing the SDK, the two auth models (delegated vs
-app-only), and the scope gotcha that trips everyone up the first time.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="../../../../connect-microsoft-graph-powershell/">
           Continue reading
         </a>
       </nav>
