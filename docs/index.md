@@ -12,8 +12,7 @@ running — and I genuinely enjoy it. This is where I write about the things I'm
 figuring out: identity, security, PowerShell, and increasingly AI and how it
 changes the way we work.
 
-Not polished thought leadership. Just honest notes from someone who spends a
-lot of time at the keyboard.
+Just honest notes from someone who spends a lot of time at the keyboard.
 
 [Browse all posts →](blog/index.md){ .md-button .md-button--primary }
 
