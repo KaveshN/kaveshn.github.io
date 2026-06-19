@@ -2,8 +2,8 @@ site_name: Kavesh Naidoo
 site_url: https://kaveshn.github.io/
 site_author: Kavesh Naidoo
 site_description: >-
-  Notes on identity, infrastructure, and AI — Entra ID, PowerShell, and the
-  systems in between.
+  An IT guy writing about identity, security, PowerShell, and AI — honest notes
+  from someone who spends a lot of time at the keyboard.
 
 theme:
   name: material

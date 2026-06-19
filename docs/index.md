@@ -6,9 +6,14 @@ hide:
 
 # Kavesh Naidoo
 
-Notes from the intersection of **identity, infrastructure, and AI** — Entra ID,
-PowerShell, and the systems in between. I lead IT/infra and I'm learning to
-build, so expect equal parts architecture and hands-on.
+I'm an IT guy at heart. I've spent years in the weeds of Active Directory,
+firewalls, cloud infrastructure, and everything that keeps an organisation
+running — and I genuinely enjoy it. This is where I write about the things I'm
+figuring out: identity, security, PowerShell, and increasingly AI and how it
+changes the way we work.
+
+Not polished thought leadership. Just honest notes from someone who spends a
+lot of time at the keyboard.
 
 [Browse all posts →](blog/index.md){ .md-button .md-button--primary }
 
