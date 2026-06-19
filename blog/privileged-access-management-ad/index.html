@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes.">
+        <meta name="description" content="Standing admin rights are the gift that keeps on giving — to attackers. How time-based group memberships in AD DS work, why they matter, and how to start deploying PAM today.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/the-great-unbundling/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/privileged-access-management-ad/">
       
       
+        <link rel="prev" href="../zero-trust-active-directory/">
       
-        <link rel="next" href="../entra-nextjs-getting-started/">
+      
+        <link rel="next" href="../single-vs-multi-forest-ad/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>The Great Unbundling - Kavesh Naidoo</title>
+        <title>Privileged Access Management in AD DS: stopping the attack path before it starts - Kavesh Naidoo</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-great-unbundling" class="md-skip">
+        <a href="#privileged-access-management-in-ad-ds-stopping-the-attack-path-before-it-starts" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The Great Unbundling
+              Privileged Access Management in AD DS: stopping the attack path before it starts
             
           </span>
         </div>
@@ -702,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" class="md-nav__link">
+  <a href="#the-fundamental-flaw-of-standing-privilege" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes
+        The fundamental flaw of standing privilege
       
     </span>
   </a>
@@ -713,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#saas-was-built-for-humans-ai-is-not" class="md-nav__link">
+  <a href="#what-pam-actually-does" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SaaS was built for humans. AI is not.
+        What PAM actually does
       
     </span>
   </a>
@@ -724,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#from-seats-to-tokens" class="md-nav__link">
+  <a href="#time-based-group-memberships-in-practice" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From seats to tokens
+        Time-based group memberships in practice
       
     </span>
   </a>
@@ -735,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-agent-layer-is-the-new-interface" class="md-nav__link">
+  <a href="#the-cultural-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The agent layer is the new interface
+        The cultural problem
       
     </span>
   </a>
@@ -746,43 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-the-mag-7-still-have-a-window" class="md-nav__link">
+  <a href="#where-to-start-today" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the Mag 7 still have a window
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-strategic-fork" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The strategic fork
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-next-five-years-look-like" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the next five years look like
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-final-thought" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The final thought
+        Where to start today
       
     </span>
   </a>
@@ -845,7 +814,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-04-27 00:00:00+00:00" class="md-ellipsis">April 27, 2026</time>
+                        <time datetime="2026-06-27 00:00:00+00:00" class="md-ellipsis">June 27, 2026</time>
                       </div>
                     </li>
                     
@@ -856,7 +825,8 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../category/ai/">AI</a></span>
+                              <a href="../category/identity/">Identity</a>, 
+                              <a href="../category/powershell/">PowerShell</a></span>
                         </div>
                       </li>
                     
@@ -867,7 +837,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              4 min read
                             
                           </span>
                         </div>
@@ -891,55 +861,88 @@
 
 
 
-<h1 id="the-great-unbundling">The Great Unbundling<a class="headerlink" href="#the-great-unbundling" title="Permanent link">&para;</a></h1>
-<h2 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes<a class="headerlink" href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" title="Permanent link">&para;</a></h2>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
+<h1 id="privileged-access-management-in-ad-ds-stopping-the-attack-path-before-it-starts">Privileged Access Management in AD DS: stopping the attack path before it starts<a class="headerlink" href="#privileged-access-management-in-ad-ds-stopping-the-attack-path-before-it-starts" title="Permanent link">&para;</a></h1>
+<p>Let me describe an attack that has played out, in some variant, in nearly
+every major breach I've read about over the last decade.</p>
+<p>A user clicks a phishing link. Malware lands on their laptop. The malware
+harvests credentials cached in memory — not the user's own password,
+necessarily, but the hash of an admin account that ran a maintenance task on
+that machine last week. The attacker pivots laterally using that hash, lands
+on a server, finds another stored credential, escalates again. Within hours,
+they hold a Domain Admin token.</p>
+<p>Everything in that chain depends on one thing: somewhere in the environment,
+highly privileged credentials were sitting around waiting to be stolen.</p>
 <!-- more -->
 
-<p>They have time. What they do with that time is what decides whether they stay dominant or become the next generation of legacy infrastructure. Because the ground beneath them is shifting in a very specific way:</p>
-<p><strong>AI isn't a feature. It's a new economic model.</strong></p>
-<hr />
-<h2 id="saas-was-built-for-humans-ai-is-not">SaaS was built for humans. AI is not.<a class="headerlink" href="#saas-was-built-for-humans-ai-is-not" title="Permanent link">&para;</a></h2>
-<p>The SaaS model is simple at its core: charge per user, per month, for software that amplifies human productivity.</p>
-<p>It made perfect sense in a world where work was done by people, software was the tool, and scale meant more seats.</p>
-<p>Agents break that equation.</p>
-<p>When two agents can do the work of fifty users, you don't need fifty licenses. You don't need ten. In the traditional sense, you might not need any. The pricing model collapses first. The product model follows.</p>
-<p>This is the real reason behind the slow, persistent compression in SaaS multiples — not that software is less valuable, but that the <em>unit</em> of value has changed.</p>
-<hr />
-<h2 id="from-seats-to-tokens">From seats to tokens<a class="headerlink" href="#from-seats-to-tokens" title="Permanent link">&para;</a></h2>
-<p>What replaces per-user pricing? Tokenisation — not in the crypto sense, but in the economic one.</p>
-<p>You pay for compute. You pay for outcomes. You pay for execution, not access.</p>
-<p>Agents don't care about seats. They care about tokens processed, tasks completed, workflows executed. So the future pricing unit looks less like <em>cost per employee</em> and more like <em>cost per task, cost per workflow, cost per decision</em>.</p>
-<p>That's a problem if your entire revenue engine is built on expanding seat count.</p>
-<hr />
-<h2 id="the-agent-layer-is-the-new-interface">The agent layer is the new interface<a class="headerlink" href="#the-agent-layer-is-the-new-interface" title="Permanent link">&para;</a></h2>
-<p>Here's the deeper disruption: <strong>SaaS tools are no longer the interface. Agents are.</strong></p>
-<p>Instead of a human logging into five different systems, the agent orchestrates across them — pulling data, executing actions, returning outcomes.</p>
-<p>In that world, the UI becomes irrelevant. The product becomes an API. The brand becomes invisible.</p>
-<p>SaaS risks becoming commoditised infrastructure unless it owns — or embeds itself inside — the agent layer.</p>
-<hr />
-<h2 id="why-the-mag-7-still-have-a-window">Why the Mag 7 still have a window<a class="headerlink" href="#why-the-mag-7-still-have-a-window" title="Permanent link">&para;</a></h2>
-<p>This is where the incumbents still have the edge. They control compute, distribution, developer ecosystems, and enterprise trust. More importantly, they have time and cash flow to spend.</p>
-<p>They can collapse pricing models before being forced to. They can bundle AI into existing ecosystems. They can acquire agent-native platforms. They can re-architect their products around workflows instead of features.</p>
-<p>The real question is whether they will. Incumbents rarely fail from lack of resources. They fail from protecting yesterday's margins.</p>
-<hr />
-<h2 id="the-strategic-fork">The strategic fork<a class="headerlink" href="#the-strategic-fork" title="Permanent link">&para;</a></h2>
-<p>Every major platform now faces the same choice.</p>
-<p><strong>Option 1: Defend SaaS economics.</strong> Preserve per-seat pricing. Add AI as a premium feature. Optimise for short-term revenue.</p>
-<p><strong>Option 2: Embrace the agent economy.</strong> Shift to usage- or outcome-based pricing. Build native agent orchestration. Accept short-term revenue disruption for long-term dominance.</p>
-<p>History is pretty clear about which path wins.</p>
-<hr />
-<h2 id="what-the-next-five-years-look-like">What the next five years look like<a class="headerlink" href="#what-the-next-five-years-look-like" title="Permanent link">&para;</a></h2>
-<p>Expect a sharp decline in per-seat pricing as the dominant model. Expect a wave of SaaS companies repositioning as "AI platforms" — some convincingly, most not. Expect agents to become the primary consumers of software, not humans. And expect a new layer of companies to emerge that sit <em>above</em> SaaS and orchestrate it.</p>
-<p>Most importantly, expect consolidation. Once software becomes interchangeable infrastructure, scale matters again — but in a very different way.</p>
-<hr />
-<h2 id="the-final-thought">The final thought<a class="headerlink" href="#the-final-thought" title="Permanent link">&para;</a></h2>
-<p>The current narrative is that AI will augment SaaS. That's too optimistic.</p>
-<p>AI doesn't just enhance tools. It changes who — or <em>what</em> — uses them. And when the user changes from human to agent, everything from pricing to product design has to change with it.</p>
-<p>The Mag 7 aren't too big to fail.</p>
-<p>But they are big enough to pivot.</p>
-<p>The clock is ticking.</p>
+<h2 id="the-fundamental-flaw-of-standing-privilege">The fundamental flaw of standing privilege<a class="headerlink" href="#the-fundamental-flaw-of-standing-privilege" title="Permanent link">&para;</a></h2>
+<p>In most environments, administrative rights work like this: you decide a
+person needs to be a Domain Admin, you add them to the Domain Admins group,
+and they stay there — forever, usually. Until they leave the company or change
+roles, and even then often not for months.</p>
+<p>This is operationally convenient and security-catastrophic. It means that at
+any given moment, dozens of accounts have full directory rights. Each of those
+accounts logs into workstations, servers, and tools, leaving credential
+fragments in memory. Each of those accounts represents a path to total
+compromise.</p>
+<p>The standard advice — "use fewer admin accounts, use them sparingly" — is
+correct but unhelpful. Humans don't reliably restrain themselves under
+operational pressure. What's needed is a system that enforces restraint
+mechanically.</p>
+<h2 id="what-pam-actually-does">What PAM actually does<a class="headerlink" href="#what-pam-actually-does" title="Permanent link">&para;</a></h2>
+<p>The core idea is simple: nobody is a member of a privileged group all the
+time. When an administrator needs to perform a privileged task, they request
+elevation. If approved, they're added to the appropriate group for a limited
+time — say, four hours. When the clock runs out, they're automatically removed.</p>
+<p>This single change disrupts the attack chain at multiple points. The attacker
+who steals a credential mostly steals a credential to a non-privileged account.
+The hash sitting in memory on that server isn't usable for domain takeover
+because the account it belongs to isn't currently privileged.</p>
+<p>Microsoft's implementation uses a dedicated "bastion" forest with a one-way
+trust to your production forest. When elevation is needed, group membership is
+added as a "shadow principal" in production with a time-to-live. The
+technology behind this is <strong>time-based group memberships</strong>, available from
+Windows Server 2016 functional level onwards.</p>
+<h2 id="time-based-group-memberships-in-practice">Time-based group memberships in practice<a class="headerlink" href="#time-based-group-memberships-in-practice" title="Permanent link">&para;</a></h2>
+<p>The PowerShell cmdlets make this surprisingly approachable:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Add-ADGroupMember</span> <span class="n">-Identity</span> <span class="s2">&quot;Domain Admins&quot;</span> <span class="p">`</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">-Members</span> <span class="s2">&quot;jsmith&quot;</span> <span class="p">`</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">-MemberTimeToLive</span> <span class="p">(</span><span class="nb">New-TimeSpan</span> <span class="n">-Hours</span> <span class="n">4</span><span class="p">)</span>
+</span></code></pre></div>
+<p>That's it. Four hours later, the membership evaporates. No human has to
+remember to revoke it. No ticket has to be tracked to closure. The directory
+itself enforces the boundary.</p>
+<p>You can build this into approval workflows using whatever tooling you have — a
+help desk system, a custom portal, or a third-party PAM tool. The mechanism in
+AD is the same. What varies is how requests are made and approved upstream.</p>
+<h2 id="the-cultural-problem">The cultural problem<a class="headerlink" href="#the-cultural-problem" title="Permanent link">&para;</a></h2>
+<p>The technical implementation is the easy part. The hard part is convincing
+your organisation that this is necessary.</p>
+<p>Administrators don't like friction. Tickets to elevate, approval workflows,
+time limits — these all slow people down. The pushback I hear most often is
+"we trust our people, why are we making their lives harder?"</p>
+<p>The answer is that the controls aren't about distrust. They're about damage
+limitation. You trust your administrators. You don't trust the malware on the
+laptop of someone who used that administrator's credential six months ago.</p>
+<div class="admonition tip">
+<p class="admonition-title">Phase it in, starting with the most powerful groups</p>
+<p>Start with Enterprise Admins, Schema Admins, Domain Admins. Most
+organisations rarely need anyone in these groups for routine work, so
+removing standing membership has low operational cost. Move outward from
+there to delegated admin roles as the workflow matures.</p>
+</div>
+<h2 id="where-to-start-today">Where to start today<a class="headerlink" href="#where-to-start-today" title="Permanent link">&para;</a></h2>
+<p>If you're running AD DS 2016 or later, you already have the building blocks.
+Time-based group memberships work today. You don't need to license anything
+additional or build a separate forest to start.</p>
+<p>The smallest meaningful step: identify everyone currently in Domain Admins. For
+each of them, ask whether they need permanent membership. For almost all of
+them, the answer is no. Move them to a process where they request elevation
+when needed, with a TTL on the membership.</p>
+<p>Then keep going. Schema Admins, Enterprise Admins, Account Operators, Backup
+Operators. One group at a time. By the time you've worked through the
+privileged groups, you'll have a different organisation — and an attacker
+landing on a compromised laptop will find a much less productive trip ahead of
+them.</p>
 
 
 
@@ -981,15 +984,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../zero-trust-active-directory/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Zero Trust meets Active Directory: why your on-prem identity strategy needs a rethink">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Zero Trust meets Active Directory: why your on-prem identity strategy needs a rethink
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="../entra-nextjs-getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Skills Directory — Getting Started Guide">
+          <a href="../single-vs-multi-forest-ad/" class="md-footer__link md-footer__link--next" aria-label="Next: Single forest vs. multi-forest: a decision framework for AD architects">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Skills Directory — Getting Started Guide
+                Single forest vs. multi-forest: a decision framework for AD architects
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -456,7 +456,7 @@
   <span class="md-ellipsis">
     
   
-    June 2026
+    August 2026
   
 
     
@@ -719,6 +719,357 @@
       <header class="md-typeset">
         <h1 id="infrastructure">Infrastructure<a class="headerlink" href="#infrastructure" title="Permanent link">&para;</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-08-08 00:00:00+00:00">August 8, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../identity/" class="md-meta__link">Identity</a>, 
+              <a href="./" class="md-meta__link">Infrastructure</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="azure-ad-connect-sign-in-methods-compared-phs-pta-and-federation"><a class="toclink" href="../../azure-ad-connect-sign-in-methods/">Azure AD Connect sign-in methods compared: PHS, PTA, and federation</a></h2>
+<p>If you run an on-premises Active Directory environment and also use Microsoft
+365, you've made — or somebody before you made — a choice about how
+authentication flows between the two. There are three options. Each has
+distinct security, availability, and operational properties. And the choice is
+not trivially reversible once you've built out around it.</p>
+<p>I keep meeting organisations who picked the wrong one years ago and are stuck
+with it because changing means migrating thousands of users to new
+authentication patterns. So let's think about this properly.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../azure-ad-connect-sign-in-methods/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-07-25 00:00:00+00:00">July 25, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="./" class="md-meta__link">Infrastructure</a>, 
+              <a href="../powershell/" class="md-meta__link">PowerShell</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="group-policy-inheritance-filtering-and-loopback-the-three-concepts-that-trip-everyone-up"><a class="toclink" href="../../group-policy-inheritance-filtering-loopback/">Group Policy inheritance, filtering, and loopback: the three concepts that trip everyone up</a></h2>
+<p>Group Policy feels simple at first. You create a GPO, link it to an OU, set a
+thing, and the thing happens on the machines in that OU. Everyone follows along
+for about twenty minutes. Then someone asks "but what if a setting is
+configured here AND here?" and "what if I want this to apply to laptops but
+not desktops?" and "what if a user logs into a server — which settings apply?"
+and suddenly nobody can answer reliably.</p>
+<p>The good news is that all of Group Policy's complexity reduces to three
+concepts. The bad news is that all three are subtle in ways that bite when you
+stop paying attention.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../group-policy-inheritance-filtering-loopback/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-07-18 00:00:00+00:00">July 18, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../identity/" class="md-meta__link">Identity</a>, 
+              <a href="./" class="md-meta__link">Infrastructure</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="designing-a-pki-that-wont-haunt-you-two-tier-vs-three-tier-hierarchies"><a class="toclink" href="../../pki-design-two-tier-three-tier/">Designing a PKI that won't haunt you: two-tier vs three-tier hierarchies</a></h2>
+<p>The decision to deploy an internal Public Key Infrastructure is one of those
+choices that seems modest at the time and turns out to be effectively
+permanent. The root CA you stand up today will issue certificates that live in
+your environment for years. The trust relationships you build will become
+foundational. And the design mistakes you make at the beginning will follow you
+long after the original architect has moved on.</p>
+<p>I have watched organisations live with bad PKI designs for over a decade
+because the cost of replacing them is so high. So this is one of the few areas
+in IT where it genuinely pays to slow down, read the documentation properly,
+and think carefully before you click "Install Role."</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../pki-design-two-tier-three-tier/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-07-11 00:00:00+00:00">July 11, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../identity/" class="md-meta__link">Identity</a>, 
+              <a href="./" class="md-meta__link">Infrastructure</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="fsmo-role-placement-the-underrated-decision-that-breaks-ad-environments"><a class="toclink" href="../../fsmo-role-placement/">FSMO role placement: the underrated decision that breaks AD environments</a></h2>
+<p>A few years ago I was called into an environment where logins were failing
+intermittently across half the company. Users in the head office worked fine.
+Users in three regional sites were getting locked out or seeing password change
+errors. The on-call engineer had restarted everything that could be restarted
+and was beginning to panic.</p>
+<p>The cause turned out to be embarrassingly simple. Six months earlier, someone
+had decommissioned an old domain controller without realising it held the PDC
+emulator role. Time synchronisation drifted. Account lockout processing got
+confused. Password changes propagated unpredictably. The whole environment had
+been slowly degrading and nobody had noticed because nothing failed
+dramatically.</p>
+<p>This is FSMO roles in a nutshell: they don't matter until they do, and when
+they do, they matter very badly.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../fsmo-role-placement/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-07-04 00:00:00+00:00">July 4, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../identity/" class="md-meta__link">Identity</a>, 
+              <a href="./" class="md-meta__link">Infrastructure</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="single-forest-vs-multi-forest-a-decision-framework-for-ad-architects"><a class="toclink" href="../../single-vs-multi-forest-ad/">Single forest vs. multi-forest: a decision framework for AD architects</a></h2>
+<p>If I had to name the single most consequential decision in an Active Directory
+deployment, it would be the choice between a single forest and a multi-forest
+design. It dictates your security boundaries, your operational complexity, your
+replication topology, and the cost of doing business in your environment for
+the next decade.</p>
+<p>It's also the decision most often made badly. I've walked into environments
+where someone, years ago, decided to "keep things separated" by building four
+forests for what turned out to be a single business. The cleanup is always
+expensive. Sometimes it's effectively impossible without a wholesale migration.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../single-vs-multi-forest-ad/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-06-20 00:00:00+00:00">June 20, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../identity/" class="md-meta__link">Identity</a>, 
+              <a href="./" class="md-meta__link">Infrastructure</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="zero-trust-meets-active-directory-why-your-on-prem-identity-strategy-needs-a-rethink"><a class="toclink" href="../../zero-trust-active-directory/">Zero Trust meets Active Directory: why your on-prem identity strategy needs a rethink</a></h2>
+<p>For roughly two decades, Active Directory has been the quiet workhorse of
+enterprise IT. It authenticated your users, applied your group policies, and
+managed your service accounts. And for most of that time, it operated on a
+comfortable assumption: if you were inside the corporate network, you were
+probably trustworthy.</p>
+<p>That assumption is dead. It died somewhere between the rise of remote work, the
+explosion of SaaS applications, and the steady drumbeat of ransomware attacks
+that begin with one phished credential and end with a domain admin token.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../zero-trust-active-directory/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">

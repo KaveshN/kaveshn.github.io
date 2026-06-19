@@ -456,7 +456,7 @@
   <span class="md-ellipsis">
     
   
-    June 2026
+    August 2026
   
 
     
@@ -719,6 +719,302 @@
       <header class="md-typeset">
         <h1 id="powershell">PowerShell<a class="headerlink" href="#powershell" title="Permanent link">&para;</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-08-22 00:00:00+00:00">August 22, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../identity/" class="md-meta__link">Identity</a>, 
+              <a href="./" class="md-meta__link">PowerShell</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="powershell-for-ad-hygiene-10-scripts-every-admin-should-have-in-their-back-pocket"><a class="toclink" href="../../powershell-ad-hygiene-scripts/">PowerShell for AD hygiene: 10 scripts every admin should have in their back pocket</a></h2>
+<p>Active Directory environments accumulate cruft. Accounts of people who left
+two years ago. Service accounts whose owners forgot they existed. Group
+memberships granted for a project that ended in 2019. Computer objects for
+laptops that were stolen, decommissioned, or simply forgotten. Without active
+hygiene, your directory becomes a fossil record of every decision anyone made
+for the last decade.</p>
+<p>The fix is not heroic. It's PowerShell, run regularly, with a handful of
+scripts that surface the rot so you can deal with it.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../powershell-ad-hygiene-scripts/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-08-15 00:00:00+00:00">August 15, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../identity/" class="md-meta__link">Identity</a>, 
+              <a href="./" class="md-meta__link">PowerShell</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="auditing-active-directory-from-event-viewer-to-microsoft-defender-for-identity"><a class="toclink" href="../../auditing-active-directory/">Auditing Active Directory: from Event Viewer to Microsoft Defender for Identity</a></h2>
+<p>Every breach report I read tells the same story in different words: the
+attackers were in the environment for weeks or months before anyone noticed.
+The signs were there. The logs recorded them. But nobody was looking, or the
+logging wasn't capturing what mattered, or the volume was too high to extract
+signal from noise.</p>
+<p>Auditing Active Directory is one of those areas where the default setup is
+mostly useless and the proper setup is more involved than people expect. But you
+can build it up in stages, starting with what's free and built-in, and
+graduating to genuinely sophisticated detection.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../auditing-active-directory/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-08-01 00:00:00+00:00">August 1, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../identity/" class="md-meta__link">Identity</a>, 
+              <a href="./" class="md-meta__link">PowerShell</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="pass-the-hash-defence-protected-users-authentication-policies-and-authentication-policy-silos"><a class="toclink" href="../../pass-the-hash-defence/">Pass-the-Hash defence: Protected Users, Authentication Policies, and Authentication Policy Silos</a></h2>
+<p>If you've followed cybersecurity news at all over the last decade, you've seen
+variations of the same headline play out repeatedly. Major company hit by
+ransomware. Attackers moved laterally for weeks before triggering encryption.
+Initial compromise was a single phished credential; final compromise was Domain
+Admin.</p>
+<p>The middle part of that story — the lateral movement — is almost always powered
+by credential theft from compromised machines. The most famous technique is
+Pass-the-Hash, but it has cousins: Pass-the-Ticket, Overpass-the-Hash, Silver
+Tickets, Golden Tickets. They all work on the same basic principle: Windows
+caches authentication material in memory to provide single sign-on, and an
+attacker with sufficient privilege can extract that material and reuse it
+elsewhere.</p>
+<p>The good news: Microsoft has built three increasingly powerful features into
+Active Directory specifically to defeat these attacks. Almost nobody deploys
+them properly.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../pass-the-hash-defence/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-07-25 00:00:00+00:00">July 25, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../infrastructure/" class="md-meta__link">Infrastructure</a>, 
+              <a href="./" class="md-meta__link">PowerShell</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="group-policy-inheritance-filtering-and-loopback-the-three-concepts-that-trip-everyone-up"><a class="toclink" href="../../group-policy-inheritance-filtering-loopback/">Group Policy inheritance, filtering, and loopback: the three concepts that trip everyone up</a></h2>
+<p>Group Policy feels simple at first. You create a GPO, link it to an OU, set a
+thing, and the thing happens on the machines in that OU. Everyone follows along
+for about twenty minutes. Then someone asks "but what if a setting is
+configured here AND here?" and "what if I want this to apply to laptops but
+not desktops?" and "what if a user logs into a server — which settings apply?"
+and suddenly nobody can answer reliably.</p>
+<p>The good news is that all of Group Policy's complexity reduces to three
+concepts. The bad news is that all three are subtle in ways that bite when you
+stop paying attention.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../group-policy-inheritance-filtering-loopback/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-06-27 00:00:00+00:00">June 27, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../identity/" class="md-meta__link">Identity</a>, 
+              <a href="./" class="md-meta__link">PowerShell</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="privileged-access-management-in-ad-ds-stopping-the-attack-path-before-it-starts"><a class="toclink" href="../../privileged-access-management-ad/">Privileged Access Management in AD DS: stopping the attack path before it starts</a></h2>
+<p>Let me describe an attack that has played out, in some variant, in nearly
+every major breach I've read about over the last decade.</p>
+<p>A user clicks a phishing link. Malware lands on their laptop. The malware
+harvests credentials cached in memory — not the user's own password,
+necessarily, but the hash of an admin account that ran a maintenance task on
+that machine last week. The attacker pivots laterally using that hash, lands
+on a server, finds another stored credential, escalates again. Within hours,
+they hold a Domain Admin token.</p>
+<p>Everything in that chain depends on one thing: somewhere in the environment,
+highly privileged credentials were sitting around waiting to be stolen.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../privileged-access-management-ad/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">
@@ -1000,280 +1296,6 @@ not discover it from a pile of helpdesk tickets.</p>
   </div>
 </article>
       
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-06-10 00:00:00+00:00">June 10, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="./" class="md-meta__link">PowerShell</a>, 
-              <a href="../identity/" class="md-meta__link">Identity</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="assigning-entra-id-access-packages-with-powershell"><a class="toclink" href="../../assign-entra-access-packages-powershell/">Assigning Entra ID access packages with PowerShell</a></h2>
-<p>Entitlement Management is how Entra ID does access-at-scale: bundle the groups,
-apps, and roles a role needs into an <strong>access package</strong>, then assign people to
-it through a policy. The portal is fine for one person. For onboarding a cohort,
-or wiring it into a joiner workflow, you want PowerShell.</p>
-<p>This post walks the full admin-driven assignment: find the package, find the
-policy, submit the request, confirm it landed.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="../../assign-entra-access-packages-powershell/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-06-10 00:00:00+00:00">June 10, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="./" class="md-meta__link">PowerShell</a>, 
-              <a href="../identity/" class="md-meta__link">Identity</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              3 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="get-an-email-the-moment-someone-joins-domain-admins"><a class="toclink" href="../../monitor-privileged-groups-powershell/">Get an email the moment someone joins Domain Admins</a></h2>
-<p>A change to <strong>Domain Admins</strong> or <strong>Enterprise Admins</strong> is one of the highest-signal
-events in your whole estate. Legitimately, it happens a few times a year. If it
-happens and you <em>didn't</em> schedule it, you want to know in minutes, not at the next
-quarterly access review.</p>
-<p>You don't need a SIEM for the first 80% of this. A scheduled PowerShell script
-that remembers last run's membership and emails you the delta is a genuinely
-useful control — the <strong>state-file diff</strong> pattern.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="../../monitor-privileged-groups-powershell/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-06-09 00:00:00+00:00">June 9, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="./" class="md-meta__link">PowerShell</a>, 
-              <a href="../infrastructure/" class="md-meta__link">Infrastructure</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              4 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="a-domain-controller-health-report-youll-actually-read"><a class="toclink" href="../../dc-health-report-powershell/">A domain controller health report you'll actually read</a></h2>
-<p>Every morning someone should be able to glance at one page and know whether the
-directory is healthy. <code>dcdiag</code> and <code>repadmin</code> give you the raw truth, but their
-output is a wall of text — nobody reads it daily. The fix is a scheduled script
-that polls every DC in the forest, scores each check, and emails a colour-coded
-HTML table: green is fine, yellow needs a look, red is on fire.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="../../dc-health-report-powershell/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-06-02 00:00:00+00:00">June 2, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="./" class="md-meta__link">PowerShell</a>, 
-              <a href="../identity/" class="md-meta__link">Identity</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="auditing-entra-id-users-with-powershell"><a class="toclink" href="../../audit-entra-users-powershell/">Auditing Entra ID users with PowerShell</a></h2>
-<p>"Who has access?" is the question every security review opens with. With the
-Microsoft Graph PowerShell SDK you can answer it in a few lines: list every
-user, flag the guests and the dormant accounts, and hand security a CSV.</p>
-<p>This builds directly on <a href="../../connect-microsoft-graph-powershell/">connecting to Graph</a> —
-make sure you can run <code>Get-MgContext</code> first.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="../../audit-entra-users-powershell/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/KaveshN.png" alt="Kavesh Naidoo">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-05-20 00:00:00+00:00">May 20, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="./" class="md-meta__link">PowerShell</a>, 
-              <a href="../identity/" class="md-meta__link">Identity</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="connecting-to-microsoft-graph-with-powershell"><a class="toclink" href="../../connect-microsoft-graph-powershell/">Connecting to Microsoft Graph with PowerShell</a></h2>
-<p>Almost every Entra ID automation I write starts the same way: connect to
-Microsoft Graph, request the least privilege I need, do the work, disconnect.
-Get this foundation right and everything else — users, groups, access packages —
-is just cmdlets on top.</p>
-<p>This post covers installing the SDK, the two auth models (delegated vs
-app-only), and the scope gotcha that trips everyone up the first time.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="../../connect-microsoft-graph-powershell/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
       
         
           
@@ -1281,7 +1303,7 @@ app-only), and the scope gotcha that trips everyone up the first time.</p>
 
 
 <nav class="md-pagination">
-  
+  <span class="md-pagination__current">1</span> <a class="md-pagination__link" href="page/2/">2</a>
 </nav>
         
       
@@ -1324,13 +1346,13 @@ app-only), and the scope gotcha that trips everyone up the first time.</p>
         
         
           
-          <a href="../../archive/2026/" class="md-footer__link md-footer__link--next" aria-label="Next: June 2026">
+          <a href="../../archive/2026/" class="md-footer__link md-footer__link--next" aria-label="Next: August 2026">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                June 2026
+                August 2026
               </div>
             </div>
             <div class="md-footer__button md-icon">

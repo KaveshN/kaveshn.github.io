@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes.">
+        <meta name="description" content="Most "Group Policy isn't working" tickets come down to one of three things: inheritance order, security or WMI filtering, and loopback processing. A clear explanation of each — plus the one diagnostic command that solves most problems in thirty seconds.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/the-great-unbundling/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/group-policy-inheritance-filtering-loopback/">
       
       
+        <link rel="prev" href="../pki-design-two-tier-three-tier/">
       
-        <link rel="next" href="../entra-nextjs-getting-started/">
+      
+        <link rel="next" href="../pass-the-hash-defence/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>The Great Unbundling - Kavesh Naidoo</title>
+        <title>Group Policy inheritance, filtering, and loopback: the three concepts that trip everyone up - Kavesh Naidoo</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-great-unbundling" class="md-skip">
+        <a href="#group-policy-inheritance-filtering-and-loopback-the-three-concepts-that-trip-everyone-up" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The Great Unbundling
+              Group Policy inheritance, filtering, and loopback: the three concepts that trip everyone up
             
           </span>
         </div>
@@ -702,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" class="md-nav__link">
+  <a href="#concept-1-inheritance-and-the-lsdou-order" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes
+        Concept 1: inheritance and the LSDOU order
       
     </span>
   </a>
@@ -713,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#saas-was-built-for-humans-ai-is-not" class="md-nav__link">
+  <a href="#concept-2-filtering-security-and-wmi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SaaS was built for humans. AI is not.
+        Concept 2: filtering — security and WMI
       
     </span>
   </a>
@@ -724,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#from-seats-to-tokens" class="md-nav__link">
+  <a href="#concept-3-loopback-processing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From seats to tokens
+        Concept 3: loopback processing
       
     </span>
   </a>
@@ -735,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-agent-layer-is-the-new-interface" class="md-nav__link">
+  <a href="#the-diagnostic-shortcut" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The agent layer is the new interface
+        The diagnostic shortcut
       
     </span>
   </a>
@@ -746,43 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-the-mag-7-still-have-a-window" class="md-nav__link">
+  <a href="#keeping-gpos-manageable-over-time" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the Mag 7 still have a window
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-strategic-fork" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The strategic fork
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-next-five-years-look-like" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the next five years look like
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-final-thought" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The final thought
+        Keeping GPOs manageable over time
       
     </span>
   </a>
@@ -845,7 +814,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-04-27 00:00:00+00:00" class="md-ellipsis">April 27, 2026</time>
+                        <time datetime="2026-07-25 00:00:00+00:00" class="md-ellipsis">July 25, 2026</time>
                       </div>
                     </li>
                     
@@ -856,7 +825,8 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../category/ai/">AI</a></span>
+                              <a href="../category/infrastructure/">Infrastructure</a>, 
+                              <a href="../category/powershell/">PowerShell</a></span>
                         </div>
                       </li>
                     
@@ -867,7 +837,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              5 min read
                             
                           </span>
                         </div>
@@ -891,55 +861,128 @@
 
 
 
-<h1 id="the-great-unbundling">The Great Unbundling<a class="headerlink" href="#the-great-unbundling" title="Permanent link">&para;</a></h1>
-<h2 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes<a class="headerlink" href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" title="Permanent link">&para;</a></h2>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
+<h1 id="group-policy-inheritance-filtering-and-loopback-the-three-concepts-that-trip-everyone-up">Group Policy inheritance, filtering, and loopback: the three concepts that trip everyone up<a class="headerlink" href="#group-policy-inheritance-filtering-and-loopback-the-three-concepts-that-trip-everyone-up" title="Permanent link">&para;</a></h1>
+<p>Group Policy feels simple at first. You create a GPO, link it to an OU, set a
+thing, and the thing happens on the machines in that OU. Everyone follows along
+for about twenty minutes. Then someone asks "but what if a setting is
+configured here AND here?" and "what if I want this to apply to laptops but
+not desktops?" and "what if a user logs into a server — which settings apply?"
+and suddenly nobody can answer reliably.</p>
+<p>The good news is that all of Group Policy's complexity reduces to three
+concepts. The bad news is that all three are subtle in ways that bite when you
+stop paying attention.</p>
 <!-- more -->
 
-<p>They have time. What they do with that time is what decides whether they stay dominant or become the next generation of legacy infrastructure. Because the ground beneath them is shifting in a very specific way:</p>
-<p><strong>AI isn't a feature. It's a new economic model.</strong></p>
-<hr />
-<h2 id="saas-was-built-for-humans-ai-is-not">SaaS was built for humans. AI is not.<a class="headerlink" href="#saas-was-built-for-humans-ai-is-not" title="Permanent link">&para;</a></h2>
-<p>The SaaS model is simple at its core: charge per user, per month, for software that amplifies human productivity.</p>
-<p>It made perfect sense in a world where work was done by people, software was the tool, and scale meant more seats.</p>
-<p>Agents break that equation.</p>
-<p>When two agents can do the work of fifty users, you don't need fifty licenses. You don't need ten. In the traditional sense, you might not need any. The pricing model collapses first. The product model follows.</p>
-<p>This is the real reason behind the slow, persistent compression in SaaS multiples — not that software is less valuable, but that the <em>unit</em> of value has changed.</p>
-<hr />
-<h2 id="from-seats-to-tokens">From seats to tokens<a class="headerlink" href="#from-seats-to-tokens" title="Permanent link">&para;</a></h2>
-<p>What replaces per-user pricing? Tokenisation — not in the crypto sense, but in the economic one.</p>
-<p>You pay for compute. You pay for outcomes. You pay for execution, not access.</p>
-<p>Agents don't care about seats. They care about tokens processed, tasks completed, workflows executed. So the future pricing unit looks less like <em>cost per employee</em> and more like <em>cost per task, cost per workflow, cost per decision</em>.</p>
-<p>That's a problem if your entire revenue engine is built on expanding seat count.</p>
-<hr />
-<h2 id="the-agent-layer-is-the-new-interface">The agent layer is the new interface<a class="headerlink" href="#the-agent-layer-is-the-new-interface" title="Permanent link">&para;</a></h2>
-<p>Here's the deeper disruption: <strong>SaaS tools are no longer the interface. Agents are.</strong></p>
-<p>Instead of a human logging into five different systems, the agent orchestrates across them — pulling data, executing actions, returning outcomes.</p>
-<p>In that world, the UI becomes irrelevant. The product becomes an API. The brand becomes invisible.</p>
-<p>SaaS risks becoming commoditised infrastructure unless it owns — or embeds itself inside — the agent layer.</p>
-<hr />
-<h2 id="why-the-mag-7-still-have-a-window">Why the Mag 7 still have a window<a class="headerlink" href="#why-the-mag-7-still-have-a-window" title="Permanent link">&para;</a></h2>
-<p>This is where the incumbents still have the edge. They control compute, distribution, developer ecosystems, and enterprise trust. More importantly, they have time and cash flow to spend.</p>
-<p>They can collapse pricing models before being forced to. They can bundle AI into existing ecosystems. They can acquire agent-native platforms. They can re-architect their products around workflows instead of features.</p>
-<p>The real question is whether they will. Incumbents rarely fail from lack of resources. They fail from protecting yesterday's margins.</p>
-<hr />
-<h2 id="the-strategic-fork">The strategic fork<a class="headerlink" href="#the-strategic-fork" title="Permanent link">&para;</a></h2>
-<p>Every major platform now faces the same choice.</p>
-<p><strong>Option 1: Defend SaaS economics.</strong> Preserve per-seat pricing. Add AI as a premium feature. Optimise for short-term revenue.</p>
-<p><strong>Option 2: Embrace the agent economy.</strong> Shift to usage- or outcome-based pricing. Build native agent orchestration. Accept short-term revenue disruption for long-term dominance.</p>
-<p>History is pretty clear about which path wins.</p>
-<hr />
-<h2 id="what-the-next-five-years-look-like">What the next five years look like<a class="headerlink" href="#what-the-next-five-years-look-like" title="Permanent link">&para;</a></h2>
-<p>Expect a sharp decline in per-seat pricing as the dominant model. Expect a wave of SaaS companies repositioning as "AI platforms" — some convincingly, most not. Expect agents to become the primary consumers of software, not humans. And expect a new layer of companies to emerge that sit <em>above</em> SaaS and orchestrate it.</p>
-<p>Most importantly, expect consolidation. Once software becomes interchangeable infrastructure, scale matters again — but in a very different way.</p>
-<hr />
-<h2 id="the-final-thought">The final thought<a class="headerlink" href="#the-final-thought" title="Permanent link">&para;</a></h2>
-<p>The current narrative is that AI will augment SaaS. That's too optimistic.</p>
-<p>AI doesn't just enhance tools. It changes who — or <em>what</em> — uses them. And when the user changes from human to agent, everything from pricing to product design has to change with it.</p>
-<p>The Mag 7 aren't too big to fail.</p>
-<p>But they are big enough to pivot.</p>
-<p>The clock is ticking.</p>
+<h2 id="concept-1-inheritance-and-the-lsdou-order">Concept 1: inheritance and the LSDOU order<a class="headerlink" href="#concept-1-inheritance-and-the-lsdou-order" title="Permanent link">&para;</a></h2>
+<p>Group Policy is applied based on where the object sits in the directory
+hierarchy. The famous ordering is <strong>LSDOU</strong>: Local, Site, Domain, OU.</p>
+<p>In practice: the local policy applies first, then GPOs linked to the AD site
+the machine is in, then GPOs linked at the domain root, then GPOs linked to
+OUs from the OU closest to the domain root down to the OU containing the
+object. Later applications win, so lower OUs generally override higher ones.</p>
+<p>When multiple GPOs are linked at the same level, they apply in link order —
+and here's where most people get confused: <strong>the GPO at the bottom of the link
+order applies first</strong>, the one at the top applies last. Since later wins, the
+top-of-list GPO is the most authoritative at that level. This is the opposite
+of what most people guess.</p>
+<p>The <strong>Resultant Set of Policy</strong> is what actually applies. The fastest way to
+debug anything: run this on the affected machine and open the HTML report:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">gpresult</span> <span class="p">/</span><span class="nb">h </span><span class="n">C</span><span class="p">:\</span><span class="n">Temp</span><span class="p">\</span><span class="n">gp-report</span><span class="p">.</span><span class="n">html</span> <span class="p">/</span><span class="n">f</span>
+</span></code></pre></div>
+<p>The report shows every setting, which GPO it came from, and — if it's being
+overridden — which GPO won.</p>
+<p><strong>Two exceptions that disrupt inheritance:</strong></p>
+<p><strong>Enforced links.</strong> Right-clicking a GPO link and setting Enforced makes it
+override conflicting GPOs at lower levels. Useful for genuinely mandatory
+settings (security baselines), but use sparingly — it makes the inheritance
+order surprising.</p>
+<p><strong>Block Inheritance.</strong> An OU can have its inheritance blocked, causing GPOs
+linked higher up to be ignored — unless those higher-up GPOs are Enforced.
+A red flag when overused because it makes the policy environment fragmented
+and hard to reason about.</p>
+<h2 id="concept-2-filtering-security-and-wmi">Concept 2: filtering — security and WMI<a class="headerlink" href="#concept-2-filtering-security-and-wmi" title="Permanent link">&para;</a></h2>
+<p>Linking a GPO to an OU applies it to everything in that OU. Filtering gives
+you finer control.</p>
+<p><strong>Security filtering</strong> uses the GPO's Access Control List. By default,
+"Authenticated Users" has Read and Apply Group Policy permissions. Change the
+security filter to only include a specific group — say, "Marketing Laptops" —
+and only members of that group will have the GPO applied, even if the link is
+on a broader OU.</p>
+<div class="admonition warning">
+<p class="admonition-title">The MS16-072 gotcha</p>
+<p>Microsoft's MS16-072 update requires GPOs to have at least Read access for
+the computer account to be evaluated and applied, even if the Apply
+permission is filtered to a user group. If you remove Authenticated Users
+entirely and only grant rights to a specific user group, computer-scoped
+settings can stop applying silently.</p>
+<p><strong>Fix:</strong> add "Domain Computers" with Read permission (not Apply) to any GPO
+that filters on user groups. This is the kind of detail that turns "I tested
+it and it works" into "it stopped working three months later for reasons no
+one understands."</p>
+</div>
+<p><strong>WMI filtering</strong> is more powerful and more dangerous. You attach a WMI query
+to the GPO; the GPO only applies to machines where the query returns true. The
+classic example — Windows 10/11 workstations only:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>SELECT Version FROM Win32_OperatingSystem 
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>WHERE Version LIKE &quot;10.0%&quot; AND ProductType = &quot;1&quot;
+</span></code></pre></div>
+<p>WMI filtering is flexible but slow. Every WMI filter is evaluated at every
+Group Policy refresh. Use it where you genuinely need it, but prefer OU
+placement and security filtering for performance-critical scenarios.</p>
+<h2 id="concept-3-loopback-processing">Concept 3: loopback processing<a class="headerlink" href="#concept-3-loopback-processing" title="Permanent link">&para;</a></h2>
+<p>This is the one nobody understands until they have to use it.</p>
+<p>By default: user settings apply based on where the <strong>user account</strong> sits in
+the directory; computer settings apply based on where the <strong>computer account</strong>
+sits. So a marketing user logging into a marketing laptop gets marketing user
+policies — clean and obvious.</p>
+<p>The trouble starts when users log into shared computers in unusual scopes.
+Imagine a kiosk computer in a reception area. Anyone in the company might log
+into it. By default, each user brings their own user policies — desktop
+wallpapers, drive mappings, software shortcuts — which is not what you want on
+a kiosk. You want a consistent experience regardless of who logs in.</p>
+<p>Loopback processing tells Group Policy to apply user policies based on the
+<strong>computer's</strong> location, not the user's. Two modes:</p>
+<p><strong>Merge mode:</strong> applies the user's normal policies first, then overlays the
+policies from the computer's location. Computer-scoped OU wins on conflicts.
+The user still gets some of their normal experience, with computer-specific
+overrides.</p>
+<p><strong>Replace mode:</strong> ignores the user's normal policies entirely and applies only
+the user policies from the computer's location. Right for kiosks, terminal
+servers, VDI, and other tightly controlled environments.</p>
+<p>Loopback is enabled per-computer via a setting in Computer Configuration
+→ Policies → Administrative Templates → System → Group Policy → "Configure
+user Group Policy loopback processing mode."</p>
+<div class="admonition note">
+<p class="admonition-title">Classic legitimate uses</p>
+<p>Kiosks, RDS session hosts, jump boxes, and lab computers. If you're
+using loopback for general-purpose user workstations, something is probably
+wrong with your OU design.</p>
+</div>
+<h2 id="the-diagnostic-shortcut">The diagnostic shortcut<a class="headerlink" href="#the-diagnostic-shortcut" title="Permanent link">&para;</a></h2>
+<p>When a GPO setting isn't applying as expected, the investigation that takes
+hours without <code>gpresult</code> takes thirty seconds with it. Look for:</p>
+<ul>
+<li>The GPO is linked but security or WMI filtering is excluding the target</li>
+<li>A different GPO at a different level is winning on the same setting</li>
+<li>The GPO is linked to the wrong scope (user setting on a computer OU or vice versa)</li>
+<li>The user or computer hasn't refreshed policies (<code>gpupdate /force</code> to test immediately)</li>
+<li>Loopback is enabled where it shouldn't be, or not enabled where it should be</li>
+</ul>
+<p><code>gpresult</code> will tell you which one of these is happening.</p>
+<h2 id="keeping-gpos-manageable-over-time">Keeping GPOs manageable over time<a class="headerlink" href="#keeping-gpos-manageable-over-time" title="Permanent link">&para;</a></h2>
+<p>Use descriptive names. "Marketing Laptops — Drive Mappings" is better than
+"GPO-MKT-001." You will thank yourself in three years.</p>
+<p>Keep GPOs small and focused. One GPO that does one thing is easier to reason
+about than one mega-GPO that does fifteen unrelated things.</p>
+<p>Document why a GPO exists. A short description on the GPO itself, or a wiki
+entry, costs a minute and saves whoever inherits the environment days.</p>
+<p>Don't enable settings just because you can. Every setting is technical debt.
+Audit your GPOs periodically and disable anything that no longer serves a
+purpose.</p>
+<p>Group Policy is one of the most powerful tools in a Windows administrator's
+kit. The complexity is in the corners — inheritance edge cases, filtering
+subtleties, loopback. Once those three concepts click, the rest becomes
+much less mysterious.</p>
 
 
 
@@ -981,15 +1024,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../pki-design-two-tier-three-tier/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Designing a PKI that won&#39;t haunt you: two-tier vs three-tier hierarchies">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Designing a PKI that won't haunt you: two-tier vs three-tier hierarchies
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="../entra-nextjs-getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Skills Directory — Getting Started Guide">
+          <a href="../pass-the-hash-defence/" class="md-footer__link md-footer__link--next" aria-label="Next: Pass-the-Hash defence: Protected Users, Authentication Policies, and Authentication Policy Silos">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Skills Directory — Getting Started Guide
+                Pass-the-Hash defence: Protected Users, Authentication Policies, and Authentication Policy Silos
               </div>
             </div>
             <div class="md-footer__button md-icon">

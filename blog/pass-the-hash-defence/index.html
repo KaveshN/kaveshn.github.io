@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes.">
+        <meta name="description" content="Protected Users, Authentication Policies, and Authentication Policy Silos — the three Active Directory features that would have stopped most of the breaches you've read about. What they do, how they layer, and the order to deploy them.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/the-great-unbundling/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/pass-the-hash-defence/">
       
       
+        <link rel="prev" href="../group-policy-inheritance-filtering-loopback/">
       
-        <link rel="next" href="../entra-nextjs-getting-started/">
+      
+        <link rel="next" href="../azure-ad-connect-sign-in-methods/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>The Great Unbundling - Kavesh Naidoo</title>
+        <title>Pass-the-Hash defence: Protected Users, Authentication Policies, and Authentication Policy Silos - Kavesh Naidoo</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-great-unbundling" class="md-skip">
+        <a href="#pass-the-hash-defence-protected-users-authentication-policies-and-authentication-policy-silos" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The Great Unbundling
+              Pass-the-Hash defence: Protected Users, Authentication Policies, and Authentication Policy Silos
             
           </span>
         </div>
@@ -702,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" class="md-nav__link">
+  <a href="#how-the-attack-actually-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes
+        How the attack actually works
       
     </span>
   </a>
@@ -713,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#saas-was-built-for-humans-ai-is-not" class="md-nav__link">
+  <a href="#defence-1-the-protected-users-group" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SaaS was built for humans. AI is not.
+        Defence 1: the Protected Users group
       
     </span>
   </a>
@@ -724,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#from-seats-to-tokens" class="md-nav__link">
+  <a href="#defence-2-authentication-policies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From seats to tokens
+        Defence 2: Authentication Policies
       
     </span>
   </a>
@@ -735,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-agent-layer-is-the-new-interface" class="md-nav__link">
+  <a href="#defence-3-authentication-policy-silos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The agent layer is the new interface
+        Defence 3: Authentication Policy Silos
       
     </span>
   </a>
@@ -746,10 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-the-mag-7-still-have-a-window" class="md-nav__link">
+  <a href="#microsoft-laps-as-a-complement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the Mag 7 still have a window
+        Microsoft LAPS as a complement
       
     </span>
   </a>
@@ -757,32 +759,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-strategic-fork" class="md-nav__link">
+  <a href="#the-deployment-order" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The strategic fork
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-next-five-years-look-like" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the next five years look like
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-final-thought" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The final thought
+        The deployment order
       
     </span>
   </a>
@@ -845,7 +825,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-04-27 00:00:00+00:00" class="md-ellipsis">April 27, 2026</time>
+                        <time datetime="2026-08-01 00:00:00+00:00" class="md-ellipsis">August 1, 2026</time>
                       </div>
                     </li>
                     
@@ -856,7 +836,8 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../category/ai/">AI</a></span>
+                              <a href="../category/identity/">Identity</a>, 
+                              <a href="../category/powershell/">PowerShell</a></span>
                         </div>
                       </li>
                     
@@ -867,7 +848,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              5 min read
                             
                           </span>
                         </div>
@@ -891,55 +872,136 @@
 
 
 
-<h1 id="the-great-unbundling">The Great Unbundling<a class="headerlink" href="#the-great-unbundling" title="Permanent link">&para;</a></h1>
-<h2 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes<a class="headerlink" href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" title="Permanent link">&para;</a></h2>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
+<h1 id="pass-the-hash-defence-protected-users-authentication-policies-and-authentication-policy-silos">Pass-the-Hash defence: Protected Users, Authentication Policies, and Authentication Policy Silos<a class="headerlink" href="#pass-the-hash-defence-protected-users-authentication-policies-and-authentication-policy-silos" title="Permanent link">&para;</a></h1>
+<p>If you've followed cybersecurity news at all over the last decade, you've seen
+variations of the same headline play out repeatedly. Major company hit by
+ransomware. Attackers moved laterally for weeks before triggering encryption.
+Initial compromise was a single phished credential; final compromise was Domain
+Admin.</p>
+<p>The middle part of that story — the lateral movement — is almost always powered
+by credential theft from compromised machines. The most famous technique is
+Pass-the-Hash, but it has cousins: Pass-the-Ticket, Overpass-the-Hash, Silver
+Tickets, Golden Tickets. They all work on the same basic principle: Windows
+caches authentication material in memory to provide single sign-on, and an
+attacker with sufficient privilege can extract that material and reuse it
+elsewhere.</p>
+<p>The good news: Microsoft has built three increasingly powerful features into
+Active Directory specifically to defeat these attacks. Almost nobody deploys
+them properly.</p>
 <!-- more -->
 
-<p>They have time. What they do with that time is what decides whether they stay dominant or become the next generation of legacy infrastructure. Because the ground beneath them is shifting in a very specific way:</p>
-<p><strong>AI isn't a feature. It's a new economic model.</strong></p>
-<hr />
-<h2 id="saas-was-built-for-humans-ai-is-not">SaaS was built for humans. AI is not.<a class="headerlink" href="#saas-was-built-for-humans-ai-is-not" title="Permanent link">&para;</a></h2>
-<p>The SaaS model is simple at its core: charge per user, per month, for software that amplifies human productivity.</p>
-<p>It made perfect sense in a world where work was done by people, software was the tool, and scale meant more seats.</p>
-<p>Agents break that equation.</p>
-<p>When two agents can do the work of fifty users, you don't need fifty licenses. You don't need ten. In the traditional sense, you might not need any. The pricing model collapses first. The product model follows.</p>
-<p>This is the real reason behind the slow, persistent compression in SaaS multiples — not that software is less valuable, but that the <em>unit</em> of value has changed.</p>
-<hr />
-<h2 id="from-seats-to-tokens">From seats to tokens<a class="headerlink" href="#from-seats-to-tokens" title="Permanent link">&para;</a></h2>
-<p>What replaces per-user pricing? Tokenisation — not in the crypto sense, but in the economic one.</p>
-<p>You pay for compute. You pay for outcomes. You pay for execution, not access.</p>
-<p>Agents don't care about seats. They care about tokens processed, tasks completed, workflows executed. So the future pricing unit looks less like <em>cost per employee</em> and more like <em>cost per task, cost per workflow, cost per decision</em>.</p>
-<p>That's a problem if your entire revenue engine is built on expanding seat count.</p>
-<hr />
-<h2 id="the-agent-layer-is-the-new-interface">The agent layer is the new interface<a class="headerlink" href="#the-agent-layer-is-the-new-interface" title="Permanent link">&para;</a></h2>
-<p>Here's the deeper disruption: <strong>SaaS tools are no longer the interface. Agents are.</strong></p>
-<p>Instead of a human logging into five different systems, the agent orchestrates across them — pulling data, executing actions, returning outcomes.</p>
-<p>In that world, the UI becomes irrelevant. The product becomes an API. The brand becomes invisible.</p>
-<p>SaaS risks becoming commoditised infrastructure unless it owns — or embeds itself inside — the agent layer.</p>
-<hr />
-<h2 id="why-the-mag-7-still-have-a-window">Why the Mag 7 still have a window<a class="headerlink" href="#why-the-mag-7-still-have-a-window" title="Permanent link">&para;</a></h2>
-<p>This is where the incumbents still have the edge. They control compute, distribution, developer ecosystems, and enterprise trust. More importantly, they have time and cash flow to spend.</p>
-<p>They can collapse pricing models before being forced to. They can bundle AI into existing ecosystems. They can acquire agent-native platforms. They can re-architect their products around workflows instead of features.</p>
-<p>The real question is whether they will. Incumbents rarely fail from lack of resources. They fail from protecting yesterday's margins.</p>
-<hr />
-<h2 id="the-strategic-fork">The strategic fork<a class="headerlink" href="#the-strategic-fork" title="Permanent link">&para;</a></h2>
-<p>Every major platform now faces the same choice.</p>
-<p><strong>Option 1: Defend SaaS economics.</strong> Preserve per-seat pricing. Add AI as a premium feature. Optimise for short-term revenue.</p>
-<p><strong>Option 2: Embrace the agent economy.</strong> Shift to usage- or outcome-based pricing. Build native agent orchestration. Accept short-term revenue disruption for long-term dominance.</p>
-<p>History is pretty clear about which path wins.</p>
-<hr />
-<h2 id="what-the-next-five-years-look-like">What the next five years look like<a class="headerlink" href="#what-the-next-five-years-look-like" title="Permanent link">&para;</a></h2>
-<p>Expect a sharp decline in per-seat pricing as the dominant model. Expect a wave of SaaS companies repositioning as "AI platforms" — some convincingly, most not. Expect agents to become the primary consumers of software, not humans. And expect a new layer of companies to emerge that sit <em>above</em> SaaS and orchestrate it.</p>
-<p>Most importantly, expect consolidation. Once software becomes interchangeable infrastructure, scale matters again — but in a very different way.</p>
-<hr />
-<h2 id="the-final-thought">The final thought<a class="headerlink" href="#the-final-thought" title="Permanent link">&para;</a></h2>
-<p>The current narrative is that AI will augment SaaS. That's too optimistic.</p>
-<p>AI doesn't just enhance tools. It changes who — or <em>what</em> — uses them. And when the user changes from human to agent, everything from pricing to product design has to change with it.</p>
-<p>The Mag 7 aren't too big to fail.</p>
-<p>But they are big enough to pivot.</p>
-<p>The clock is ticking.</p>
+<h2 id="how-the-attack-actually-works">How the attack actually works<a class="headerlink" href="#how-the-attack-actually-works" title="Permanent link">&para;</a></h2>
+<p>When a user logs into a Windows machine, Windows stores the authentication
+material — the NTLM hash, the Kerberos TGT, or both — in the memory of the
+LSASS process. This is how the user can access network resources later without
+being prompted again. Single sign-on requires the credential to be available
+somewhere.</p>
+<p>If an attacker gains administrative access to that machine, they can extract
+those credentials from LSASS. Tools like Mimikatz have made this trivially
+easy. The extracted hash can then be used to authenticate to other systems as
+the user, without ever knowing the actual password. The hash <em>is</em> the
+credential.</p>
+<p>The problem compounds because high-privilege accounts log into many machines.
+A Domain Admin who runs a maintenance task on a server leaves their credentials
+in that server's LSASS memory. An attacker landing on that server can steal
+those credentials and become Domain Admin. The blast radius of one compromised
+workstation can be enormous.</p>
+<h2 id="defence-1-the-protected-users-group">Defence 1: the Protected Users group<a class="headerlink" href="#defence-1-the-protected-users-group" title="Permanent link">&para;</a></h2>
+<p>The Protected Users security group was introduced with Windows Server 2012 R2.
+It's a built-in group in every modern AD environment. Add an account to it, and
+a number of additional security restrictions kick in automatically.</p>
+<p>Accounts in Protected Users:</p>
+<ul>
+<li><strong>Cannot authenticate using NTLM.</strong> They must use Kerberos. This eliminates
+  the entire class of NTLM-based pass-the-hash attacks against those accounts.</li>
+<li><strong>Cannot use DES or RC4 in Kerberos.</strong> Only AES is permitted.</li>
+<li><strong>Cannot delegate credentials,</strong> including via CredSSP (what RDP uses for
+  credential forwarding).</li>
+<li><strong>Cannot have a long-lived TGT.</strong> Lifetime is capped at four hours and
+  cannot be renewed.</li>
+<li><strong>Cannot have credentials cached for offline logon.</strong> The user must
+  authenticate to a DC every time.</li>
+</ul>
+<p>The effect: an account in Protected Users is dramatically less useful to an
+attacker who manages to steal anything from a machine the account has touched.</p>
+<div class="admonition warning">
+<p class="admonition-title">Test before deploying broadly</p>
+<p>The same restrictions can break legitimate workflows — applications that
+rely on NTLM, environments that need delegation, users who travel and depend
+on cached credentials. The right starting point is your most sensitive
+accounts only: Domain Admins, Enterprise Admins, Schema Admins, and
+privileged service accounts. Regular user accounts should not be in this
+group.</p>
+</div>
+<h2 id="defence-2-authentication-policies">Defence 2: Authentication Policies<a class="headerlink" href="#defence-2-authentication-policies" title="Permanent link">&para;</a></h2>
+<p>Authentication Policies let you put specific restrictions on individual
+accounts: where they can log in from, what kinds of access they can perform,
+and how long their tickets last.</p>
+<p>Typical use case: ensuring Domain Admin accounts can only authenticate from a
+specific set of Privileged Access Workstations. You create an Authentication
+Policy that says "this user's TGT can only be issued if the request comes from
+one of these machines." Anyone trying to log in as that admin from a regular
+workstation fails authentication outright.</p>
+<p>Authentication Policies are deployed via Active Directory Administrative Center
+→ Authentication. Create the policy, configure the constraints, then apply it
+to specific accounts. This is fine-grained — one policy can target one account
+if needed.</p>
+<p>Requires Windows Server 2012 R2 or later domain functional level, and Kerberos
+for the controlled accounts — which dovetails neatly with Protected Users
+membership.</p>
+<h2 id="defence-3-authentication-policy-silos">Defence 3: Authentication Policy Silos<a class="headerlink" href="#defence-3-authentication-policy-silos" title="Permanent link">&para;</a></h2>
+<p>Silos group Authentication Policies together. A silo is a container that holds
+users, computers, and service accounts that all share authentication policies.
+The canonical use case is implementing a tier model.</p>
+<p>In Microsoft's enterprise access model:</p>
+<ul>
+<li><strong>Tier 0</strong> — the most sensitive identities: Domain Admins, Enterprise Admins,
+  credentials that can take over the directory.</li>
+<li><strong>Tier 1</strong> — server administrators and service accounts for enterprise
+  applications.</li>
+<li><strong>Tier 2</strong> — user workstations and end-user accounts.</li>
+</ul>
+<p>The rule: credentials never flow downward. A Tier 0 admin never logs into a
+Tier 2 workstation. A Tier 1 server admin never authenticates from a Tier 2
+endpoint.</p>
+<p>You implement this with Authentication Policy Silos. Create three silos, assign
+accounts to them, and configure the silo's authentication policy so that Tier 0
+accounts can only authenticate from machines that are also in the Tier 0 silo.
+Anything attempting authentication from outside that silo fails.</p>
+<div class="admonition note">
+<p class="admonition-title">This is significantly more effort than Protected Users</p>
+<p>You have to define your tier boundaries clearly, classify every account and
+machine, ensure your operational processes work within the tier constraints,
+and accept the friction of administrators using dedicated PAWs for admin
+work. The payoff is the architectural pattern that actually defeats lateral
+movement at scale.</p>
+</div>
+<h2 id="microsoft-laps-as-a-complement">Microsoft LAPS as a complement<a class="headerlink" href="#microsoft-laps-as-a-complement" title="Permanent link">&para;</a></h2>
+<p>While not strictly part of the same feature family, LAPS solves a related
+problem: shared local administrator passwords.</p>
+<p>In many environments, every workstation has the same local Administrator
+password — set during imaging and never changed. An attacker who extracts that
+password from one machine has it for every machine.</p>
+<p>LAPS randomises the local administrator password on every machine and stores
+the current password in Active Directory, accessible only to authorised
+accounts. Deploying LAPS is well-documented and relatively low-effort. There's
+an older "Microsoft LAPS" and a newer "Windows LAPS" built into recent Windows
+versions. Either is dramatically better than shared local admin passwords.</p>
+<h2 id="the-deployment-order">The deployment order<a class="headerlink" href="#the-deployment-order" title="Permanent link">&para;</a></h2>
+<p>Each control is useful on its own. Together, they're a defensive system:</p>
+<ol>
+<li><strong>Start with LAPS.</strong> Easiest win, lowest deployment cost, broadest immediate
+   benefit.</li>
+<li><strong>Add highest-value accounts to Protected Users.</strong> Test carefully — there
+   will be applications that break. Address those, then expand membership
+   cautiously.</li>
+<li><strong>Introduce Authentication Policies</strong> for your most sensitive accounts,
+   restricting them to specific privileged access workstations.</li>
+<li><strong>Formalise your tier model with Authentication Policy Silos</strong> when the
+   cultural and operational groundwork is in place.</li>
+</ol>
+<p>This is a journey, not a weekend project. But every step forward closes a class
+of attack. Take the first step this quarter.</p>
 
 
 
@@ -981,15 +1043,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../group-policy-inheritance-filtering-loopback/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Group Policy inheritance, filtering, and loopback: the three concepts that trip everyone up">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Group Policy inheritance, filtering, and loopback: the three concepts that trip everyone up
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="../entra-nextjs-getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Skills Directory — Getting Started Guide">
+          <a href="../azure-ad-connect-sign-in-methods/" class="md-footer__link md-footer__link--next" aria-label="Next: Azure AD Connect sign-in methods compared: PHS, PTA, and federation">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Skills Directory — Getting Started Guide
+                Azure AD Connect sign-in methods compared: PHS, PTA, and federation
               </div>
             </div>
             <div class="md-footer__button md-icon">

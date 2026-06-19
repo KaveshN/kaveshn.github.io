@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes.">
+        <meta name="description" content="Internal certificate authorities are forever. A practical guide to two-tier vs three-tier PKI hierarchies, offline root CAs, validity periods that won't trap you, and the CRL/AIA mistakes that cause mysterious outages months later.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/the-great-unbundling/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/pki-design-two-tier-three-tier/">
       
       
+        <link rel="prev" href="../fsmo-role-placement/">
       
-        <link rel="next" href="../entra-nextjs-getting-started/">
+      
+        <link rel="next" href="../group-policy-inheritance-filtering-loopback/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>The Great Unbundling - Kavesh Naidoo</title>
+        <title>Designing a PKI that won't haunt you: two-tier vs three-tier hierarchies - Kavesh Naidoo</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-great-unbundling" class="md-skip">
+        <a href="#designing-a-pki-that-wont-haunt-you-two-tier-vs-three-tier-hierarchies" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The Great Unbundling
+              Designing a PKI that won't haunt you: two-tier vs three-tier hierarchies
             
           </span>
         </div>
@@ -702,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" class="md-nav__link">
+  <a href="#why-you-need-pki-at-all" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes
+        Why you need PKI at all
       
     </span>
   </a>
@@ -713,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#saas-was-built-for-humans-ai-is-not" class="md-nav__link">
+  <a href="#the-three-hierarchy-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SaaS was built for humans. AI is not.
+        The three hierarchy models
       
     </span>
   </a>
@@ -724,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#from-seats-to-tokens" class="md-nav__link">
+  <a href="#why-offline-roots-matter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From seats to tokens
+        Why offline roots matter
       
     </span>
   </a>
@@ -735,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-agent-layer-is-the-new-interface" class="md-nav__link">
+  <a href="#validity-periods-that-wont-trap-you" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The agent layer is the new interface
+        Validity periods that won't trap you
       
     </span>
   </a>
@@ -746,10 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-the-mag-7-still-have-a-window" class="md-nav__link">
+  <a href="#cdp-aia-and-the-things-that-get-forgotten" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the Mag 7 still have a window
+        CDP, AIA, and the things that get forgotten
       
     </span>
   </a>
@@ -757,10 +759,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-strategic-fork" class="md-nav__link">
+  <a href="#disaster-recovery-before-you-need-it" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The strategic fork
+        Disaster recovery, before you need it
       
     </span>
   </a>
@@ -768,21 +770,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-the-next-five-years-look-like" class="md-nav__link">
+  <a href="#a-practical-roadmap-for-most-organisations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What the next five years look like
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-final-thought" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The final thought
+        A practical roadmap for most organisations
       
     </span>
   </a>
@@ -845,7 +836,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-04-27 00:00:00+00:00" class="md-ellipsis">April 27, 2026</time>
+                        <time datetime="2026-07-18 00:00:00+00:00" class="md-ellipsis">July 18, 2026</time>
                       </div>
                     </li>
                     
@@ -856,7 +847,8 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../category/ai/">AI</a></span>
+                              <a href="../category/identity/">Identity</a>, 
+                              <a href="../category/infrastructure/">Infrastructure</a></span>
                         </div>
                       </li>
                     
@@ -867,7 +859,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              5 min read
                             
                           </span>
                         </div>
@@ -891,55 +883,124 @@
 
 
 
-<h1 id="the-great-unbundling">The Great Unbundling<a class="headerlink" href="#the-great-unbundling" title="Permanent link">&para;</a></h1>
-<h2 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes<a class="headerlink" href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" title="Permanent link">&para;</a></h2>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
+<h1 id="designing-a-pki-that-wont-haunt-you-two-tier-vs-three-tier-hierarchies">Designing a PKI that won't haunt you: two-tier vs three-tier hierarchies<a class="headerlink" href="#designing-a-pki-that-wont-haunt-you-two-tier-vs-three-tier-hierarchies" title="Permanent link">&para;</a></h1>
+<p>The decision to deploy an internal Public Key Infrastructure is one of those
+choices that seems modest at the time and turns out to be effectively
+permanent. The root CA you stand up today will issue certificates that live in
+your environment for years. The trust relationships you build will become
+foundational. And the design mistakes you make at the beginning will follow you
+long after the original architect has moved on.</p>
+<p>I have watched organisations live with bad PKI designs for over a decade
+because the cost of replacing them is so high. So this is one of the few areas
+in IT where it genuinely pays to slow down, read the documentation properly,
+and think carefully before you click "Install Role."</p>
 <!-- more -->
 
-<p>They have time. What they do with that time is what decides whether they stay dominant or become the next generation of legacy infrastructure. Because the ground beneath them is shifting in a very specific way:</p>
-<p><strong>AI isn't a feature. It's a new economic model.</strong></p>
-<hr />
-<h2 id="saas-was-built-for-humans-ai-is-not">SaaS was built for humans. AI is not.<a class="headerlink" href="#saas-was-built-for-humans-ai-is-not" title="Permanent link">&para;</a></h2>
-<p>The SaaS model is simple at its core: charge per user, per month, for software that amplifies human productivity.</p>
-<p>It made perfect sense in a world where work was done by people, software was the tool, and scale meant more seats.</p>
-<p>Agents break that equation.</p>
-<p>When two agents can do the work of fifty users, you don't need fifty licenses. You don't need ten. In the traditional sense, you might not need any. The pricing model collapses first. The product model follows.</p>
-<p>This is the real reason behind the slow, persistent compression in SaaS multiples — not that software is less valuable, but that the <em>unit</em> of value has changed.</p>
-<hr />
-<h2 id="from-seats-to-tokens">From seats to tokens<a class="headerlink" href="#from-seats-to-tokens" title="Permanent link">&para;</a></h2>
-<p>What replaces per-user pricing? Tokenisation — not in the crypto sense, but in the economic one.</p>
-<p>You pay for compute. You pay for outcomes. You pay for execution, not access.</p>
-<p>Agents don't care about seats. They care about tokens processed, tasks completed, workflows executed. So the future pricing unit looks less like <em>cost per employee</em> and more like <em>cost per task, cost per workflow, cost per decision</em>.</p>
-<p>That's a problem if your entire revenue engine is built on expanding seat count.</p>
-<hr />
-<h2 id="the-agent-layer-is-the-new-interface">The agent layer is the new interface<a class="headerlink" href="#the-agent-layer-is-the-new-interface" title="Permanent link">&para;</a></h2>
-<p>Here's the deeper disruption: <strong>SaaS tools are no longer the interface. Agents are.</strong></p>
-<p>Instead of a human logging into five different systems, the agent orchestrates across them — pulling data, executing actions, returning outcomes.</p>
-<p>In that world, the UI becomes irrelevant. The product becomes an API. The brand becomes invisible.</p>
-<p>SaaS risks becoming commoditised infrastructure unless it owns — or embeds itself inside — the agent layer.</p>
-<hr />
-<h2 id="why-the-mag-7-still-have-a-window">Why the Mag 7 still have a window<a class="headerlink" href="#why-the-mag-7-still-have-a-window" title="Permanent link">&para;</a></h2>
-<p>This is where the incumbents still have the edge. They control compute, distribution, developer ecosystems, and enterprise trust. More importantly, they have time and cash flow to spend.</p>
-<p>They can collapse pricing models before being forced to. They can bundle AI into existing ecosystems. They can acquire agent-native platforms. They can re-architect their products around workflows instead of features.</p>
-<p>The real question is whether they will. Incumbents rarely fail from lack of resources. They fail from protecting yesterday's margins.</p>
-<hr />
-<h2 id="the-strategic-fork">The strategic fork<a class="headerlink" href="#the-strategic-fork" title="Permanent link">&para;</a></h2>
-<p>Every major platform now faces the same choice.</p>
-<p><strong>Option 1: Defend SaaS economics.</strong> Preserve per-seat pricing. Add AI as a premium feature. Optimise for short-term revenue.</p>
-<p><strong>Option 2: Embrace the agent economy.</strong> Shift to usage- or outcome-based pricing. Build native agent orchestration. Accept short-term revenue disruption for long-term dominance.</p>
-<p>History is pretty clear about which path wins.</p>
-<hr />
-<h2 id="what-the-next-five-years-look-like">What the next five years look like<a class="headerlink" href="#what-the-next-five-years-look-like" title="Permanent link">&para;</a></h2>
-<p>Expect a sharp decline in per-seat pricing as the dominant model. Expect a wave of SaaS companies repositioning as "AI platforms" — some convincingly, most not. Expect agents to become the primary consumers of software, not humans. And expect a new layer of companies to emerge that sit <em>above</em> SaaS and orchestrate it.</p>
-<p>Most importantly, expect consolidation. Once software becomes interchangeable infrastructure, scale matters again — but in a very different way.</p>
-<hr />
-<h2 id="the-final-thought">The final thought<a class="headerlink" href="#the-final-thought" title="Permanent link">&para;</a></h2>
-<p>The current narrative is that AI will augment SaaS. That's too optimistic.</p>
-<p>AI doesn't just enhance tools. It changes who — or <em>what</em> — uses them. And when the user changes from human to agent, everything from pricing to product design has to change with it.</p>
-<p>The Mag 7 aren't too big to fail.</p>
-<p>But they are big enough to pivot.</p>
-<p>The clock is ticking.</p>
+<h2 id="why-you-need-pki-at-all">Why you need PKI at all<a class="headerlink" href="#why-you-need-pki-at-all" title="Permanent link">&para;</a></h2>
+<p>Active Directory Certificate Services gives you the ability to issue, manage,
+and revoke digital certificates inside your organisation. Those certificates
+underpin a lot of modern infrastructure: secure LDAP, Windows Hello for
+Business authentication, EFS file encryption, certificate-based VPN, IPsec,
+Wi-Fi authentication via 802.1X, code signing, and the certificates that
+secure traffic between internal services.</p>
+<p>For external-facing services, buy certificates from a public CA. For internal
+services — where the relying parties are all machines you control — an internal
+PKI is dramatically cheaper, faster to issue, and more flexible. The cost is
+that you become responsible for running it properly, and "properly" is a higher
+bar than people expect.</p>
+<h2 id="the-three-hierarchy-models">The three hierarchy models<a class="headerlink" href="#the-three-hierarchy-models" title="Permanent link">&para;</a></h2>
+<p><strong>The single-tier model</strong> has one CA that does everything — root of trust and
+direct issuer of all certificates. Appropriate for labs and very small test
+environments.</p>
+<div class="admonition danger">
+<p class="admonition-title">Do not use single-tier in production</p>
+<p>If that single CA is compromised, every certificate it ever issued must be
+considered compromised, and you have no way to bring up a replacement trust
+hierarchy without retrofitting trust into every device.</p>
+</div>
+<p><strong>The two-tier model</strong> has an offline root CA that issues certificates only to
+subordinate issuing CAs, which then issue certificates to end entities. The
+root sits powered off most of the time. The issuing CAs do the day-to-day
+work. <strong>This is the right design for most organisations.</strong></p>
+<p><strong>The three-tier model</strong> adds an intermediate policy CA layer between the root
+and the issuing CAs. Each tier signs the next. The benefit is granular
+separation: you can revoke an entire branch of the tree by revoking the policy
+CA that signed it, without affecting the rest. Appropriate for very large
+organisations or those issuing certificates across many distinct business units.</p>
+<h2 id="why-offline-roots-matter">Why offline roots matter<a class="headerlink" href="#why-offline-roots-matter" title="Permanent link">&para;</a></h2>
+<p>The root CA is the anchor of trust. Every certificate your PKI issues chains
+back to it. If the root's private key is stolen, an attacker can issue
+arbitrary certificates that everything in your environment will trust. The only
+remediation is removing trust in the root from every device — a catastrophic,
+multi-week emergency at any reasonable organisation size.</p>
+<p>The defence is to keep the root offline almost all the time. It is not joined
+to the domain. It has no network connectivity. Many organisations keep it as a
+VM exported to encrypted storage, powered on in an isolated network only when
+needed.</p>
+<div class="admonition note">
+<p class="admonition-title">How often does the root actually need to come online?</p>
+<p>A few times a year — to renew its CRL, to issue certificates for new
+subordinate CAs, to handle key recovery. Standing it up for an afternoon
+twice a year is a small operational cost for a substantial security gain.</p>
+</div>
+<h2 id="validity-periods-that-wont-trap-you">Validity periods that won't trap you<a class="headerlink" href="#validity-periods-that-wont-trap-you" title="Permanent link">&para;</a></h2>
+<p>A common pattern that works well: a root CA with a <strong>20-year</strong> certificate,
+issuing or policy CAs with <strong>10-year</strong> certificates, end-entity certificates
+with <strong>one or two-year</strong> validity and automated renewal.</p>
+<p>Two traps to avoid:</p>
+<p><strong>Making end-entity validity too short without renewal automation.</strong> If
+certificates expire annually and you issue each one manually, you'll spend a
+noticeable percentage of your operational capacity on certificate hygiene. Plan
+for automated enrolment via Group Policy, Certificate Enrollment Web Services,
+or NDES for non-domain-joined devices.</p>
+<p><strong>Making root validity so long you forget to plan for renewal.</strong> If your root
+certificate expires in 18 years, what happens in year 16? Diary the root
+renewal project now, not in year 17. It's a real project involving a new key
+pair and propagation to every machine in the environment.</p>
+<h2 id="cdp-aia-and-the-things-that-get-forgotten">CDP, AIA, and the things that get forgotten<a class="headerlink" href="#cdp-aia-and-the-things-that-get-forgotten" title="Permanent link">&para;</a></h2>
+<p>Two pieces of CA configuration cause more outages than the rest of the PKI
+combined: <strong>CRL Distribution Points</strong> and <strong>Authority Information Access</strong>
+locations.</p>
+<p>When a certificate is presented for validation, the relying party retrieves a
+Certificate Revocation List from one of the URLs the certificate itself
+advertises — its CDP. If those URLs are unreachable, validation fails.</p>
+<p>Similarly, AIA URLs point relying parties to the issuer's certificate so they
+can build a chain to the root.</p>
+<div class="admonition warning">
+<p class="admonition-title">The failure mode is delayed</p>
+<p>Certificates seem to work fine immediately after issuance, then
+mysteriously fail months later when something tries to use them in a context
+where the CDP isn't reachable.</p>
+</div>
+<p>Standard practice: publish CDPs and AIAs to <strong>HTTP locations</strong> — not LDAP,
+which only works inside the directory — at URLs reachable both internally and
+externally if your certificates will ever be used outside the corporate network.
+Plan this on day one. It costs almost nothing and saves substantial pain later.</p>
+<h2 id="disaster-recovery-before-you-need-it">Disaster recovery, before you need it<a class="headerlink" href="#disaster-recovery-before-you-need-it" title="Permanent link">&para;</a></h2>
+<p>The CA database — records of every certificate issued, keys for key archival if
+enabled — needs to be backed up reliably. Test the recovery. Build a parallel
+test CA, restore a backup to it, confirm the restored CA can issue certificates
+that chain correctly.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># Back up the CA database and private key</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">Backup-CARoleService</span> <span class="n">-Path</span> <span class="s2">&quot;D:\CABackup&quot;</span> <span class="n">-Password</span> <span class="p">(</span><span class="nb">Read-Host</span> <span class="n">-AsSecureString</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The first time you do a real CA recovery should not be during an actual
+disaster.</p>
+<h2 id="a-practical-roadmap-for-most-organisations">A practical roadmap for most organisations<a class="headerlink" href="#a-practical-roadmap-for-most-organisations" title="Permanent link">&para;</a></h2>
+<p>A two-tier hierarchy. One offline standalone root CA, kept in a safe or
+encrypted storage, brought online a few times a year. One or two issuing CAs
+joined to the domain, doing the day-to-day work. CRLs and AIAs published to
+internal HTTP, with consideration for whether any certificates need external
+validation.</p>
+<p>Reasonable validity periods: 20 years on the root, 10 on the issuing CAs, one
+or two years on most end-entity certificates with automated renewal via
+autoenrolment for domain-joined devices.</p>
+<p>A documented runbook for taking the root online, issuing new subordinate CAs,
+renewing the root's own certificate, and disaster recovery — stored somewhere
+your future colleagues will find it.</p>
+<p>This is not exciting work. Nobody will applaud you for getting PKI right. But
+a PKI that traps you in operational pain, or exposes you to a wholesale trust
+compromise, is one of the worst architectural legacies you can leave behind.</p>
 
 
 
@@ -981,15 +1042,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../fsmo-role-placement/" class="md-footer__link md-footer__link--prev" aria-label="Previous: FSMO role placement: the underrated decision that breaks AD environments">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                FSMO role placement: the underrated decision that breaks AD environments
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="../entra-nextjs-getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Skills Directory — Getting Started Guide">
+          <a href="../group-policy-inheritance-filtering-loopback/" class="md-footer__link md-footer__link--next" aria-label="Next: Group Policy inheritance, filtering, and loopback: the three concepts that trip everyone up">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Skills Directory — Getting Started Guide
+                Group Policy inheritance, filtering, and loopback: the three concepts that trip everyone up
               </div>
             </div>
             <div class="md-footer__button md-icon">

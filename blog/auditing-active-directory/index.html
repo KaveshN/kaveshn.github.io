@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes.">
+        <meta name="description" content="You can't detect what you don't see. A layered guide to AD auditing — from enabling Advanced Audit Policies and centralising logs, through to what to actually alert on and what Microsoft Defender for Identity adds on top.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/the-great-unbundling/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/auditing-active-directory/">
       
       
+        <link rel="prev" href="../azure-ad-connect-sign-in-methods/">
       
-        <link rel="next" href="../entra-nextjs-getting-started/">
+      
+        <link rel="next" href="../powershell-ad-hygiene-scripts/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>The Great Unbundling - Kavesh Naidoo</title>
+        <title>Auditing Active Directory: from Event Viewer to Microsoft Defender for Identity - Kavesh Naidoo</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-great-unbundling" class="md-skip">
+        <a href="#auditing-active-directory-from-event-viewer-to-microsoft-defender-for-identity" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The Great Unbundling
+              Auditing Active Directory: from Event Viewer to Microsoft Defender for Identity
             
           </span>
         </div>
@@ -702,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" class="md-nav__link">
+  <a href="#the-starting-point-event-viewer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes
+        The starting point: Event Viewer
       
     </span>
   </a>
@@ -713,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#saas-was-built-for-humans-ai-is-not" class="md-nav__link">
+  <a href="#advanced-audit-policies-the-part-you-must-enable" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SaaS was built for humans. AI is not.
+        Advanced Audit Policies — the part you must enable
       
     </span>
   </a>
@@ -724,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#from-seats-to-tokens" class="md-nav__link">
+  <a href="#centralising-the-logs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From seats to tokens
+        Centralising the logs
       
     </span>
   </a>
@@ -735,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-agent-layer-is-the-new-interface" class="md-nav__link">
+  <a href="#what-to-alert-on" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The agent layer is the new interface
+        What to alert on
       
     </span>
   </a>
@@ -746,10 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-the-mag-7-still-have-a-window" class="md-nav__link">
+  <a href="#microsoft-defender-for-identity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the Mag 7 still have a window
+        Microsoft Defender for Identity
       
     </span>
   </a>
@@ -757,10 +759,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-strategic-fork" class="md-nav__link">
+  <a href="#azure-ad-connect-health" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The strategic fork
+        Azure AD Connect Health
       
     </span>
   </a>
@@ -768,21 +770,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-the-next-five-years-look-like" class="md-nav__link">
+  <a href="#a-practical-roadmap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What the next five years look like
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-final-thought" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The final thought
+        A practical roadmap
       
     </span>
   </a>
@@ -845,7 +836,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-04-27 00:00:00+00:00" class="md-ellipsis">April 27, 2026</time>
+                        <time datetime="2026-08-15 00:00:00+00:00" class="md-ellipsis">August 15, 2026</time>
                       </div>
                     </li>
                     
@@ -856,7 +847,8 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../category/ai/">AI</a></span>
+                              <a href="../category/identity/">Identity</a>, 
+                              <a href="../category/powershell/">PowerShell</a></span>
                         </div>
                       </li>
                     
@@ -867,7 +859,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              5 min read
                             
                           </span>
                         </div>
@@ -891,55 +883,163 @@
 
 
 
-<h1 id="the-great-unbundling">The Great Unbundling<a class="headerlink" href="#the-great-unbundling" title="Permanent link">&para;</a></h1>
-<h2 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes<a class="headerlink" href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" title="Permanent link">&para;</a></h2>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
+<h1 id="auditing-active-directory-from-event-viewer-to-microsoft-defender-for-identity">Auditing Active Directory: from Event Viewer to Microsoft Defender for Identity<a class="headerlink" href="#auditing-active-directory-from-event-viewer-to-microsoft-defender-for-identity" title="Permanent link">&para;</a></h1>
+<p>Every breach report I read tells the same story in different words: the
+attackers were in the environment for weeks or months before anyone noticed.
+The signs were there. The logs recorded them. But nobody was looking, or the
+logging wasn't capturing what mattered, or the volume was too high to extract
+signal from noise.</p>
+<p>Auditing Active Directory is one of those areas where the default setup is
+mostly useless and the proper setup is more involved than people expect. But you
+can build it up in stages, starting with what's free and built-in, and
+graduating to genuinely sophisticated detection.</p>
 <!-- more -->
 
-<p>They have time. What they do with that time is what decides whether they stay dominant or become the next generation of legacy infrastructure. Because the ground beneath them is shifting in a very specific way:</p>
-<p><strong>AI isn't a feature. It's a new economic model.</strong></p>
-<hr />
-<h2 id="saas-was-built-for-humans-ai-is-not">SaaS was built for humans. AI is not.<a class="headerlink" href="#saas-was-built-for-humans-ai-is-not" title="Permanent link">&para;</a></h2>
-<p>The SaaS model is simple at its core: charge per user, per month, for software that amplifies human productivity.</p>
-<p>It made perfect sense in a world where work was done by people, software was the tool, and scale meant more seats.</p>
-<p>Agents break that equation.</p>
-<p>When two agents can do the work of fifty users, you don't need fifty licenses. You don't need ten. In the traditional sense, you might not need any. The pricing model collapses first. The product model follows.</p>
-<p>This is the real reason behind the slow, persistent compression in SaaS multiples — not that software is less valuable, but that the <em>unit</em> of value has changed.</p>
-<hr />
-<h2 id="from-seats-to-tokens">From seats to tokens<a class="headerlink" href="#from-seats-to-tokens" title="Permanent link">&para;</a></h2>
-<p>What replaces per-user pricing? Tokenisation — not in the crypto sense, but in the economic one.</p>
-<p>You pay for compute. You pay for outcomes. You pay for execution, not access.</p>
-<p>Agents don't care about seats. They care about tokens processed, tasks completed, workflows executed. So the future pricing unit looks less like <em>cost per employee</em> and more like <em>cost per task, cost per workflow, cost per decision</em>.</p>
-<p>That's a problem if your entire revenue engine is built on expanding seat count.</p>
-<hr />
-<h2 id="the-agent-layer-is-the-new-interface">The agent layer is the new interface<a class="headerlink" href="#the-agent-layer-is-the-new-interface" title="Permanent link">&para;</a></h2>
-<p>Here's the deeper disruption: <strong>SaaS tools are no longer the interface. Agents are.</strong></p>
-<p>Instead of a human logging into five different systems, the agent orchestrates across them — pulling data, executing actions, returning outcomes.</p>
-<p>In that world, the UI becomes irrelevant. The product becomes an API. The brand becomes invisible.</p>
-<p>SaaS risks becoming commoditised infrastructure unless it owns — or embeds itself inside — the agent layer.</p>
-<hr />
-<h2 id="why-the-mag-7-still-have-a-window">Why the Mag 7 still have a window<a class="headerlink" href="#why-the-mag-7-still-have-a-window" title="Permanent link">&para;</a></h2>
-<p>This is where the incumbents still have the edge. They control compute, distribution, developer ecosystems, and enterprise trust. More importantly, they have time and cash flow to spend.</p>
-<p>They can collapse pricing models before being forced to. They can bundle AI into existing ecosystems. They can acquire agent-native platforms. They can re-architect their products around workflows instead of features.</p>
-<p>The real question is whether they will. Incumbents rarely fail from lack of resources. They fail from protecting yesterday's margins.</p>
-<hr />
-<h2 id="the-strategic-fork">The strategic fork<a class="headerlink" href="#the-strategic-fork" title="Permanent link">&para;</a></h2>
-<p>Every major platform now faces the same choice.</p>
-<p><strong>Option 1: Defend SaaS economics.</strong> Preserve per-seat pricing. Add AI as a premium feature. Optimise for short-term revenue.</p>
-<p><strong>Option 2: Embrace the agent economy.</strong> Shift to usage- or outcome-based pricing. Build native agent orchestration. Accept short-term revenue disruption for long-term dominance.</p>
-<p>History is pretty clear about which path wins.</p>
-<hr />
-<h2 id="what-the-next-five-years-look-like">What the next five years look like<a class="headerlink" href="#what-the-next-five-years-look-like" title="Permanent link">&para;</a></h2>
-<p>Expect a sharp decline in per-seat pricing as the dominant model. Expect a wave of SaaS companies repositioning as "AI platforms" — some convincingly, most not. Expect agents to become the primary consumers of software, not humans. And expect a new layer of companies to emerge that sit <em>above</em> SaaS and orchestrate it.</p>
-<p>Most importantly, expect consolidation. Once software becomes interchangeable infrastructure, scale matters again — but in a very different way.</p>
-<hr />
-<h2 id="the-final-thought">The final thought<a class="headerlink" href="#the-final-thought" title="Permanent link">&para;</a></h2>
-<p>The current narrative is that AI will augment SaaS. That's too optimistic.</p>
-<p>AI doesn't just enhance tools. It changes who — or <em>what</em> — uses them. And when the user changes from human to agent, everything from pricing to product design has to change with it.</p>
-<p>The Mag 7 aren't too big to fail.</p>
-<p>But they are big enough to pivot.</p>
-<p>The clock is ticking.</p>
+<h2 id="the-starting-point-event-viewer">The starting point: Event Viewer<a class="headerlink" href="#the-starting-point-event-viewer" title="Permanent link">&para;</a></h2>
+<p>Every domain controller is generating events constantly about what's happening
+in the directory. Most of these events are recorded and then never looked at,
+because there's no good way to look at them at scale.</p>
+<p>The relevant logs on a DC:</p>
+<ul>
+<li><strong>Security log</strong> — authentication events, account management, directory
+  changes, and a great deal else if you've enabled the right audit policies.</li>
+<li><strong>Directory Service log</strong> — replication issues, schema operations, and
+  AD-internal events.</li>
+<li><strong>DNS Server log</strong> — DNS activity, relevant because so much of AD depends on
+  DNS being healthy.</li>
+</ul>
+<p>Event Viewer is fundamentally an interactive tool for looking at one machine at
+a time. It is not a monitoring solution. You need to move logs somewhere useful.</p>
+<h2 id="advanced-audit-policies-the-part-you-must-enable">Advanced Audit Policies — the part you must enable<a class="headerlink" href="#advanced-audit-policies-the-part-you-must-enable" title="Permanent link">&para;</a></h2>
+<p>Here's the part that catches people: the default audit settings in Active
+Directory do not record most of what you'd want to know. To get useful auditing,
+you need to enable the <strong>Advanced Audit Policies</strong> via Group Policy:</p>
+<p><em>Computer Configuration → Policies → Windows Settings → Security Settings
+→ Advanced Audit Policy Configuration</em></p>
+<p>Also enable: <em>"Audit: Force audit policy subcategory settings to override audit
+policy category settings"</em> — otherwise the granular settings won't take effect.</p>
+<p>The categories worth enabling on domain controllers:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>What it captures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account Logon → Kerberos Authentication Service</td>
+<td>Who's getting TGTs and from where</td>
+</tr>
+<tr>
+<td>Account Logon → Kerberos Service Ticket Operations</td>
+<td>Service tickets issued (Kerberoasting detection)</td>
+</tr>
+<tr>
+<td>Account Management → Security Group Management</td>
+<td>Group membership changes</td>
+</tr>
+<tr>
+<td>Account Management → User Account Management</td>
+<td>Account creation, modification, deletion</td>
+</tr>
+<tr>
+<td>DS Access → Directory Service Changes</td>
+<td>Attribute-level before/after on directory object changes</td>
+</tr>
+<tr>
+<td>Logon/Logoff → Special Logon</td>
+<td>Use of sensitive privileges on logon</td>
+</tr>
+<tr>
+<td>Policy Change → Audit Policy Change</td>
+<td>Changes to the audit policy itself</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Enabling all these categories will significantly increase event volume</p>
+<p>A busy DC can produce tens of thousands of audit events per minute. This is
+a feature, not a bug — but it means you can't reasonably hope to read these
+logs interactively. You need to collect them somewhere and search them.</p>
+</div>
+<h2 id="centralising-the-logs">Centralising the logs<a class="headerlink" href="#centralising-the-logs" title="Permanent link">&para;</a></h2>
+<p>Logs sitting on individual DCs have several problems: they roll over and
+disappear, they can be tampered with by an attacker who gains DC access, and
+they can only be searched one machine at a time.</p>
+<p><strong>Windows Event Forwarding</strong> is free and built in. Configure source machines
+(DCs) to forward specific events to a collector using a subscription. This
+works adequately at small scale.</p>
+<p>At larger scale, forward events into a proper SIEM — Microsoft Sentinel, Splunk,
+Elastic, QRadar. The SIEM gives you searchable storage, dashboards, alerts on
+specific patterns, and correlation across multiple data sources.</p>
+<div class="admonition warning">
+<p class="admonition-title">Protect your log store</p>
+<p>Make sure collected logs are not writable from compromised hosts. An attacker
+who breaks into a DC should not be able to erase the evidence from your
+central log store.</p>
+</div>
+<h2 id="what-to-alert-on">What to alert on<a class="headerlink" href="#what-to-alert-on" title="Permanent link">&para;</a></h2>
+<p>A SIEM full of events that nobody triages is hardly better than no SIEM. High-
+value alerts worth building first:</p>
+<p><strong>Membership changes to highly privileged groups</strong> — Domain Admins, Enterprise
+Admins, Schema Admins, Account Operators. Any change should be alerted on, with
+confirmation the change was authorised.</p>
+<p><strong>Service account behaviour anomalies</strong> — service accounts interactively logging
+in (they shouldn't), authenticating from unexpected sources, password changes.</p>
+<p><strong>Disabled-account authentication attempts</strong> — probing leftover accounts is
+common early-reconnaissance behaviour.</p>
+<p><strong>Replication failures between DCs</strong> — can indicate hardware issues but can also
+indicate an attacker disrupting normal operation.</p>
+<p><strong>Kerberos pre-authentication failures in patterns</strong> — concentrated failures
+suggest Kerberoasting or password spraying.</p>
+<p><strong>Account creation outside normal working hours</strong>, particularly in privileged OUs.</p>
+<p><strong>Object permission changes on sensitive directory objects</strong> — granting yourself
+rights to a privileged group is a classic persistence move.</p>
+<h2 id="microsoft-defender-for-identity">Microsoft Defender for Identity<a class="headerlink" href="#microsoft-defender-for-identity" title="Permanent link">&para;</a></h2>
+<p>For organisations licensed for it — included in Microsoft 365 E5 — Defender for
+Identity is the modern answer to AD-focused detection.</p>
+<p>It works by installing lightweight sensors on your domain controllers. These
+sensors monitor network traffic to and from the DC, watch the security event
+log, and feed both into a cloud analytics engine trained to recognise the
+behaviours of common attack tools: pass-the-hash, pass-the-ticket,
+Kerberoasting, DCSync, Golden Tickets, Silver Tickets, suspicious replication
+requests, brute-force patterns.</p>
+<p>The detection quality is genuinely good. I've seen Defender for Identity detect
+Mimikatz usage in a domain within minutes of the tool running.</p>
+<p>Beyond detection:</p>
+<ul>
+<li><strong>Lateral movement path mapping</strong> — given a compromised user, where could an
+  attacker reach next, given credentials currently cached around the
+  environment?</li>
+<li><strong>Defender XDR integration</strong> — pivot from a directory alert to endpoint
+  telemetry to email content in a single investigation.</li>
+<li><strong>Honeytoken accounts</strong> — create a decoy account that should never be used.
+  Any authentication attempt against it triggers an alert. Attackers reliably
+  trip honeytokens during reconnaissance.</li>
+</ul>
+<h2 id="azure-ad-connect-health">Azure AD Connect Health<a class="headerlink" href="#azure-ad-connect-health" title="Permanent link">&para;</a></h2>
+<p>If you're running hybrid identity, Azure AD Connect Health monitors the health
+of your synchronisation infrastructure. This is operational monitoring rather
+than security monitoring, but it overlaps: a failing AD Connect can mask
+security-relevant changes in your environment.</p>
+<p>Deploy agents on the relevant servers, point them at your Entra tenant, and view
+the resulting dashboards in the Entra admin centre. Low operational overhead.</p>
+<h2 id="a-practical-roadmap">A practical roadmap<a class="headerlink" href="#a-practical-roadmap" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Enable Advanced Audit Policies on all domain controllers.</strong> Free and
+   produces dramatically richer logs than the default.</li>
+<li><strong>Centralise logs somewhere</strong> — WEF to a collector at minimum, a SIEM if
+   you have one. Protect the central store against tampering.</li>
+<li><strong>Build a small set of high-value alerts</strong> and make sure someone triages
+   them. Start with privileged group changes and service account anomalies.</li>
+<li><strong>Deploy Microsoft Defender for Identity</strong> if you have the licensing. The
+   detection capability it adds is hard to replicate any other way.</li>
+<li><strong>Iterate</strong> — tune false positives, add detections, practise response.</li>
+</ol>
+<p>Detection alone doesn't stop attacks, but it shortens the window between
+intrusion and discovery from months to hours. That difference is often the
+difference between a contained incident and a public breach.</p>
 
 
 
@@ -981,15 +1081,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../azure-ad-connect-sign-in-methods/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Azure AD Connect sign-in methods compared: PHS, PTA, and federation">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Azure AD Connect sign-in methods compared: PHS, PTA, and federation
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="../entra-nextjs-getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Skills Directory — Getting Started Guide">
+          <a href="../powershell-ad-hygiene-scripts/" class="md-footer__link md-footer__link--next" aria-label="Next: PowerShell for AD hygiene: 10 scripts every admin should have in their back pocket">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Skills Directory — Getting Started Guide
+                PowerShell for AD hygiene: 10 scripts every admin should have in their back pocket
               </div>
             </div>
             <div class="md-footer__button md-icon">

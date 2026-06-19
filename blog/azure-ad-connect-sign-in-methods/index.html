@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes.">
+        <meta name="description" content="Password Hash Sync, Pass-Through Authentication, and Federation — the three ways to bridge on-premises AD to Entra ID. What each one does, how it fails, and a decision framework for choosing the right one.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/the-great-unbundling/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/azure-ad-connect-sign-in-methods/">
       
       
+        <link rel="prev" href="../pass-the-hash-defence/">
       
-        <link rel="next" href="../entra-nextjs-getting-started/">
+      
+        <link rel="next" href="../auditing-active-directory/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>The Great Unbundling - Kavesh Naidoo</title>
+        <title>Azure AD Connect sign-in methods compared: PHS, PTA, and federation - Kavesh Naidoo</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-great-unbundling" class="md-skip">
+        <a href="#azure-ad-connect-sign-in-methods-compared-phs-pta-and-federation" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The Great Unbundling
+              Azure AD Connect sign-in methods compared: PHS, PTA, and federation
             
           </span>
         </div>
@@ -702,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" class="md-nav__link">
+  <a href="#what-were-actually-choosing-between" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes
+        What we're actually choosing between
       
     </span>
   </a>
@@ -713,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#saas-was-built-for-humans-ai-is-not" class="md-nav__link">
+  <a href="#password-hash-sync-the-underestimated-option" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SaaS was built for humans. AI is not.
+        Password Hash Sync: the underestimated option
       
     </span>
   </a>
@@ -724,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#from-seats-to-tokens" class="md-nav__link">
+  <a href="#pass-through-authentication-the-middle-ground" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From seats to tokens
+        Pass-Through Authentication: the middle ground
       
     </span>
   </a>
@@ -735,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-agent-layer-is-the-new-interface" class="md-nav__link">
+  <a href="#federation-the-heavyweight-option" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The agent layer is the new interface
+        Federation: the heavyweight option
       
     </span>
   </a>
@@ -746,10 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-the-mag-7-still-have-a-window" class="md-nav__link">
+  <a href="#seamless-sso-the-often-forgotten-add-on" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the Mag 7 still have a window
+        Seamless SSO: the often-forgotten add-on
       
     </span>
   </a>
@@ -757,32 +759,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-strategic-fork" class="md-nav__link">
+  <a href="#a-decision-framework" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The strategic fork
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-next-five-years-look-like" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the next five years look like
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-final-thought" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The final thought
+        A decision framework
       
     </span>
   </a>
@@ -845,7 +825,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-04-27 00:00:00+00:00" class="md-ellipsis">April 27, 2026</time>
+                        <time datetime="2026-08-08 00:00:00+00:00" class="md-ellipsis">August 8, 2026</time>
                       </div>
                     </li>
                     
@@ -856,7 +836,8 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../category/ai/">AI</a></span>
+                              <a href="../category/identity/">Identity</a>, 
+                              <a href="../category/infrastructure/">Infrastructure</a></span>
                         </div>
                       </li>
                     
@@ -867,7 +848,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              5 min read
                             
                           </span>
                         </div>
@@ -891,55 +872,139 @@
 
 
 
-<h1 id="the-great-unbundling">The Great Unbundling<a class="headerlink" href="#the-great-unbundling" title="Permanent link">&para;</a></h1>
-<h2 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes<a class="headerlink" href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" title="Permanent link">&para;</a></h2>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
+<h1 id="azure-ad-connect-sign-in-methods-compared-phs-pta-and-federation">Azure AD Connect sign-in methods compared: PHS, PTA, and federation<a class="headerlink" href="#azure-ad-connect-sign-in-methods-compared-phs-pta-and-federation" title="Permanent link">&para;</a></h1>
+<p>If you run an on-premises Active Directory environment and also use Microsoft
+365, you've made — or somebody before you made — a choice about how
+authentication flows between the two. There are three options. Each has
+distinct security, availability, and operational properties. And the choice is
+not trivially reversible once you've built out around it.</p>
+<p>I keep meeting organisations who picked the wrong one years ago and are stuck
+with it because changing means migrating thousands of users to new
+authentication patterns. So let's think about this properly.</p>
 <!-- more -->
 
-<p>They have time. What they do with that time is what decides whether they stay dominant or become the next generation of legacy infrastructure. Because the ground beneath them is shifting in a very specific way:</p>
-<p><strong>AI isn't a feature. It's a new economic model.</strong></p>
-<hr />
-<h2 id="saas-was-built-for-humans-ai-is-not">SaaS was built for humans. AI is not.<a class="headerlink" href="#saas-was-built-for-humans-ai-is-not" title="Permanent link">&para;</a></h2>
-<p>The SaaS model is simple at its core: charge per user, per month, for software that amplifies human productivity.</p>
-<p>It made perfect sense in a world where work was done by people, software was the tool, and scale meant more seats.</p>
-<p>Agents break that equation.</p>
-<p>When two agents can do the work of fifty users, you don't need fifty licenses. You don't need ten. In the traditional sense, you might not need any. The pricing model collapses first. The product model follows.</p>
-<p>This is the real reason behind the slow, persistent compression in SaaS multiples — not that software is less valuable, but that the <em>unit</em> of value has changed.</p>
-<hr />
-<h2 id="from-seats-to-tokens">From seats to tokens<a class="headerlink" href="#from-seats-to-tokens" title="Permanent link">&para;</a></h2>
-<p>What replaces per-user pricing? Tokenisation — not in the crypto sense, but in the economic one.</p>
-<p>You pay for compute. You pay for outcomes. You pay for execution, not access.</p>
-<p>Agents don't care about seats. They care about tokens processed, tasks completed, workflows executed. So the future pricing unit looks less like <em>cost per employee</em> and more like <em>cost per task, cost per workflow, cost per decision</em>.</p>
-<p>That's a problem if your entire revenue engine is built on expanding seat count.</p>
-<hr />
-<h2 id="the-agent-layer-is-the-new-interface">The agent layer is the new interface<a class="headerlink" href="#the-agent-layer-is-the-new-interface" title="Permanent link">&para;</a></h2>
-<p>Here's the deeper disruption: <strong>SaaS tools are no longer the interface. Agents are.</strong></p>
-<p>Instead of a human logging into five different systems, the agent orchestrates across them — pulling data, executing actions, returning outcomes.</p>
-<p>In that world, the UI becomes irrelevant. The product becomes an API. The brand becomes invisible.</p>
-<p>SaaS risks becoming commoditised infrastructure unless it owns — or embeds itself inside — the agent layer.</p>
-<hr />
-<h2 id="why-the-mag-7-still-have-a-window">Why the Mag 7 still have a window<a class="headerlink" href="#why-the-mag-7-still-have-a-window" title="Permanent link">&para;</a></h2>
-<p>This is where the incumbents still have the edge. They control compute, distribution, developer ecosystems, and enterprise trust. More importantly, they have time and cash flow to spend.</p>
-<p>They can collapse pricing models before being forced to. They can bundle AI into existing ecosystems. They can acquire agent-native platforms. They can re-architect their products around workflows instead of features.</p>
-<p>The real question is whether they will. Incumbents rarely fail from lack of resources. They fail from protecting yesterday's margins.</p>
-<hr />
-<h2 id="the-strategic-fork">The strategic fork<a class="headerlink" href="#the-strategic-fork" title="Permanent link">&para;</a></h2>
-<p>Every major platform now faces the same choice.</p>
-<p><strong>Option 1: Defend SaaS economics.</strong> Preserve per-seat pricing. Add AI as a premium feature. Optimise for short-term revenue.</p>
-<p><strong>Option 2: Embrace the agent economy.</strong> Shift to usage- or outcome-based pricing. Build native agent orchestration. Accept short-term revenue disruption for long-term dominance.</p>
-<p>History is pretty clear about which path wins.</p>
-<hr />
-<h2 id="what-the-next-five-years-look-like">What the next five years look like<a class="headerlink" href="#what-the-next-five-years-look-like" title="Permanent link">&para;</a></h2>
-<p>Expect a sharp decline in per-seat pricing as the dominant model. Expect a wave of SaaS companies repositioning as "AI platforms" — some convincingly, most not. Expect agents to become the primary consumers of software, not humans. And expect a new layer of companies to emerge that sit <em>above</em> SaaS and orchestrate it.</p>
-<p>Most importantly, expect consolidation. Once software becomes interchangeable infrastructure, scale matters again — but in a very different way.</p>
-<hr />
-<h2 id="the-final-thought">The final thought<a class="headerlink" href="#the-final-thought" title="Permanent link">&para;</a></h2>
-<p>The current narrative is that AI will augment SaaS. That's too optimistic.</p>
-<p>AI doesn't just enhance tools. It changes who — or <em>what</em> — uses them. And when the user changes from human to agent, everything from pricing to product design has to change with it.</p>
-<p>The Mag 7 aren't too big to fail.</p>
-<p>But they are big enough to pivot.</p>
-<p>The clock is ticking.</p>
+<h2 id="what-were-actually-choosing-between">What we're actually choosing between<a class="headerlink" href="#what-were-actually-choosing-between" title="Permanent link">&para;</a></h2>
+<p>When a user signs into a Microsoft 365 service, Entra ID needs to verify their
+password. The user's authoritative password lives in your on-premises AD. The
+three options describe how Entra ID gets satisfied that the user provided the
+right one.</p>
+<p><strong>Password Hash Synchronisation</strong> sends a transformation of the on-premises
+password hash up to Entra ID. When the user signs in, Entra ID verifies the
+password locally against the synchronised hash. Your on-premises infrastructure
+doesn't participate in the sign-in at all.</p>
+<p><strong>Pass-Through Authentication</strong> keeps verification on-premises. When the user
+signs in, Entra ID forwards the credential to a lightweight agent running in
+your environment, which validates it against AD and returns the result.</p>
+<p><strong>Federation</strong> routes authentication entirely through on-premises
+infrastructure — typically AD FS. Entra ID redirects the user to your
+federation server, which authenticates them and returns a SAML or
+WS-Federation token.</p>
+<h2 id="password-hash-sync-the-underestimated-option">Password Hash Sync: the underestimated option<a class="headerlink" href="#password-hash-sync-the-underestimated-option" title="Permanent link">&para;</a></h2>
+<p>For years, PHS was treated as the inferior option — "too consumer-grade, not
+enterprise enough." That reputation was always undeserved. Microsoft's official
+guidance now positions PHS as the <strong>default recommendation</strong> for most
+organisations.</p>
+<p>The security properties are better than people initially assume. The value
+stored in Entra ID is not the AD password hash and cannot be used to
+authenticate to AD even if extracted. The transformation is cryptographically
+strong. Entra ID never sees the cleartext password.</p>
+<p>The operational properties are exceptional:</p>
+<ul>
+<li>Sign-in works whether your on-premises infrastructure is reachable or not.
+  If your data centre catches fire, users can still access Microsoft 365.</li>
+<li>Sign-in latency is low — everything is in the Microsoft cloud.</li>
+<li>No extra servers to maintain beyond AD Connect itself.</li>
+</ul>
+<p>A useful side benefit: PHS gives Entra ID Identity Protection enough data to
+detect credential compromise. Entra ID compares user hashes against
+known-compromised credential dumps — this protection doesn't work for federated
+or PTA users without PHS also running.</p>
+<div class="admonition note">
+<p class="admonition-title">The reasons not to use PHS</p>
+<p>If your organisation has a hard policy that authentication material must
+never leave your premises, PHS doesn't satisfy it. Some regulated industries
+take this view.</p>
+<p>If you need on-premises account state — disabled flags, password expiration,
+logon hour restrictions — enforced in real time during cloud sign-in, PHS by
+itself doesn't do this.</p>
+</div>
+<p>For most organisations without those constraints, PHS is the right answer.</p>
+<h2 id="pass-through-authentication-the-middle-ground">Pass-Through Authentication: the middle ground<a class="headerlink" href="#pass-through-authentication-the-middle-ground" title="Permanent link">&para;</a></h2>
+<p>PTA keeps passwords on-premises while avoiding the complexity of full
+federation. A lightweight agent runs on a server in your environment (run at
+least three for redundancy). When a sign-in arrives, Entra ID encrypts the
+credential and posts it to an Azure-managed queue. Your agent picks it up,
+validates against AD, and returns success or failure.</p>
+<p>The cleartext password is exposed in memory on the agent for the duration of
+validation, then discarded. The connection from agent to Azure is outbound only
+— no inbound firewall ports needed.</p>
+<p>This satisfies the "password material doesn't leave the premises" requirement
+with relatively little operational overhead.</p>
+<p>Trade-offs:</p>
+<ul>
+<li>Sign-in latency includes a round trip to your environment.</li>
+<li>Sign-in depends on your agents being reachable. This is why you run multiple
+  agents in different parts of your environment.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Combine PTA with PHS as a fallback</p>
+<p>PHS doesn't have to be the active authentication method — it can run in the
+background. If all PTA agents fail, you still have a working fallback. This
+combination is what Microsoft recommends for PTA deployments.</p>
+</div>
+<h2 id="federation-the-heavyweight-option">Federation: the heavyweight option<a class="headerlink" href="#federation-the-heavyweight-option" title="Permanent link">&para;</a></h2>
+<p>Federation routes authentication through on-premises federation
+infrastructure — typically AD FS. The user's browser is redirected to your
+federation server, which authenticates them via AD and returns a signed token.
+Entra ID accepts that token.</p>
+<p>The reasons federation has historically been chosen:</p>
+<ul>
+<li>Strong support for advanced scenarios: smart cards, certificate-based
+  authentication, custom MFA integrations.</li>
+<li>Full control over authentication policy and user experience.</li>
+<li>Compliance with regulations or contractual requirements that explicitly
+  mandate on-premises authentication.</li>
+</ul>
+<p>The cost is substantial. AD FS is a complete infrastructure: federation servers,
+Web Application Proxy servers for external access, a configuration database
+(typically SQL Server), certificates, DNS records, monitoring. The blast radius
+of an AD FS outage is enormous — if AD FS is down, users cannot sign in to
+anything that depends on Entra ID.</p>
+<div class="admonition danger">
+<p class="admonition-title">Federation is where the most public breaches have happened</p>
+<p>The SolarWinds attackers used compromised AD FS infrastructure to forge SAML
+tokens — the "Golden SAML" attack — and impersonate any user in the
+federated domain. AD FS sits in a uniquely sensitive position and must be
+defended accordingly.</p>
+</div>
+<p>Microsoft's clear direction is to move organisations off federation where
+possible. Most modern Entra capabilities — conditional access, Identity
+Protection, passwordless authentication — work best or only with cloud-managed
+authentication.</p>
+<h2 id="seamless-sso-the-often-forgotten-add-on">Seamless SSO: the often-forgotten add-on<a class="headerlink" href="#seamless-sso-the-often-forgotten-add-on" title="Permanent link">&para;</a></h2>
+<p>One feature worth mentioning: <strong>Seamless SSO</strong> can be layered on top of PHS or
+PTA. It uses a domain-joined machine's existing Kerberos ticket to silently
+authenticate the user to Entra ID when they're on the corporate network.</p>
+<p>Seamless SSO is enabled in AD Connect, requires no additional infrastructure,
+and dramatically improves the experience for domain-joined endpoints. If you've
+chosen PHS or PTA and users are complaining that "the old AD FS setup felt
+smoother," Seamless SSO is usually what's missing.</p>
+<h2 id="a-decision-framework">A decision framework<a class="headerlink" href="#a-decision-framework" title="Permanent link">&para;</a></h2>
+<p>Start with Password Hash Sync as the default. Add Seamless SSO for the
+domain-joined experience. This gets you fast, resilient, low-maintenance cloud
+sign-in with the best support for modern Entra security features.</p>
+<p>If your organisation has a documented policy that authentication material must
+not leave the premises, switch to Pass-Through Authentication. Keep PHS enabled
+as a fallback. Deploy at least three PTA agents for redundancy.</p>
+<p>Only choose Federation if you have a specific requirement — typically smart
+cards where Windows Hello for Business isn't viable, certain third-party
+identity provider integrations, or a regulatory mandate — that the other
+options genuinely can't satisfy.</p>
+<p>The wrong answer is the one I see most often: federation deployed years ago
+because it seemed "more enterprise," now treated as an immovable foundation. It
+moved. Microsoft moved. The right answer for most organisations has changed. If
+you're running AD FS purely because it's there, it's worth asking whether it
+should still be there.</p>
 
 
 
@@ -981,15 +1046,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../pass-the-hash-defence/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Pass-the-Hash defence: Protected Users, Authentication Policies, and Authentication Policy Silos">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Pass-the-Hash defence: Protected Users, Authentication Policies, and Authentication Policy Silos
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="../entra-nextjs-getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Skills Directory — Getting Started Guide">
+          <a href="../auditing-active-directory/" class="md-footer__link md-footer__link--next" aria-label="Next: Auditing Active Directory: from Event Viewer to Microsoft Defender for Identity">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Skills Directory — Getting Started Guide
+                Auditing Active Directory: from Event Viewer to Microsoft Defender for Identity
               </div>
             </div>
             <div class="md-footer__button md-icon">

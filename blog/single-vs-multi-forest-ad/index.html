@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes.">
+        <meta name="description" content="Most multi-forest Active Directory deployments shouldn't exist. A decision framework for when a second forest is genuinely justified — and the operational cost of getting it wrong.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/the-great-unbundling/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/single-vs-multi-forest-ad/">
       
       
+        <link rel="prev" href="../privileged-access-management-ad/">
       
-        <link rel="next" href="../entra-nextjs-getting-started/">
+      
+        <link rel="next" href="../fsmo-role-placement/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>The Great Unbundling - Kavesh Naidoo</title>
+        <title>Single forest vs. multi-forest: a decision framework for AD architects - Kavesh Naidoo</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-great-unbundling" class="md-skip">
+        <a href="#single-forest-vs-multi-forest-a-decision-framework-for-ad-architects" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The Great Unbundling
+              Single forest vs. multi-forest: a decision framework for AD architects
             
           </span>
         </div>
@@ -702,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" class="md-nav__link">
+  <a href="#what-a-forest-actually-is" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes
+        What a forest actually is
       
     </span>
   </a>
@@ -713,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#saas-was-built-for-humans-ai-is-not" class="md-nav__link">
+  <a href="#the-autonomy-vs-isolation-distinction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SaaS was built for humans. AI is not.
+        The autonomy-vs-isolation distinction
       
     </span>
   </a>
@@ -724,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#from-seats-to-tokens" class="md-nav__link">
+  <a href="#the-three-legitimate-forest-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From seats to tokens
+        The three legitimate forest models
       
     </span>
   </a>
@@ -735,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-agent-layer-is-the-new-interface" class="md-nav__link">
+  <a href="#the-questions-to-ask" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The agent layer is the new interface
+        The questions to ask
       
     </span>
   </a>
@@ -746,10 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-the-mag-7-still-have-a-window" class="md-nav__link">
+  <a href="#what-goes-wrong-when-you-build-too-many-forests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the Mag 7 still have a window
+        What goes wrong when you build too many forests
       
     </span>
   </a>
@@ -757,32 +759,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-strategic-fork" class="md-nav__link">
+  <a href="#the-pragmatic-default" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The strategic fork
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-next-five-years-look-like" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the next five years look like
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-final-thought" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The final thought
+        The pragmatic default
       
     </span>
   </a>
@@ -845,7 +825,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-04-27 00:00:00+00:00" class="md-ellipsis">April 27, 2026</time>
+                        <time datetime="2026-07-04 00:00:00+00:00" class="md-ellipsis">July 4, 2026</time>
                       </div>
                     </li>
                     
@@ -856,7 +836,8 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../category/ai/">AI</a></span>
+                              <a href="../category/identity/">Identity</a>, 
+                              <a href="../category/infrastructure/">Infrastructure</a></span>
                         </div>
                       </li>
                     
@@ -867,7 +848,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              4 min read
                             
                           </span>
                         </div>
@@ -891,55 +872,104 @@
 
 
 
-<h1 id="the-great-unbundling">The Great Unbundling<a class="headerlink" href="#the-great-unbundling" title="Permanent link">&para;</a></h1>
-<h2 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes<a class="headerlink" href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" title="Permanent link">&para;</a></h2>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
+<h1 id="single-forest-vs-multi-forest-a-decision-framework-for-ad-architects">Single forest vs. multi-forest: a decision framework for AD architects<a class="headerlink" href="#single-forest-vs-multi-forest-a-decision-framework-for-ad-architects" title="Permanent link">&para;</a></h1>
+<p>If I had to name the single most consequential decision in an Active Directory
+deployment, it would be the choice between a single forest and a multi-forest
+design. It dictates your security boundaries, your operational complexity, your
+replication topology, and the cost of doing business in your environment for
+the next decade.</p>
+<p>It's also the decision most often made badly. I've walked into environments
+where someone, years ago, decided to "keep things separated" by building four
+forests for what turned out to be a single business. The cleanup is always
+expensive. Sometimes it's effectively impossible without a wholesale migration.</p>
 <!-- more -->
 
-<p>They have time. What they do with that time is what decides whether they stay dominant or become the next generation of legacy infrastructure. Because the ground beneath them is shifting in a very specific way:</p>
-<p><strong>AI isn't a feature. It's a new economic model.</strong></p>
-<hr />
-<h2 id="saas-was-built-for-humans-ai-is-not">SaaS was built for humans. AI is not.<a class="headerlink" href="#saas-was-built-for-humans-ai-is-not" title="Permanent link">&para;</a></h2>
-<p>The SaaS model is simple at its core: charge per user, per month, for software that amplifies human productivity.</p>
-<p>It made perfect sense in a world where work was done by people, software was the tool, and scale meant more seats.</p>
-<p>Agents break that equation.</p>
-<p>When two agents can do the work of fifty users, you don't need fifty licenses. You don't need ten. In the traditional sense, you might not need any. The pricing model collapses first. The product model follows.</p>
-<p>This is the real reason behind the slow, persistent compression in SaaS multiples — not that software is less valuable, but that the <em>unit</em> of value has changed.</p>
-<hr />
-<h2 id="from-seats-to-tokens">From seats to tokens<a class="headerlink" href="#from-seats-to-tokens" title="Permanent link">&para;</a></h2>
-<p>What replaces per-user pricing? Tokenisation — not in the crypto sense, but in the economic one.</p>
-<p>You pay for compute. You pay for outcomes. You pay for execution, not access.</p>
-<p>Agents don't care about seats. They care about tokens processed, tasks completed, workflows executed. So the future pricing unit looks less like <em>cost per employee</em> and more like <em>cost per task, cost per workflow, cost per decision</em>.</p>
-<p>That's a problem if your entire revenue engine is built on expanding seat count.</p>
-<hr />
-<h2 id="the-agent-layer-is-the-new-interface">The agent layer is the new interface<a class="headerlink" href="#the-agent-layer-is-the-new-interface" title="Permanent link">&para;</a></h2>
-<p>Here's the deeper disruption: <strong>SaaS tools are no longer the interface. Agents are.</strong></p>
-<p>Instead of a human logging into five different systems, the agent orchestrates across them — pulling data, executing actions, returning outcomes.</p>
-<p>In that world, the UI becomes irrelevant. The product becomes an API. The brand becomes invisible.</p>
-<p>SaaS risks becoming commoditised infrastructure unless it owns — or embeds itself inside — the agent layer.</p>
-<hr />
-<h2 id="why-the-mag-7-still-have-a-window">Why the Mag 7 still have a window<a class="headerlink" href="#why-the-mag-7-still-have-a-window" title="Permanent link">&para;</a></h2>
-<p>This is where the incumbents still have the edge. They control compute, distribution, developer ecosystems, and enterprise trust. More importantly, they have time and cash flow to spend.</p>
-<p>They can collapse pricing models before being forced to. They can bundle AI into existing ecosystems. They can acquire agent-native platforms. They can re-architect their products around workflows instead of features.</p>
-<p>The real question is whether they will. Incumbents rarely fail from lack of resources. They fail from protecting yesterday's margins.</p>
-<hr />
-<h2 id="the-strategic-fork">The strategic fork<a class="headerlink" href="#the-strategic-fork" title="Permanent link">&para;</a></h2>
-<p>Every major platform now faces the same choice.</p>
-<p><strong>Option 1: Defend SaaS economics.</strong> Preserve per-seat pricing. Add AI as a premium feature. Optimise for short-term revenue.</p>
-<p><strong>Option 2: Embrace the agent economy.</strong> Shift to usage- or outcome-based pricing. Build native agent orchestration. Accept short-term revenue disruption for long-term dominance.</p>
-<p>History is pretty clear about which path wins.</p>
-<hr />
-<h2 id="what-the-next-five-years-look-like">What the next five years look like<a class="headerlink" href="#what-the-next-five-years-look-like" title="Permanent link">&para;</a></h2>
-<p>Expect a sharp decline in per-seat pricing as the dominant model. Expect a wave of SaaS companies repositioning as "AI platforms" — some convincingly, most not. Expect agents to become the primary consumers of software, not humans. And expect a new layer of companies to emerge that sit <em>above</em> SaaS and orchestrate it.</p>
-<p>Most importantly, expect consolidation. Once software becomes interchangeable infrastructure, scale matters again — but in a very different way.</p>
-<hr />
-<h2 id="the-final-thought">The final thought<a class="headerlink" href="#the-final-thought" title="Permanent link">&para;</a></h2>
-<p>The current narrative is that AI will augment SaaS. That's too optimistic.</p>
-<p>AI doesn't just enhance tools. It changes who — or <em>what</em> — uses them. And when the user changes from human to agent, everything from pricing to product design has to change with it.</p>
-<p>The Mag 7 aren't too big to fail.</p>
-<p>But they are big enough to pivot.</p>
-<p>The clock is ticking.</p>
+<h2 id="what-a-forest-actually-is">What a forest actually is<a class="headerlink" href="#what-a-forest-actually-is" title="Permanent link">&para;</a></h2>
+<p>A forest is the top-level security boundary in Active Directory. Inside a
+forest, all domains share a common schema, a common configuration partition,
+and an implicit two-way transitive trust between every domain.</p>
+<p>When you create a second forest, you create a second of all those things. Two
+schemas. Two configurations. No automatic trust. Replication does not cross
+forests. The global catalog does not cross forests. Tools that work seamlessly
+in one forest may need special handling across forests, or may not work at all.</p>
+<p>This is the cost. Everything you gain by separating must be worth paying that
+cost twice — or three times, or whatever multiple you've signed up for.</p>
+<h2 id="the-autonomy-vs-isolation-distinction">The autonomy-vs-isolation distinction<a class="headerlink" href="#the-autonomy-vs-isolation-distinction" title="Permanent link">&para;</a></h2>
+<p>The most useful framing comes straight from Microsoft's guidance: ask whether
+you need <strong>autonomy</strong> or <strong>isolation</strong>.</p>
+<p><strong>Autonomy</strong> means a business unit wants to manage its own piece of the
+directory without interference. Different OUs, different group policies,
+different administrative teams. This is achievable within a single forest using
+OU-level delegation. You do not need a separate forest for this.</p>
+<p><strong>Isolation</strong> means a business unit needs to be technically incapable of
+affecting — or being affected by — others. A domain admin in Forest A cannot,
+by any means, gain access to resources in Forest B. This is the only
+justification for a separate forest. And it is much rarer than people think.</p>
+<div class="admonition warning">
+<p class="admonition-title">The common mistake</p>
+<p>If your driver is "we don't trust each other to share a directory," you
+probably need autonomy and you're about to overbuild. If your driver is
+"regulators or contracts require provable separation," you might genuinely
+need isolation.</p>
+</div>
+<h2 id="the-three-legitimate-forest-models">The three legitimate forest models<a class="headerlink" href="#the-three-legitimate-forest-models" title="Permanent link">&para;</a></h2>
+<p><strong>The organisational forest</strong> is the default. One forest for the organisation,
+possibly with multiple domains for geographic or political reasons. Users and
+resources live together. Trust is implicit. This is what most companies should
+be running.</p>
+<p><strong>The resource forest</strong> holds resources only — application servers, file
+servers, services — while user accounts live in a separate identity forest.
+Trust flows one way: the resource forest trusts the identity forest. The case
+for it is specific: you want a clean, hardened environment for resources
+without the variability of user accounts in it. Microsoft's PAM bastion forest
+follows this model.</p>
+<p><strong>The restricted-access forest</strong> is the strongest separation. It exists when
+you need users and resources together but completely isolated from your main
+directory — typically for highly classified workloads or air-gapped scenarios.
+There is no trust to the production forest at all. Administrators must have
+separate accounts.</p>
+<p>If none of these three models cleanly fits your situation, that's a strong
+signal you shouldn't be building a multi-forest design.</p>
+<h2 id="the-questions-to-ask">The questions to ask<a class="headerlink" href="#the-questions-to-ask" title="Permanent link">&para;</a></h2>
+<p>When someone asks me whether they should split into multiple forests:</p>
+<p><strong>Is there a hard legal or regulatory requirement?</strong> Some defence contracts,
+healthcare regulations, and financial-services rules genuinely demand technical
+separation. If you have one of these, document it precisely. If you don't,
+keep going.</p>
+<p><strong>Are you about to divest part of the business?</strong> A forest can be carved off
+relatively cleanly if it's separate to begin with. But only build for this if
+you actually know a divestiture is coming — not if someone has merely mentioned
+it as a possibility.</p>
+<p><strong>Are the schemas going to conflict?</strong> Forests share a schema. If two business
+units genuinely need incompatible schema extensions — which is rare, but happens
+with some niche applications — they cannot coexist in one forest.</p>
+<p><strong>Do you have the resources to operate multiple forests well?</strong> Each forest
+needs its own domain controllers, backup strategy, monitoring, patching
+schedule, and security baseline. Each cross-forest trust needs to be designed,
+tested, and maintained. If you have one harried sysadmin, multi-forest will eat
+them alive.</p>
+<h2 id="what-goes-wrong-when-you-build-too-many-forests">What goes wrong when you build too many forests<a class="headerlink" href="#what-goes-wrong-when-you-build-too-many-forests" title="Permanent link">&para;</a></h2>
+<p>The pathologies are predictable. Users can't easily access resources in the
+"other" forest. Administrators build elaborate trust topologies — selective
+authentication, name suffix routing, conditional forwarders — that nobody fully
+understands. Identity becomes fragmented; the same person ends up with three
+usernames and three sets of credentials. Group policy can't span forests, so
+settings drift. Monitoring tools either need to be deployed multiple times or
+pay for cross-forest licensing.</p>
+<p>Worst of all, the original justification for the split is often forgotten
+within a few years. The acquisition that triggered it has been integrated. The
+regulator who demanded it has moved on. But the forests remain, because
+consolidating them is a hard, expensive project that nobody wants to propose.</p>
+<h2 id="the-pragmatic-default">The pragmatic default<a class="headerlink" href="#the-pragmatic-default" title="Permanent link">&para;</a></h2>
+<p>For the vast majority of organisations, the right design is a single forest,
+possibly with multiple domains if there are strong geographic, legal, or
+political reasons to split namespace administration. Within that forest,
+autonomy is achieved through OU structure, delegation, and group policy scoping.</p>
+<p>A single forest is not the cheap or lazy choice. It's the operationally sound
+choice for most cases. Multi-forest is the answer when you have a specific,
+documented reason that one of the three legitimate forest models applies.</p>
+<p>The architects who get this right keep asking "but do we really need that?"
+until they have a clean answer either way. Be that architect.</p>
 
 
 
@@ -981,15 +1011,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../privileged-access-management-ad/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Privileged Access Management in AD DS: stopping the attack path before it starts">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Privileged Access Management in AD DS: stopping the attack path before it starts
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="../entra-nextjs-getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Skills Directory — Getting Started Guide">
+          <a href="../fsmo-role-placement/" class="md-footer__link md-footer__link--next" aria-label="Next: FSMO role placement: the underrated decision that breaks AD environments">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Skills Directory — Getting Started Guide
+                FSMO role placement: the underrated decision that breaks AD environments
               </div>
             </div>
             <div class="md-footer__button md-icon">

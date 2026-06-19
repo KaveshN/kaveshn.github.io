@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes.">
+        <meta name="description" content="The perimeter is gone. Your domain controllers haven't caught up yet. How Zero Trust principles apply to an on-premises Active Directory environment — and where most organisations are actually stuck.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/the-great-unbundling/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/zero-trust-active-directory/">
       
       
+        <link rel="prev" href="../find-admins-without-mfa-graph/">
       
-        <link rel="next" href="../entra-nextjs-getting-started/">
+      
+        <link rel="next" href="../privileged-access-management-ad/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>The Great Unbundling - Kavesh Naidoo</title>
+        <title>Zero Trust meets Active Directory: why your on-prem identity strategy needs a rethink - Kavesh Naidoo</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-great-unbundling" class="md-skip">
+        <a href="#zero-trust-meets-active-directory-why-your-on-prem-identity-strategy-needs-a-rethink" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The Great Unbundling
+              Zero Trust meets Active Directory: why your on-prem identity strategy needs a rethink
             
           </span>
         </div>
@@ -702,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" class="md-nav__link">
+  <a href="#the-death-of-the-network-perimeter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes
+        The death of the network perimeter
       
     </span>
   </a>
@@ -713,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#saas-was-built-for-humans-ai-is-not" class="md-nav__link">
+  <a href="#what-this-actually-means-for-ad" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SaaS was built for humans. AI is not.
+        What this actually means for AD
       
     </span>
   </a>
@@ -724,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#from-seats-to-tokens" class="md-nav__link">
+  <a href="#where-most-organisations-are-stuck" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From seats to tokens
+        Where most organisations are stuck
       
     </span>
   </a>
@@ -735,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-agent-layer-is-the-new-interface" class="md-nav__link">
+  <a href="#the-hybrid-reality" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The agent layer is the new interface
+        The hybrid reality
       
     </span>
   </a>
@@ -746,43 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-the-mag-7-still-have-a-window" class="md-nav__link">
+  <a href="#starting-where-you-are" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the Mag 7 still have a window
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-strategic-fork" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The strategic fork
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-next-five-years-look-like" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the next five years look like
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-final-thought" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The final thought
+        Starting where you are
       
     </span>
   </a>
@@ -845,7 +814,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-04-27 00:00:00+00:00" class="md-ellipsis">April 27, 2026</time>
+                        <time datetime="2026-06-20 00:00:00+00:00" class="md-ellipsis">June 20, 2026</time>
                       </div>
                     </li>
                     
@@ -856,7 +825,8 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../category/ai/">AI</a></span>
+                              <a href="../category/identity/">Identity</a>, 
+                              <a href="../category/infrastructure/">Infrastructure</a></span>
                         </div>
                       </li>
                     
@@ -867,7 +837,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              4 min read
                             
                           </span>
                         </div>
@@ -891,55 +861,93 @@
 
 
 
-<h1 id="the-great-unbundling">The Great Unbundling<a class="headerlink" href="#the-great-unbundling" title="Permanent link">&para;</a></h1>
-<h2 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes<a class="headerlink" href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" title="Permanent link">&para;</a></h2>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
+<h1 id="zero-trust-meets-active-directory-why-your-on-prem-identity-strategy-needs-a-rethink">Zero Trust meets Active Directory: why your on-prem identity strategy needs a rethink<a class="headerlink" href="#zero-trust-meets-active-directory-why-your-on-prem-identity-strategy-needs-a-rethink" title="Permanent link">&para;</a></h1>
+<p>For roughly two decades, Active Directory has been the quiet workhorse of
+enterprise IT. It authenticated your users, applied your group policies, and
+managed your service accounts. And for most of that time, it operated on a
+comfortable assumption: if you were inside the corporate network, you were
+probably trustworthy.</p>
+<p>That assumption is dead. It died somewhere between the rise of remote work, the
+explosion of SaaS applications, and the steady drumbeat of ransomware attacks
+that begin with one phished credential and end with a domain admin token.</p>
 <!-- more -->
 
-<p>They have time. What they do with that time is what decides whether they stay dominant or become the next generation of legacy infrastructure. Because the ground beneath them is shifting in a very specific way:</p>
-<p><strong>AI isn't a feature. It's a new economic model.</strong></p>
-<hr />
-<h2 id="saas-was-built-for-humans-ai-is-not">SaaS was built for humans. AI is not.<a class="headerlink" href="#saas-was-built-for-humans-ai-is-not" title="Permanent link">&para;</a></h2>
-<p>The SaaS model is simple at its core: charge per user, per month, for software that amplifies human productivity.</p>
-<p>It made perfect sense in a world where work was done by people, software was the tool, and scale meant more seats.</p>
-<p>Agents break that equation.</p>
-<p>When two agents can do the work of fifty users, you don't need fifty licenses. You don't need ten. In the traditional sense, you might not need any. The pricing model collapses first. The product model follows.</p>
-<p>This is the real reason behind the slow, persistent compression in SaaS multiples — not that software is less valuable, but that the <em>unit</em> of value has changed.</p>
-<hr />
-<h2 id="from-seats-to-tokens">From seats to tokens<a class="headerlink" href="#from-seats-to-tokens" title="Permanent link">&para;</a></h2>
-<p>What replaces per-user pricing? Tokenisation — not in the crypto sense, but in the economic one.</p>
-<p>You pay for compute. You pay for outcomes. You pay for execution, not access.</p>
-<p>Agents don't care about seats. They care about tokens processed, tasks completed, workflows executed. So the future pricing unit looks less like <em>cost per employee</em> and more like <em>cost per task, cost per workflow, cost per decision</em>.</p>
-<p>That's a problem if your entire revenue engine is built on expanding seat count.</p>
-<hr />
-<h2 id="the-agent-layer-is-the-new-interface">The agent layer is the new interface<a class="headerlink" href="#the-agent-layer-is-the-new-interface" title="Permanent link">&para;</a></h2>
-<p>Here's the deeper disruption: <strong>SaaS tools are no longer the interface. Agents are.</strong></p>
-<p>Instead of a human logging into five different systems, the agent orchestrates across them — pulling data, executing actions, returning outcomes.</p>
-<p>In that world, the UI becomes irrelevant. The product becomes an API. The brand becomes invisible.</p>
-<p>SaaS risks becoming commoditised infrastructure unless it owns — or embeds itself inside — the agent layer.</p>
-<hr />
-<h2 id="why-the-mag-7-still-have-a-window">Why the Mag 7 still have a window<a class="headerlink" href="#why-the-mag-7-still-have-a-window" title="Permanent link">&para;</a></h2>
-<p>This is where the incumbents still have the edge. They control compute, distribution, developer ecosystems, and enterprise trust. More importantly, they have time and cash flow to spend.</p>
-<p>They can collapse pricing models before being forced to. They can bundle AI into existing ecosystems. They can acquire agent-native platforms. They can re-architect their products around workflows instead of features.</p>
-<p>The real question is whether they will. Incumbents rarely fail from lack of resources. They fail from protecting yesterday's margins.</p>
-<hr />
-<h2 id="the-strategic-fork">The strategic fork<a class="headerlink" href="#the-strategic-fork" title="Permanent link">&para;</a></h2>
-<p>Every major platform now faces the same choice.</p>
-<p><strong>Option 1: Defend SaaS economics.</strong> Preserve per-seat pricing. Add AI as a premium feature. Optimise for short-term revenue.</p>
-<p><strong>Option 2: Embrace the agent economy.</strong> Shift to usage- or outcome-based pricing. Build native agent orchestration. Accept short-term revenue disruption for long-term dominance.</p>
-<p>History is pretty clear about which path wins.</p>
-<hr />
-<h2 id="what-the-next-five-years-look-like">What the next five years look like<a class="headerlink" href="#what-the-next-five-years-look-like" title="Permanent link">&para;</a></h2>
-<p>Expect a sharp decline in per-seat pricing as the dominant model. Expect a wave of SaaS companies repositioning as "AI platforms" — some convincingly, most not. Expect agents to become the primary consumers of software, not humans. And expect a new layer of companies to emerge that sit <em>above</em> SaaS and orchestrate it.</p>
-<p>Most importantly, expect consolidation. Once software becomes interchangeable infrastructure, scale matters again — but in a very different way.</p>
-<hr />
-<h2 id="the-final-thought">The final thought<a class="headerlink" href="#the-final-thought" title="Permanent link">&para;</a></h2>
-<p>The current narrative is that AI will augment SaaS. That's too optimistic.</p>
-<p>AI doesn't just enhance tools. It changes who — or <em>what</em> — uses them. And when the user changes from human to agent, everything from pricing to product design has to change with it.</p>
-<p>The Mag 7 aren't too big to fail.</p>
-<p>But they are big enough to pivot.</p>
-<p>The clock is ticking.</p>
+<h2 id="the-death-of-the-network-perimeter">The death of the network perimeter<a class="headerlink" href="#the-death-of-the-network-perimeter" title="Permanent link">&para;</a></h2>
+<p>Traditional AD security was built on castle-and-moat thinking. The corporate
+network was the castle. The firewall was the moat. Anything inside the moat —
+workstations, servers, domain controllers — was assumed friendly.</p>
+<p>This worked when work happened in offices, applications lived on internal
+servers, and users carried company laptops on the corporate LAN. None of those
+assumptions hold anymore. Your users are at home, in coffee shops, on airline
+Wi-Fi. Your applications live in Azure, AWS, and a hundred SaaS providers. And
+your attackers are very good at getting inside the moat — they no longer need
+to breach it from outside.</p>
+<p>Zero Trust flips the model. Instead of trusting based on network location, it
+trusts based on continuously verified identity, device posture, and contextual
+signals. The mantra is "never trust, always verify."</p>
+<h2 id="what-this-actually-means-for-ad">What this actually means for AD<a class="headerlink" href="#what-this-actually-means-for-ad" title="Permanent link">&para;</a></h2>
+<p>Zero Trust isn't a product you buy. It's a set of design principles, and
+applying them to an AD environment looks like this:</p>
+<p><strong>Identity becomes the new perimeter.</strong> Every access decision — to a file
+share, an application, a server — should be authenticated and authorised based
+on who the user is and what state they're in, not just whether they sit on a
+particular subnet.</p>
+<p><strong>Least privilege becomes non-negotiable.</strong> Standing administrative access is
+the single biggest gift you can give an attacker. The Domain Admins group
+should be nearly empty, with privileged access granted just-in-time through
+tools like Microsoft's Privileged Access Management or third-party PAM
+solutions.</p>
+<p><strong>Lateral movement gets harder.</strong> Once an attacker compromises one account,
+they typically pivot to others — collecting credentials, hopping between
+machines, escalating privileges. Segmenting AD into tiers (Tier 0 for domain
+controllers and identity infrastructure, Tier 1 for servers, Tier 2 for
+workstations) and preventing credential exposure across tiers is foundational.</p>
+<p><strong>Authentication is layered, not single-factor.</strong> Passwords alone are not
+credentials. MFA, conditional access policies, and increasingly passwordless
+authentication using Windows Hello for Business or FIDO2 keys should be the
+default.</p>
+<p><strong>Every action is logged, monitored, and analysed.</strong> You cannot detect what
+you do not see. Advanced audit policies, event forwarding to a SIEM, and
+behavioural analytics tools like Microsoft Defender for Identity are no longer
+optional for organisations of any size.</p>
+<h2 id="where-most-organisations-are-stuck">Where most organisations are stuck<a class="headerlink" href="#where-most-organisations-are-stuck" title="Permanent link">&para;</a></h2>
+<p>Here's the uncomfortable truth: the AD itself is usually fine. It's the
+surrounding habits that are broken.</p>
+<p>There are too many people in privileged groups — often inherited from
+migrations a decade ago and never cleaned up. Service accounts have domain
+admin rights for reasons nobody can explain. Group policies have accreted like
+geological strata, with no one quite sure what's still doing anything useful.
+Audit logging is enabled but goes nowhere. MFA is deployed but with so many
+exceptions that it's functionally optional.</p>
+<p>You don't fix this by ripping out AD and starting over. You fix it
+incrementally, with discipline. Start with an audit of privileged group
+memberships. Document your tier model, even if you have to invent it. Get MFA
+truly universal. Stand up proper logging. Then, and only then, start thinking
+about more sophisticated controls.</p>
+<h2 id="the-hybrid-reality">The hybrid reality<a class="headerlink" href="#the-hybrid-reality" title="Permanent link">&para;</a></h2>
+<p>Most organisations aren't choosing between on-prem AD and cloud identity.
+They're running both. Azure AD Connect, pass-through authentication, federation
+— these are no longer migration stepping stones but permanent architectural
+realities. Your Zero Trust strategy has to account for identity living in two
+places simultaneously.</p>
+<p>This is actually an opportunity. Cloud identity platforms like Microsoft Entra
+ID offer Zero Trust capabilities — conditional access, risk-based
+authentication, identity protection — that are difficult or impossible to
+replicate purely on-prem. The right move for most organisations is to make
+Entra ID the centre of identity decision-making while keeping AD for the
+workloads that genuinely need it.</p>
+<h2 id="starting-where-you-are">Starting where you are<a class="headerlink" href="#starting-where-you-are" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">One decision at a time</p>
+<p>Zero Trust isn't a project with an end date. It's a posture, and you adopt
+it one decision at a time. The next account you provision, provision with
+least privilege. The next GPO you write, scope it tightly. The next
+administrative task, do it from a properly hardened PAW — not your
+daily-driver laptop.</p>
+</div>
+<p>Your AD environment will not become a Zero Trust shop on a Tuesday afternoon.
+But it can become slightly better every week, and over a year that adds up to
+a transformation. The attackers, after all, are not slowing down.</p>
 
 
 
@@ -981,15 +989,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../find-admins-without-mfa-graph/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Which of your admins still don&#39;t have MFA?">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Which of your admins still don't have MFA?
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="../entra-nextjs-getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Skills Directory — Getting Started Guide">
+          <a href="../privileged-access-management-ad/" class="md-footer__link md-footer__link--next" aria-label="Next: Privileged Access Management in AD DS: stopping the attack path before it starts">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Skills Directory — Getting Started Guide
+                Privileged Access Management in AD DS: stopping the attack path before it starts
               </div>
             </div>
             <div class="md-footer__button md-icon">

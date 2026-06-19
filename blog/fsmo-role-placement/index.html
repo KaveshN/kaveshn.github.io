@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes.">
+        <meta name="description" content="Five FSMO roles. Most admins can't name them all. All of them matter when something goes wrong. A practical guide to placement, transferring vs seizing, and the decommissioning trap that takes down environments.">
       
       
         <meta name="author" content="Kavesh Naidoo">
       
       
-        <link rel="canonical" href="https://kaveshn.github.io/blog/the-great-unbundling/">
+        <link rel="canonical" href="https://kaveshn.github.io/blog/fsmo-role-placement/">
       
       
+        <link rel="prev" href="../single-vs-multi-forest-ad/">
       
-        <link rel="next" href="../entra-nextjs-getting-started/">
+      
+        <link rel="next" href="../pki-design-two-tier-three-tier/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>The Great Unbundling - Kavesh Naidoo</title>
+        <title>FSMO role placement: the underrated decision that breaks AD environments - Kavesh Naidoo</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-great-unbundling" class="md-skip">
+        <a href="#fsmo-role-placement-the-underrated-decision-that-breaks-ad-environments" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The Great Unbundling
+              FSMO role placement: the underrated decision that breaks AD environments
             
           </span>
         </div>
@@ -702,10 +704,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" class="md-nav__link">
+  <a href="#what-the-five-roles-actually-do" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes
+        What the five roles actually do
       
     </span>
   </a>
@@ -713,10 +715,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#saas-was-built-for-humans-ai-is-not" class="md-nav__link">
+  <a href="#where-to-put-the-roles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SaaS was built for humans. AI is not.
+        Where to put the roles
       
     </span>
   </a>
@@ -724,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#from-seats-to-tokens" class="md-nav__link">
+  <a href="#transferring-vs-seizing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From seats to tokens
+        Transferring vs seizing
       
     </span>
   </a>
@@ -735,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-agent-layer-is-the-new-interface" class="md-nav__link">
+  <a href="#the-decommissioning-trap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The agent layer is the new interface
+        The decommissioning trap
       
     </span>
   </a>
@@ -746,43 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-the-mag-7-still-have-a-window" class="md-nav__link">
+  <a href="#the-discipline-that-prevents-most-fsmo-problems" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the Mag 7 still have a window
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-strategic-fork" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The strategic fork
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-next-five-years-look-like" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the next five years look like
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-final-thought" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The final thought
+        The discipline that prevents most FSMO problems
       
     </span>
   </a>
@@ -845,7 +814,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-04-27 00:00:00+00:00" class="md-ellipsis">April 27, 2026</time>
+                        <time datetime="2026-07-11 00:00:00+00:00" class="md-ellipsis">July 11, 2026</time>
                       </div>
                     </li>
                     
@@ -856,7 +825,8 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../category/ai/">AI</a></span>
+                              <a href="../category/identity/">Identity</a>, 
+                              <a href="../category/infrastructure/">Infrastructure</a></span>
                         </div>
                       </li>
                     
@@ -867,7 +837,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
                           <span class="md-ellipsis">
                             
-                              3 min read
+                              4 min read
                             
                           </span>
                         </div>
@@ -891,55 +861,117 @@
 
 
 
-<h1 id="the-great-unbundling">The Great Unbundling<a class="headerlink" href="#the-great-unbundling" title="Permanent link">&para;</a></h1>
-<h2 id="why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes">Why AI agents are quietly dismantling the SaaS economy — and forcing the Mag 7 to pivot before the window closes<a class="headerlink" href="#why-ai-agents-are-quietly-dismantling-the-saas-economy-and-forcing-the-mag-7-to-pivot-before-the-window-closes" title="Permanent link">&para;</a></h2>
-<p>There's a quiet assumption baked into today's tech narrative: that the Mag 7 have already won. That their scale, distribution, and balance sheets make them untouchable in the age of AI.</p>
-<p>I think the opposite is true.</p>
+<h1 id="fsmo-role-placement-the-underrated-decision-that-breaks-ad-environments">FSMO role placement: the underrated decision that breaks AD environments<a class="headerlink" href="#fsmo-role-placement-the-underrated-decision-that-breaks-ad-environments" title="Permanent link">&para;</a></h1>
+<p>A few years ago I was called into an environment where logins were failing
+intermittently across half the company. Users in the head office worked fine.
+Users in three regional sites were getting locked out or seeing password change
+errors. The on-call engineer had restarted everything that could be restarted
+and was beginning to panic.</p>
+<p>The cause turned out to be embarrassingly simple. Six months earlier, someone
+had decommissioned an old domain controller without realising it held the PDC
+emulator role. Time synchronisation drifted. Account lockout processing got
+confused. Password changes propagated unpredictably. The whole environment had
+been slowly degrading and nobody had noticed because nothing failed
+dramatically.</p>
+<p>This is FSMO roles in a nutshell: they don't matter until they do, and when
+they do, they matter very badly.</p>
 <!-- more -->
 
-<p>They have time. What they do with that time is what decides whether they stay dominant or become the next generation of legacy infrastructure. Because the ground beneath them is shifting in a very specific way:</p>
-<p><strong>AI isn't a feature. It's a new economic model.</strong></p>
-<hr />
-<h2 id="saas-was-built-for-humans-ai-is-not">SaaS was built for humans. AI is not.<a class="headerlink" href="#saas-was-built-for-humans-ai-is-not" title="Permanent link">&para;</a></h2>
-<p>The SaaS model is simple at its core: charge per user, per month, for software that amplifies human productivity.</p>
-<p>It made perfect sense in a world where work was done by people, software was the tool, and scale meant more seats.</p>
-<p>Agents break that equation.</p>
-<p>When two agents can do the work of fifty users, you don't need fifty licenses. You don't need ten. In the traditional sense, you might not need any. The pricing model collapses first. The product model follows.</p>
-<p>This is the real reason behind the slow, persistent compression in SaaS multiples — not that software is less valuable, but that the <em>unit</em> of value has changed.</p>
-<hr />
-<h2 id="from-seats-to-tokens">From seats to tokens<a class="headerlink" href="#from-seats-to-tokens" title="Permanent link">&para;</a></h2>
-<p>What replaces per-user pricing? Tokenisation — not in the crypto sense, but in the economic one.</p>
-<p>You pay for compute. You pay for outcomes. You pay for execution, not access.</p>
-<p>Agents don't care about seats. They care about tokens processed, tasks completed, workflows executed. So the future pricing unit looks less like <em>cost per employee</em> and more like <em>cost per task, cost per workflow, cost per decision</em>.</p>
-<p>That's a problem if your entire revenue engine is built on expanding seat count.</p>
-<hr />
-<h2 id="the-agent-layer-is-the-new-interface">The agent layer is the new interface<a class="headerlink" href="#the-agent-layer-is-the-new-interface" title="Permanent link">&para;</a></h2>
-<p>Here's the deeper disruption: <strong>SaaS tools are no longer the interface. Agents are.</strong></p>
-<p>Instead of a human logging into five different systems, the agent orchestrates across them — pulling data, executing actions, returning outcomes.</p>
-<p>In that world, the UI becomes irrelevant. The product becomes an API. The brand becomes invisible.</p>
-<p>SaaS risks becoming commoditised infrastructure unless it owns — or embeds itself inside — the agent layer.</p>
-<hr />
-<h2 id="why-the-mag-7-still-have-a-window">Why the Mag 7 still have a window<a class="headerlink" href="#why-the-mag-7-still-have-a-window" title="Permanent link">&para;</a></h2>
-<p>This is where the incumbents still have the edge. They control compute, distribution, developer ecosystems, and enterprise trust. More importantly, they have time and cash flow to spend.</p>
-<p>They can collapse pricing models before being forced to. They can bundle AI into existing ecosystems. They can acquire agent-native platforms. They can re-architect their products around workflows instead of features.</p>
-<p>The real question is whether they will. Incumbents rarely fail from lack of resources. They fail from protecting yesterday's margins.</p>
-<hr />
-<h2 id="the-strategic-fork">The strategic fork<a class="headerlink" href="#the-strategic-fork" title="Permanent link">&para;</a></h2>
-<p>Every major platform now faces the same choice.</p>
-<p><strong>Option 1: Defend SaaS economics.</strong> Preserve per-seat pricing. Add AI as a premium feature. Optimise for short-term revenue.</p>
-<p><strong>Option 2: Embrace the agent economy.</strong> Shift to usage- or outcome-based pricing. Build native agent orchestration. Accept short-term revenue disruption for long-term dominance.</p>
-<p>History is pretty clear about which path wins.</p>
-<hr />
-<h2 id="what-the-next-five-years-look-like">What the next five years look like<a class="headerlink" href="#what-the-next-five-years-look-like" title="Permanent link">&para;</a></h2>
-<p>Expect a sharp decline in per-seat pricing as the dominant model. Expect a wave of SaaS companies repositioning as "AI platforms" — some convincingly, most not. Expect agents to become the primary consumers of software, not humans. And expect a new layer of companies to emerge that sit <em>above</em> SaaS and orchestrate it.</p>
-<p>Most importantly, expect consolidation. Once software becomes interchangeable infrastructure, scale matters again — but in a very different way.</p>
-<hr />
-<h2 id="the-final-thought">The final thought<a class="headerlink" href="#the-final-thought" title="Permanent link">&para;</a></h2>
-<p>The current narrative is that AI will augment SaaS. That's too optimistic.</p>
-<p>AI doesn't just enhance tools. It changes who — or <em>what</em> — uses them. And when the user changes from human to agent, everything from pricing to product design has to change with it.</p>
-<p>The Mag 7 aren't too big to fail.</p>
-<p>But they are big enough to pivot.</p>
-<p>The clock is ticking.</p>
+<h2 id="what-the-five-roles-actually-do">What the five roles actually do<a class="headerlink" href="#what-the-five-roles-actually-do" title="Permanent link">&para;</a></h2>
+<p>Active Directory uses a multi-master replication model — most operations can
+happen on any domain controller and replicate out. But five specific operations
+require a single authoritative source. These are the Flexible Single Master
+Operations roles.</p>
+<p><strong>Two roles exist once per forest:</strong></p>
+<p><strong>Schema Master.</strong> Owns changes to the AD schema — adding new attributes,
+classes, or modifying existing ones. Schema changes are rare but critical. If
+the Schema Master is unavailable, you cannot make schema changes. Everything
+else keeps working.</p>
+<p><strong>Domain Naming Master.</strong> Owns the addition and removal of domains from the
+forest. Also rare to use, also non-critical for day-to-day operations.</p>
+<p><strong>Three roles exist once per domain:</strong></p>
+<p><strong>RID Master.</strong> Hands out pools of Relative Identifiers to other DCs, which
+they use to construct SIDs for new security principals. If the RID Master is
+down long enough, DCs exhaust their pools and cannot create new objects. "Long
+enough" is usually weeks, not hours.</p>
+<p><strong>Infrastructure Master.</strong> Maintains references to objects in other domains
+within the same forest. Important in multi-domain forests with cross-domain
+group memberships. Has a famous gotcha: in a multi-domain forest, the
+Infrastructure Master should <strong>not</strong> be on a global catalog server — except
+when every DC in the domain is a GC, which is increasingly the default.</p>
+<p><strong>PDC Emulator.</strong> This is the one that matters most. It's the authoritative
+time source for the domain, the focal point for password changes, and the
+processor for account lockouts. If the PDC emulator misbehaves, you'll see
+strange, intermittent, hard-to-diagnose problems across the entire domain.</p>
+<h2 id="where-to-put-the-roles">Where to put the roles<a class="headerlink" href="#where-to-put-the-roles" title="Permanent link">&para;</a></h2>
+<p>The default placement is all five roles on the first DC you install. Fine for
+a tiny environment; not fine for anything larger.</p>
+<p>Standard guidance:</p>
+<ul>
+<li><strong>Forest-level roles</strong> (Schema Master, Domain Naming Master) belong in the
+  forest root domain on a well-connected, stable DC. They're rarely used, so
+  performance doesn't matter much, but they need to be available when needed.</li>
+<li><strong>PDC Emulator</strong> should be on a beefy DC with excellent network connectivity
+  to the rest of the domain. Because of its time and password roles, it
+  generates more traffic than other DCs.</li>
+<li><strong>RID Master and Infrastructure Master</strong> should be on reliable, well-connected
+  DCs, but their placement is less critical than the PDC emulator.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Two rules that apply to all of them</p>
+<p>Never place all FSMO roles on the same DC in a multi-DC environment. You
+want roles distributed so the failure of any single DC takes out at most
+one or two roles, not all five.</p>
+<p><strong>Document where they live.</strong> Run <code>netdom query fsmo</code> and write it down.
+Put it somewhere your successors will find it. The amount of grief caused
+by undocumented FSMO placement is enormous.</p>
+</div>
+<h2 id="transferring-vs-seizing">Transferring vs seizing<a class="headerlink" href="#transferring-vs-seizing" title="Permanent link">&para;</a></h2>
+<p><strong>Transferring</strong> is the polite move. The current role holder is alive and
+reachable. Both DCs cooperate, the role moves cleanly, and there's no risk of
+inconsistency:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Move-ADDirectoryServerOperationMasterRole</span> <span class="p">`</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">-Identity</span> <span class="s2">&quot;DC02&quot;</span> <span class="p">`</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">-OperationMasterRole</span> <span class="n">PDCEmulator</span>
+</span></code></pre></div>
+<p><strong>Seizing</strong> is the emergency move. The current role holder is dead or
+unreachable. You forcibly assign the role to another DC.</p>
+<div class="admonition danger">
+<p class="admonition-title">Seizing is destructive</p>
+<p>If you seize a role because a DC seemed down but was actually just a
+network issue, and that DC comes back online, you'll have two DCs both
+believing they hold the same role — "duelling FSMO" — which corrupts the
+directory. Seized roles are gone from the original DC permanently.</p>
+<p>Only seize when you are certain the original DC will <strong>never</strong> return.</p>
+</div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">Move-ADDirectoryServerOperationMasterRole</span> <span class="p">`</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">-Identity</span> <span class="s2">&quot;DC02&quot;</span> <span class="p">`</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">-OperationMasterRole</span> <span class="n">PDCEmulator</span> <span class="p">`</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">-Force</span>
+</span></code></pre></div>
+<p>The <code>-Force</code> flag is what turns a transfer into a seizure. Use it carefully.</p>
+<h2 id="the-decommissioning-trap">The decommissioning trap<a class="headerlink" href="#the-decommissioning-trap" title="Permanent link">&para;</a></h2>
+<p>The story I opened with — admin decommissions a DC without realising it held
+FSMO roles — is so common it deserves its own warning.</p>
+<p>Before you demote or remove <strong>any</strong> domain controller, run <code>netdom query fsmo</code>
+and confirm what roles that DC holds. If it holds any, transfer them first.
+Then demote.</p>
+<p>Newer Windows Server versions handle this more gracefully than old ones, but
+you should not rely on the tooling to save you. Build the FSMO check into your
+decommissioning runbook and follow it every time.</p>
+<h2 id="the-discipline-that-prevents-most-fsmo-problems">The discipline that prevents most FSMO problems<a class="headerlink" href="#the-discipline-that-prevents-most-fsmo-problems" title="Permanent link">&para;</a></h2>
+<p>Keep role placement documented somewhere your team actually looks at — pinned to
+a wiki or architecture diagram, wherever your team's eyes go.</p>
+<p>Review placement during any architectural change: adding sites, decommissioning
+DCs, expanding domains. Check whether the placement still makes sense for the
+new topology.</p>
+<p>Monitor for role availability. Most monitoring tools can alert when an FSMO
+role holder is unreachable. If you don't have a SIEM, even a simple scheduled
+PowerShell script that emails on failure is better than nothing.</p>
+<p>Practice role transfers in your test environment. The first time you do a
+transfer should not be at 2am with a real outage in progress.</p>
+<p>The five FSMO roles are not glamorous. They're plumbing. But like plumbing, the
+time to think about them is before something leaks.</p>
 
 
 
@@ -981,15 +1013,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../single-vs-multi-forest-ad/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Single forest vs. multi-forest: a decision framework for AD architects">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Single forest vs. multi-forest: a decision framework for AD architects
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="../entra-nextjs-getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Skills Directory — Getting Started Guide">
+          <a href="../pki-design-two-tier-three-tier/" class="md-footer__link md-footer__link--next" aria-label="Next: Designing a PKI that won&#39;t haunt you: two-tier vs three-tier hierarchies">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Skills Directory — Getting Started Guide
+                Designing a PKI that won't haunt you: two-tier vs three-tier hierarchies
               </div>
             </div>
             <div class="md-footer__button md-icon">
