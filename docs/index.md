@@ -8,7 +8,7 @@ hide:
 
 I'm an IT guy at heart. I've spent years in the weeds of Active Directory,
 firewalls, cloud infrastructure, and everything that keeps an organisation
-running — and I genuinely enjoy it. This is where I write about the things I'm
+running. And I genuinely enjoy it. This is where I write about the things I'm
 figuring out: identity, security, PowerShell, and increasingly AI and how it
 changes the way we work.
 
