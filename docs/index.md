@@ -22,6 +22,16 @@ Just honest notes from someone who spends a lot of time at the keyboard.
 
 <div class="grid cards" markdown>
 
+-   :material-calendar-check:{ .lg .middle } &nbsp; __[Fixing room mailboxes that silently reject external meeting invites](blog/posts/room-mailbox-external-booking-powershell.md)__
+
+    ---
+
+    External guests send a booking and hear nothing back. The room
+    quietly discarded it. Two scripts — audit every room mailbox, then
+    fix them all in one run.
+
+    `PowerShell` · `Infrastructure`
+
 -   :material-shield-check:{ .lg .middle } &nbsp; __[PowerShell for AD hygiene: 10 scripts every admin should have](blog/posts/powershell-ad-hygiene-scripts.md)__
 
     ---
