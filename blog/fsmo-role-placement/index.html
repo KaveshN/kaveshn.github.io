@@ -941,8 +941,8 @@ unreachable. You forcibly assign the role to another DC.</p>
 <p>If you seize a role because a DC seemed down but was actually just a
 network issue, and that DC comes back online, you'll have two DCs both
 believing they hold the same role — "duelling FSMO" — which corrupts the
-directory. Seized roles are gone from the original DC permanently.</p>
-<p>Only seize when you are certain the original DC will <strong>never</strong> return.</p>
+directory. Seized roles are gone from the original DC permanently.
+<strong>Only seize when you are certain the original DC will never return.</strong></p>
 </div>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">Move-ADDirectoryServerOperationMasterRole</span> <span class="p">`</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">-Identity</span> <span class="s2">&quot;DC02&quot;</span> <span class="p">`</span>
