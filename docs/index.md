@@ -108,8 +108,6 @@ build, so expect equal parts architecture and hands-on.
 
     `Identity` · `Infrastructure`
 
-</div>
-
 -   :material-shield-key:{ .lg .middle } &nbsp; __[Which of your admins still don't have MFA?](blog/posts/find-admins-without-mfa-graph.md)__
 
     ---
