@@ -112,8 +112,7 @@ unreachable. You forcibly assign the role to another DC.
     network issue, and that DC comes back online, you'll have two DCs both
     believing they hold the same role — "duelling FSMO" — which corrupts the
     directory. Seized roles are gone from the original DC permanently.
-
-    Only seize when you are certain the original DC will **never** return.
+    **Only seize when you are certain the original DC will never return.**
 
 ```powershell
 Move-ADDirectoryServerOperationMasterRole `
