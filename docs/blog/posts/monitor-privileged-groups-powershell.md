@@ -5,6 +5,11 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Active Directory
+  - Security
+  - Monitoring
+  - Email Alerts
 slug: monitor-privileged-groups-powershell
 description: >-
   Detect changes to Domain Admins and Enterprise Admins in near real time with a

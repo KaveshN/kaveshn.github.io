@@ -5,6 +5,11 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Entra ID
+  - Microsoft Graph
+  - Auditing
+  - Reporting
 slug: audit-entra-users-powershell
 description: >-
   A practical Microsoft Graph PowerShell recipe for auditing Entra ID users —

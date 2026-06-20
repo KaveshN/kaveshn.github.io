@@ -5,6 +5,10 @@ authors:
 categories:
   - Identity
   - Infrastructure
+tags:
+  - Entra ID
+  - OAuth
+  - Next.js
 slug: entra-nextjs-getting-started
 description: >-
   A complete, self-contained walkthrough from zero to a working

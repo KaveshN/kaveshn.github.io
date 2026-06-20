@@ -5,6 +5,11 @@ authors:
 categories:
   - PowerShell
   - Infrastructure
+tags:
+  - Active Directory
+  - Domain Controllers
+  - Monitoring
+  - Reporting
 slug: dc-health-report-powershell
 description: >-
   Build a colour-coded HTML domain controller health report in PowerShell —

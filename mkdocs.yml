@@ -7,6 +7,9 @@ site_description: >-
 
 theme:
   name: material
+  font:
+    text: Inter
+    code: JetBrains Mono
   icon:
     logo: material/console-line
   palette:
@@ -27,12 +30,15 @@ theme:
   features:
     - navigation.tabs
     - navigation.top
+    - navigation.tracking
     - navigation.footer
     - navigation.indexes
     - content.code.copy
     - content.code.annotate
+    - content.tooltips
     - search.suggest
     - search.highlight
+    - search.share
     - toc.follow
 
 plugins:
@@ -41,12 +47,14 @@ plugins:
       blog_dir: blog
       post_url_format: "{slug}"
       post_excerpt: optional
+      post_readtime: true
       archive_date_format: MMMM yyyy
       categories_allowed:
         - Identity
         - PowerShell
         - Infrastructure
         - AI
+  - tags
 
 markdown_extensions:
   - admonition
@@ -74,6 +82,10 @@ nav:
   - Home: index.md
   - Blog:
       - blog/index.md
+      - Tags: blog/tags.md
+
+extra_css:
+  - stylesheets/extra.css
 
 extra:
   social:

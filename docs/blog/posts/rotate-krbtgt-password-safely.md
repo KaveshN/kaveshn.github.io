@@ -5,6 +5,10 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Active Directory
+  - Kerberos
+  - Security
 slug: rotate-krbtgt-password-safely
 description: >-
   The krbtgt account signs every Kerberos ticket in your domain. Here's how to

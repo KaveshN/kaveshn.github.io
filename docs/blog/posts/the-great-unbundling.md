@@ -4,6 +4,9 @@ authors:
   - kavesh
 categories:
   - AI
+tags:
+  - AI Agents
+  - SaaS
 slug: the-great-unbundling
 description: >-
   Why AI agents are quietly dismantling the SaaS economy — and forcing the

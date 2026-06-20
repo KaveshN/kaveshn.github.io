@@ -5,6 +5,11 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Entra ID
+  - Microsoft Graph
+  - MFA
+  - Security
 slug: find-admins-without-mfa-graph
 description: >-
   Find privileged accounts with no MFA registered using Microsoft Graph

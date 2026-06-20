@@ -5,6 +5,11 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Active Directory
+  - Security
+  - Monitoring
+  - Email Alerts
 slug: alert-locked-out-accounts-powershell
 description: >-
   Find currently locked-out AD accounts with Search-ADAccount and email a clean

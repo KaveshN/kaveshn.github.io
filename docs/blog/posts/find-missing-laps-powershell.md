@@ -5,6 +5,11 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Active Directory
+  - LAPS
+  - Security
+  - Reporting
 slug: find-missing-laps-powershell
 description: >-
   Report on every Windows machine that doesn't have a LAPS-managed local admin

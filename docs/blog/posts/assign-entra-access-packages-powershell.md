@@ -5,6 +5,11 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Entra ID
+  - Microsoft Graph
+  - Entitlement Management
+  - Automation
 slug: assign-entra-access-packages-powershell
 description: >-
   Use Microsoft Graph PowerShell to grant Entra ID Entitlement Management

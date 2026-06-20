@@ -5,6 +5,10 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Entra ID
+  - Microsoft Graph
+  - Automation
 slug: connect-microsoft-graph-powershell
 description: >-
   The foundation for every Entra ID automation: installing the Microsoft Graph

@@ -15,6 +15,7 @@ changes the way we work.
 Just honest notes from someone who spends a lot of time at the keyboard.
 
 [Browse all posts →](blog/index.md){ .md-button .md-button--primary }
+[Browse by tag →](blog/tags.md){ .md-button }
 
 ---
 
@@ -22,7 +23,7 @@ Just honest notes from someone who spends a lot of time at the keyboard.
 
 <div class="grid cards" markdown>
 
--   :material-calendar-check:{ .lg .middle } &nbsp; __[Fixing room mailboxes that silently reject external meeting invites](blog/posts/room-mailbox-external-booking-powershell.md)__
+-   :material-calendar-check:{ .lg .middle } &nbsp; __[Fixing room mailboxes that silently reject external meeting invites](blog/posts/room-mailbox-external-booking-powershell.md)__ <span class="new-badge">New</span>
 
     ---
 
@@ -32,7 +33,7 @@ Just honest notes from someone who spends a lot of time at the keyboard.
 
     `PowerShell` · `Infrastructure`
 
--   :material-shield-check:{ .lg .middle } &nbsp; __[PowerShell for AD hygiene: 10 scripts every admin should have](blog/posts/powershell-ad-hygiene-scripts.md)__
+-   :material-shield-check:{ .lg .middle } &nbsp; __[PowerShell for AD hygiene: 10 scripts every admin should have](blog/posts/powershell-ad-hygiene-scripts.md)__ <span class="new-badge">New</span>
 
     ---
 
@@ -41,7 +42,7 @@ Just honest notes from someone who spends a lot of time at the keyboard.
 
     `PowerShell` · `Identity`
 
--   :material-magnify-scan:{ .lg .middle } &nbsp; __[Auditing Active Directory: from Event Viewer to Defender for Identity](blog/posts/auditing-active-directory.md)__
+-   :material-magnify-scan:{ .lg .middle } &nbsp; __[Auditing Active Directory: from Event Viewer to Defender for Identity](blog/posts/auditing-active-directory.md)__ <span class="new-badge">New</span>
 
     ---
 
@@ -184,15 +185,6 @@ Just honest notes from someone who spends a lot of time at the keyboard.
 
     `PowerShell` · `Identity`
 
--   :material-server-network:{ .lg .middle } &nbsp; __[A domain controller health report you'll actually read](blog/posts/dc-health-report-powershell.md)__
-
-    ---
-
-    A colour-coded HTML health report across the whole forest — ping, DNS,
-    uptime, disk, services, and DCDiag.
-
-    `PowerShell` · `Infrastructure`
-
 -   :material-account-key:{ .lg .middle } &nbsp; __[Assigning Entra ID access packages with PowerShell](blog/posts/assign-entra-access-packages-powershell.md)__
 
     ---
@@ -201,6 +193,15 @@ Just honest notes from someone who spends a lot of time at the keyboard.
     admin-add assignment request, end to end.
 
     `PowerShell` · `Identity`
+
+-   :material-server-network:{ .lg .middle } &nbsp; __[A domain controller health report you'll actually read](blog/posts/dc-health-report-powershell.md)__
+
+    ---
+
+    A colour-coded HTML health report across the whole forest — ping, DNS,
+    uptime, disk, services, and DCDiag.
+
+    `PowerShell` · `Infrastructure`
 
 -   :material-account-search:{ .lg .middle } &nbsp; __[Auditing Entra ID users with PowerShell](blog/posts/audit-entra-users-powershell.md)__
 

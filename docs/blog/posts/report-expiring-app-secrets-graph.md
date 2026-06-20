@@ -5,6 +5,11 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Entra ID
+  - Microsoft Graph
+  - App Registrations
+  - Monitoring
 slug: report-expiring-app-secrets-graph
 description: >-
   Scan every Entra app registration for expiring secrets and certificates with
