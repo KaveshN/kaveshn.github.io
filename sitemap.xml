@@ -2,146 +2,150 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://kaveshn.github.io/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
+    </url>
+    <url>
+         <loc>https://kaveshn.github.io/blog/tags/</loc>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/alert-locked-out-accounts-powershell/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/assign-entra-access-packages-powershell/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/audit-entra-users-powershell/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/auditing-active-directory/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/azure-ad-connect-sign-in-methods/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/connect-microsoft-graph-powershell/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/dc-health-report-powershell/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/entra-nextjs-getting-started/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/find-admins-without-mfa-graph/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/find-missing-laps-powershell/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/fsmo-role-placement/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/group-policy-inheritance-filtering-loopback/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/monitor-privileged-groups-powershell/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/pass-the-hash-defence/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/pki-design-two-tier-three-tier/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/powershell-ad-hygiene-scripts/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/privileged-access-management-ad/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/report-expiring-app-secrets-graph/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/room-mailbox-external-booking-powershell/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/rotate-krbtgt-password-safely/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/single-vs-multi-forest-ad/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/the-great-unbundling/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/zero-trust-active-directory/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/archive/2026/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/category/identity/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/category/powershell/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/category/infrastructure/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/category/ai/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/page/2/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/page/3/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/archive/2026/page/2/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/archive/2026/page/3/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/category/identity/page/2/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
     <url>
          <loc>https://kaveshn.github.io/blog/category/powershell/page/2/</loc>
-         <lastmod>2026-06-19</lastmod>
+         <lastmod>2026-06-20</lastmod>
     </url>
 </urlset>

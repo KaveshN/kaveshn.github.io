@@ -1,0 +1,72 @@
+/* ---------------------------------------------------------------------------
+   Readability + UI polish for kaveshn.github.io
+   --------------------------------------------------------------------------- */
+
+/* Calmer, more readable body text: a touch more line-height and spacing. */
+.md-typeset {
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+.md-typeset p,
+.md-typeset li {
+  letter-spacing: 0.005em;
+}
+
+/* Give article prose a comfortable measure (line length) on wide screens. */
+.md-content__inner {
+  margin-bottom: 3rem;
+}
+
+/* Headings: a bit more breathing room above, tighter to their own text. */
+.md-typeset h2 {
+  margin-top: 2.2em;
+  font-weight: 700;
+}
+
+.md-typeset h3 {
+  margin-top: 1.8em;
+}
+
+/* ---- Grid cards (home page "Latest writing") ---------------------------- */
+.md-typeset .grid.cards > ul > li {
+  border-radius: 0.6rem;
+  transition: border-color 125ms, box-shadow 125ms, transform 125ms;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Inline "tag-like" code chips under each card (`PowerShell` · `Identity`). */
+.md-typeset .grid.cards code {
+  font-size: 0.68rem;
+  background: var(--md-default-fg-color--lightest);
+}
+
+/* ---- "New" badge for recent posts on the home page --------------------- */
+.new-badge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  border-radius: 0.6rem;
+  color: #fff;
+  background: var(--md-accent-fg-color);
+}
+
+/* ---- Tags page / post tag chips --------------------------------------- */
+.md-typeset .md-tag {
+  border-radius: 0.6rem;
+}
+
+/* Tooltips/abbreviations and links: clearer affordance. */
+.md-typeset a {
+  text-underline-offset: 0.15em;
+}
