@@ -10,6 +10,7 @@ tags:
   - Security
   - Monitoring
   - Email Alerts
+  - Privileged Access
 slug: monitor-privileged-groups-powershell
 description: >-
   Detect changes to Domain Admins and Enterprise Admins in near real time with a

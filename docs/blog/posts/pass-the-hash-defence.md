@@ -5,6 +5,10 @@ authors:
 categories:
   - Identity
   - PowerShell
+tags:
+  - Active Directory
+  - Security
+  - Authentication
 slug: pass-the-hash-defence
 description: >-
   Protected Users, Authentication Policies, and Authentication Policy Silos —

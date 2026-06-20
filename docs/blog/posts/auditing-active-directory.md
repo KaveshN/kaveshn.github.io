@@ -5,6 +5,11 @@ authors:
 categories:
   - Identity
   - PowerShell
+tags:
+  - Active Directory
+  - Auditing
+  - Security
+  - Monitoring
 slug: auditing-active-directory
 description: >-
   You can't detect what you don't see. A layered guide to AD auditing — from

@@ -5,6 +5,10 @@ authors:
 categories:
   - Identity
   - Infrastructure
+tags:
+  - PKI
+  - Security
+  - Architecture
 slug: pki-design-two-tier-three-tier
 description: >-
   Internal certificate authorities are forever. A practical guide to two-tier

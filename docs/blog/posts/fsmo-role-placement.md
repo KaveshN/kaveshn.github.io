@@ -5,6 +5,10 @@ authors:
 categories:
   - Identity
   - Infrastructure
+tags:
+  - Active Directory
+  - Domain Controllers
+  - Architecture
 slug: fsmo-role-placement
 description: >-
   Five FSMO roles. Most admins can't name them all. All of them matter when

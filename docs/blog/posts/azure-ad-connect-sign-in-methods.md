@@ -5,6 +5,11 @@ authors:
 categories:
   - Identity
   - Infrastructure
+tags:
+  - Entra ID
+  - Active Directory
+  - Hybrid Identity
+  - Authentication
 slug: azure-ad-connect-sign-in-methods
 description: >-
   Password Hash Sync, Pass-Through Authentication, and Federation — the three

@@ -5,6 +5,10 @@ authors:
 categories:
   - Identity
   - Infrastructure
+tags:
+  - Active Directory
+  - Zero Trust
+  - Security
 slug: zero-trust-active-directory
 description: >-
   The perimeter is gone. Your domain controllers haven't caught up yet. How

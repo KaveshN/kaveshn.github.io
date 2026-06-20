@@ -5,6 +5,10 @@ authors:
 categories:
   - Identity
   - PowerShell
+tags:
+  - Active Directory
+  - Security
+  - Privileged Access
 slug: privileged-access-management-ad
 description: >-
   Standing admin rights are the gift that keeps on giving — to attackers.

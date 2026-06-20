@@ -5,6 +5,10 @@ authors:
 categories:
   - Infrastructure
   - PowerShell
+tags:
+  - Active Directory
+  - Group Policy
+  - Troubleshooting
 slug: group-policy-inheritance-filtering-loopback
 description: >-
   Most "Group Policy isn't working" tickets come down to one of three things:

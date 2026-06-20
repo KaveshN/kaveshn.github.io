@@ -5,6 +5,9 @@ authors:
 categories:
   - Identity
   - Infrastructure
+tags:
+  - Active Directory
+  - Architecture
 slug: single-vs-multi-forest-ad
 description: >-
   Most multi-forest Active Directory deployments shouldn't exist. A decision

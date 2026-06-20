@@ -5,6 +5,11 @@ authors:
 categories:
   - Identity
   - PowerShell
+tags:
+  - Active Directory
+  - Automation
+  - Reporting
+  - Security
 slug: powershell-ad-hygiene-scripts
 description: >-
   Active Directory environments accumulate cruft. Ten PowerShell scripts every

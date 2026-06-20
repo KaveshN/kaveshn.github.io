@@ -5,6 +5,10 @@ authors:
 categories:
   - PowerShell
   - Identity
+tags:
+  - Exchange Online
+  - Automation
+  - Reporting
 slug: room-mailbox-external-booking-powershell
 description: >-
   External guests trying to book your meeting rooms get silently rejected and
